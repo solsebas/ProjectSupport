@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import pl.polsl.projectsupport.enums.GroupStatus;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class GroupModel {
     Long id;
 
     //todo: group status (enum)
+    @Enumerated(EnumType.STRING)
+    GroupStatus status;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
