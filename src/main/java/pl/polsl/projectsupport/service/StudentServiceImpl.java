@@ -38,10 +38,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> getStudentDtos() {
-        List<StudentModel> studentModels = getStudents();
-        List<StudentDto> studentDtos = getStudents().stream()
+        return getStudents().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
-        return studentDtos;
     }
 }
