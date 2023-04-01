@@ -1,7 +1,10 @@
 package pl.polsl.projectsupport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -13,6 +16,8 @@ public class GroupModel {
     @Column(name = "group_id")
     Long id;
 
+    //todo: group status (enum)
+
     @ManyToOne
     @JoinColumn(name = "topic_id")
     TopicModel topic;
@@ -21,7 +26,7 @@ public class GroupModel {
     @JoinColumn(name = "term_id")
     TermModel term;
 
-    //todo: group participants
-
-    //todo: group status (enum)
+    @OneToMany(mappedBy = "group")
+    @JsonIgnore
+    List<StudentGroupModel> students;
 }

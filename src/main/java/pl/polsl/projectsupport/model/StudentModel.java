@@ -24,4 +24,8 @@ public class StudentModel {
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     List<StudentTermModel> terms;
+
+    @OneToMany(mappedBy = "student")
+    @JsonIgnore
+    List<StudentGroupModel> groups;
 }
