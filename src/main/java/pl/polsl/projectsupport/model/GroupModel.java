@@ -17,7 +17,6 @@ public class GroupModel {
     @Column(name = "group_id")
     Long id;
 
-    //todo: group status (enum)
     @Enumerated(EnumType.STRING)
     GroupStatus status;
 
