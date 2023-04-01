@@ -8,12 +8,12 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "supervisors")
-public class SupervisorModel {
+@Table(name = "students")
+public class StudentModel {
 
     @Id
     @GeneratedValue
-    @Column(name = "supervisor_id")
+    @Column(name = "student_id")
     Long id;
 
     @Column(name = "first_name")
@@ -21,8 +21,7 @@ public class SupervisorModel {
 
     String surname;
 
-    @OneToMany(mappedBy = "supervisor")
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
-    List<TopicModel> topics;
-
+    List<StudentTermModel> terms;
 }

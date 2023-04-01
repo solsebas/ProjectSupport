@@ -5,23 +5,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "groups")
-public class GroupModel {
+@Table(name = "sudent_term")
+public class StudentTermModel {
 
     @Id
     @GeneratedValue
-    @Column(name = "group_id")
+    @Column(name = "student_term_id")
     Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "topic_id")
-    TopicModel topic;
 
     @ManyToOne
     @JoinColumn(name = "term_id")
     TermModel term;
 
-    //todo: group participants
-
-    //todo: group status (enum)
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    StudentModel student;
 }
