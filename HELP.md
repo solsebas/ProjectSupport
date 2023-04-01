@@ -40,3 +40,11 @@ The following guides illustrate how to use some features concretely:
 - wyłączanie kontenera: `docker stop project-support-db`
 
 
+### Angular:
+
+1. Instalacja [node.js](https://nodejs.org/en/download) - ja wybrałem "LTS 18.15.0 (includes npm 9.5.0)"
+2. Ogarnięcie Execution Policy, żeby pozwalało na używanie skryptów: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine`
+3. Instalacja angulara `npm install -g @angular/cli`
+
+#### Przydatne:
+- włączenie: `ng serve --open` w folderze z angularem (tj. [...]\InteliJDepos\ProjectSupporter\project-supporter-client)
