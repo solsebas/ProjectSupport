@@ -1,0 +1,46 @@
+<nav class="navbar-light bg-light navbar navbar-expand-lg sticky-top d-flex justify-content-between">
+
+  <div class="navbar-nav col-4 align-items-start" style="margin-left: 2%">
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sideNavbar" aria-expanded="false" aria-controls="sideNavbar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="col-4 d-flex justify-content-center">
+    <a class="navbar-brand my-auto" [routerLink]="" >
+      <img src="/assets/img/logo-ProjectSupport.png" alt="logo-ProjectSupport.png" width="100px"/>
+    </a>
+    <h1 class="project-name my-auto">ProjectSupport</h1>
+  </div>
+
+  <div class="col-4 d-flex justify-content-end" style="padding-right: 4%;">
+    <div class="row dropdown">
+      <ul class="navbar-nav">
+        <!-- Profile -->
+        <li mdbDropdown class="nav-item dropdown ms-auto">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+            <img src="/assets/img/tmp-people.png" class="rounded-circle profile-picture bg-light" alt="x.png" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" [routerLink]="">Mój profil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="">Ustawienia</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="">Wyloguj</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="col-auto col-xl-2 px-sm-3 p-3 px-0 collapse" id="sideNavbar" style="background-color: rgb(43,47,51); min-height: 1000px;">
+  <div class="card card-body">
+    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  </div>
+</div>
