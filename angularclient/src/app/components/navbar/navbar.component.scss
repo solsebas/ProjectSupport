@@ -1,0 +1,29 @@
+.profile-picture {
+  height: 40px;
+  border: black solid 1px;
+}
+
+.project-name {
+  background: -webkit-linear-gradient(56deg, rgba(0,46,97,1) 35%, rgba(0,177,236,1) 65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-header {
+  float: none;
+}
+.navbar-toggle {
+  display: block;
+}
+.navbar-collapse.collapse {
+  display: none!important;
+}
+.navbar-nav {
+  float: none!important;
+}
+.navbar-nav>li {
+  float: none;
+}
+.navbar-collapse.collapse.in{
+  display:block !important;
+}
