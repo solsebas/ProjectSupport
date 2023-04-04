@@ -1,0 +1,22 @@
+
+.navbar-side-style {
+  background-color: #012e62;
+  color: #ffffff;
+  width: 20vw;
+  position: relative;
+  bottom: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .navbar-side-style {
+    width: 97%;
+    bottom: 15px;
+    margin-left: 1.3vw;
+    border-radius: 0px 0px 10px 10px;
+  }
+
+
+}
