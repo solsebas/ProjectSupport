@@ -7,7 +7,67 @@
   background: -webkit-linear-gradient(56deg, rgba(0,46,97,1) 35%, rgba(0,177,236,1) 65%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-size: 3.5vw;
+  padding: 1%;
 }
+
+.ul-user-list {
+  position: absolute;
+  right: 170px;
+  bottom: 50px;
+}
+
+#side-navbar-button {
+  width: 3.5vw;
+  height: 3vw;
+  min-height: 50px;
+  transition: 0.4s;
+  min-width: 60px;
+
+}
+
+#navbar {
+  transition: 0.8s;
+  padding: 20px;
+  border-bottom: rgba(144, 148, 152, 0.2) solid 1px;
+}
+
+#logo {
+  width:5vw;
+  transition: 0.4s;
+  min-width: 80px;
+}
+
+#logo-text {
+  font-size: 3.5vw;
+  transition: 0.4s;
+}
+
+@media only screen and (max-width: 991px) {
+  .ul-user-list {
+    right: 2px;
+    top: 6px;
+  }
+
+}
+
+@media only screen and (max-width: 610px) {
+  #logo-text {
+    font-size: 0px !important;
+  }
+
+}
+
+@media only screen and (min-width: 580px) and (max-width: 1280px) {
+  //#side-navbar-button {
+  //  width: 5vw;
+  //  height: 4vw;
+  //}
+  //#logo {
+  //  width: 10vw;
+  //}
+}
+
 
 .navbar-header {
   float: none;
