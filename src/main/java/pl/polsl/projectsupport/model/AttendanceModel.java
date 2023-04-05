@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "attendance")
+@Table(name = "attendance", uniqueConstraints = { @UniqueConstraint(columnNames = { "date", "student_team_id" }) })
 public class AttendanceModel {
 
     @Id
@@ -17,8 +17,6 @@ public class AttendanceModel {
 
     boolean present;
 
-
-    //todo: participant and date should be unique
     @Temporal(TemporalType.DATE)
     Date date;
 

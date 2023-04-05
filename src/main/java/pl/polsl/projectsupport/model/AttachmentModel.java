@@ -15,7 +15,8 @@ public class AttachmentModel {
 
     String filename;
 
-    //blob
+    @Lob
+    byte[] content;
 
     @ManyToOne
     @JoinColumn(name = "student_team_id")
