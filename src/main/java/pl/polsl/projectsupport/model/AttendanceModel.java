@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "attendance")
+@Table(name = "attendance", uniqueConstraints = { @UniqueConstraint(columnNames = { "date", "student_team_id" }) })
 public class AttendanceModel {
 
     @Id
@@ -21,6 +21,6 @@ public class AttendanceModel {
     Date date;
 
     @ManyToOne
-    @JoinColumn(name = "student_group_id")
-    StudentGroupModel participant;
+    @JoinColumn(name = "student_team_id")
+    StudentTeamModel participant;
 }

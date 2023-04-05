@@ -3,22 +3,25 @@ package pl.polsl.projectsupport.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import pl.polsl.projectsupport.enums.GroupStatus;
+import pl.polsl.projectsupport.enums.TeamStatus;
 
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "groups")
-public class GroupModel {
+@Table(name = "team")
+public class TeamModel {
 
     @Id
     @GeneratedValue
-    @Column(name = "group_id")
+    @Column(name = "team_id")
     Long id;
 
+    @Column(name = "member_limit")
+    Short limit;
+
     @Enumerated(EnumType.STRING)
-    GroupStatus status;
+    TeamStatus status;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
@@ -28,7 +31,7 @@ public class GroupModel {
     @JoinColumn(name = "term_id")
     TermModel term;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "team")
     @JsonIgnore
-    List<StudentGroupModel> students;
+    List<StudentTeamModel> students;
 }
