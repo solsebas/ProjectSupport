@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "topics")
+@Table(name = "topic")
 public class TopicModel {
     @Id
     @GeneratedValue
@@ -23,5 +23,5 @@ public class TopicModel {
 
     @OneToMany(mappedBy = "topic")
     @JsonIgnore
-    List<GroupModel> groups;
+    List<TeamModel> teams;
 }

@@ -8,17 +8,19 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "sudent_group")
-public class StudentGroupModel {
+@Table(name = "student_team")
+public class StudentTeamModel {
 
     @Id
     @GeneratedValue
-    @Column(name = "student_group_id")
+    @Column(name = "student_team_id")
     Long id;
 
+    Short grade;
+
     @ManyToOne
-    @JoinColumn(name = "group_id")
-    GroupModel group;
+    @JoinColumn(name = "team_id")
+    TeamModel team;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -27,4 +29,8 @@ public class StudentGroupModel {
     @OneToMany(mappedBy = "participant")
     @JsonIgnore
     List<AttendanceModel> attendances;
+
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    List<AttachmentModel> attachments;
 }

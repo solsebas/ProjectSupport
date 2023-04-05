@@ -17,10 +17,12 @@ public class AttendanceModel {
 
     boolean present;
 
+
+    //todo: participant and date should be unique
     @Temporal(TemporalType.DATE)
     Date date;
 
     @ManyToOne
-    @JoinColumn(name = "student_group_id")
-    StudentGroupModel participant;
+    @JoinColumn(name = "student_team_id")
+    StudentTeamModel participant;
 }

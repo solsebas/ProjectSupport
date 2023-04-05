@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class StudentModel {
 
     @Id
@@ -27,5 +27,5 @@ public class StudentModel {
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
-    List<StudentGroupModel> groups;
+    List<StudentTeamModel> teams;
 }

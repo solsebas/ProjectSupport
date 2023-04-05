@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "supervisors")
+@Table(name = "supervisor")
 public class SupervisorModel {
 
     @Id

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "terms")
+@Table(name = "term")
 public class TermModel {
 
     @Id

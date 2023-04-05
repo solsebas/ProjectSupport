@@ -1,6 +1,6 @@
 package pl.polsl.projectsupport.enums;
 
-public enum GroupStatus {
+public enum TeamStatus {
     NEW,
     ACTIVE,
     CANCELED,
