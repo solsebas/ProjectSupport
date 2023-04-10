@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.model;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import jakarta.persistence.*;
+import pl.polsl.projectsupport.enums.EnumRole;
 
 @Data
 @Entity
@@ -14,6 +15,6 @@ public class RoleModel {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 30)
-    private EnumRoleModel name;
+    private EnumRole name;
 
 }
