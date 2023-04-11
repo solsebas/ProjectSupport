@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {httpInterceptorProviders} from "./helpers/auth.interceptor";
 
+
 @NgModule({
   declarations: [
     AppComponent,

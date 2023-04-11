@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('SUPERVISOR') or hasRole('ADMIN')")
     public String adminAccess() {
         return "ADMIN content";
     }
