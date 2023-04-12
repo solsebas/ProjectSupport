@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {httpInterceptorProviders} from "./helpers/auth.interceptor";
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {httpInterceptorProviders} from "./helpers/auth.interceptor";
     FooterComponent,
     LoginComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
