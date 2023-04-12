@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MDBBootstrapModule} from "angular-bootstrap-md";
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';

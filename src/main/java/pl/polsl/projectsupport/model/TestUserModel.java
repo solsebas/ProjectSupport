@@ -36,6 +36,12 @@ public class TestUserModel {
     @Size(max = 120)
     private String password;
 
+    @OneToOne(mappedBy = "user")
+    private SupervisorModel supervisor;
+
+    @OneToOne(mappedBy = "user")
+    private StudentModel student;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
