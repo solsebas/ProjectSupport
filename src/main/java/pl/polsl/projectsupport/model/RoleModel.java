@@ -1,9 +1,9 @@
 package pl.polsl.projectsupport.model;
 
-import jakarta.persistence.Entity;
 import lombok.Data;
-import jakarta.persistence.*;
 import pl.polsl.projectsupport.enums.EnumRole;
+
+import javax.persistence.*;
 
 @Data
 @Entity

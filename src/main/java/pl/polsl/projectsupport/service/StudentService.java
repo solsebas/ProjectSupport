@@ -1,6 +1,5 @@
 package pl.polsl.projectsupport.service;
 
-import org.springframework.stereotype.Service;
 import pl.polsl.projectsupport.dto.StudentDto;
 import pl.polsl.projectsupport.model.StudentModel;
 

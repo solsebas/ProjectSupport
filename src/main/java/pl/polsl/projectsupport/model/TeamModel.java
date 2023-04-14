@@ -1,7 +1,7 @@
 package pl.polsl.projectsupport.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import pl.polsl.projectsupport.enums.TeamStatus;
 
