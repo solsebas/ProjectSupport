@@ -20,17 +20,24 @@ public class JwtUtils {
     @Value("${projectsupport.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
-        return Jwts.builder()
+        JwtBuilder bulderJws = Jwts.builder()
+                .setId(userPrincipal.getId().toString())
                 .setSubject((userPrincipal.getUsername()))
+                .setIssuer("ProjectSupport")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS256, jwtSecret) // TU ERROR
-                .compact();
+                .signWith(SignatureAlgorithm.HS256, jwtSecret);
+
+        String jws = bulderJws.compact();
+
+        return jws;
     }
+
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
