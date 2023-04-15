@@ -1,4 +1,27 @@
 
+
+
+
+
+
+#sideNavbar {
+  display: block;
+  transition: .7s all ease;
+  overflow: hidden;
+}
+
+#sideNavbar.hidden {
+  display: none;
+}
+
+#sideNavbar.visuallyhidden {
+  opacity: 0;
+}
+
+
+
+
+
 .navbar-side-style {
   background-color: #012e62;
   color: #ffffff;
@@ -10,12 +33,30 @@
 }
 
 
-@media only screen and (max-width: 991px) {
+@media only screen and (min-width: 576px) and (max-width: 991px) {
   .navbar-side-style {
     width: 97%;
     bottom: 15px;
     margin-left: 1.3vw;
+    margin-top: -1px;
+    margin-bottom: 30px;
     border-radius: 0px 0px 10px 10px;
+    padding-bottom: 20px;
+  }
+
+
+}
+
+@media only screen and (max-width: 575px) {
+  .navbar-side-style {
+    width: 97%;
+    bottom: 20px;
+    margin-bottom: 30px;
+    margin-left: 1.3vw;
+    text-align: center;
+    border-radius: 0px 0px 10px 10px;
+    color: red;
+    padding-bottom: 20px;
   }
 
 

@@ -1,7 +1,8 @@
 package pl.polsl.projectsupport.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Data
 @Entity
