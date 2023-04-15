@@ -9,32 +9,41 @@
   </div>
 
   <div class="d-flex justify-content-center" style="position: relative; left:2.2vw;">
-    <a class="navbar-brand my-auto" [routerLink]="" >
+    <a class="navbar-brand my-auto" [routerLink]="'home'" >
       <img id="logo" src="/assets/img/logo-ProjectSupport.png" alt="logo-ProjectSupport.png" />
     </a>
-    <a class="navbar-brand my-auto" [routerLink]="" >
+    <a class="navbar-brand my-auto" [routerLink]="'home'" >
       <h1  id="logo-text" class="project-name my-auto">ProjectSupport</h1>
     </a>
   </div>
 
   <div class=" d-flex justify-content-end" style="padding-right: 4%;">
-    <div class="row dropdown">
+    <div *ngIf="!isLoggedIn" class="">
+      <a [routerLink]="'login'" class="btn btn-primary logo-button">
+        <h5 class="logo-img">
+          <img src="./assets/bootstrap-icons/dors-login.svg" style="max-height: 40px;"/>
+          <b>Zaloguj się</b>
+        </h5>
+      </a>
+    </div>
+    <div class="row dropdown" *ngIf="isLoggedIn">
       <ul class="navbar-nav">
+
         <!-- Profile -->
         <li mdbDropdown class="nav-item dropdown ms-auto">
           <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
-            <img src="/assets/img/tmp-people.png" class="rounded-circle profile-picture bg-light" alt="x.png" loading="lazy" />
+            <img src="/assets/img/people-user.jpg" class="rounded-circle profile-picture bg-light" alt="x.png" loading="lazy" />
           </a>
           <div class="ul-user-list">
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" [routerLink]="">Mój profil</a>
+                <a class="dropdown-item" [routerLink]="'profile'">Mój profil</a>
               </li>
               <li>
                 <a class="dropdown-item" [routerLink]="">Ustawienia</a>
               </li>
               <li>
-                <a class="dropdown-item" [routerLink]="">Wyloguj</a>
+                <a class="dropdown-item" (click)="logout()">Wyloguj</a>
               </li>
             </ul>
           </div>
@@ -43,5 +52,6 @@
       </ul>
     </div>
   </div>
+
 </nav>
 

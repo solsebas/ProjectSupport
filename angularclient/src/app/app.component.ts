@@ -10,9 +10,9 @@ import {AuthService} from "./services/auth.service";
 export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
+  username?: string;
   showAdminBoard = false;
   showModeratorBoard = false;
-  username?: string;
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
 
@@ -30,17 +30,7 @@ export class AppComponent {
     }
   }
 
-  logout(): void {
-    this.authService.logout().subscribe({
-      next: res => {
-        console.log(res);
-        this.storageService.clean();
 
-        window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
+
+
 }

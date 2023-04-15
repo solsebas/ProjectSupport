@@ -1,10 +1,10 @@
-<app-navbar></app-navbar>
+<app-navbar ></app-navbar> <!--[isLogIn]="isLoggedIn"-->
 <div class="container-fluid">
   <div class="row py-3 mb-5">
-    <div class="col-sm-4 navbar-side-style" id="sideNavbar">
+    <div class="col-sm-4 navbar-side-style hidden visuallyhidden" id="sideNavbar">
       <app-side-navbar></app-side-navbar>
     </div>
-    <div class="col text-center d-flex justify-content-center">
+    <div class="col text-center d-flex justify-content-center" style="min-height: 1000px;">
       <router-outlet></router-outlet>
     </div>
   </div>

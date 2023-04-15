@@ -1,5 +1,26 @@
+.logo-img {
+  transition: 0.5s;
+
+}
+
+.logo-img b {
+  position: relative;
+  top: 2px;
+  transition: 0.5s;
+}
+
+.logo-button {
+  height: 55px;
+  padding-top: 7px;
+  transition: 0.4s;
+  width: 170px;
+}
+
+
+
 .profile-picture {
-  height: 40px;
+  height: 3vw;
+  min-height: 50px;
   border: black solid 1px;
 }
 
@@ -55,7 +76,14 @@
   #logo-text {
     font-size: 0px !important;
   }
+  .logo-img b {
+    font-size: 0px !important;
 
+  }
+
+  .logo-button {
+    width: 80px !important;
+  }
 }
 
 @media only screen and (min-width: 580px) and (max-width: 1280px) {

@@ -4,12 +4,18 @@ import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {RegisterComponent} from "./components/register/register.component";
+import {BoardUserComponent} from "./components/board-user/board-user.component";
+import {BoardAdminComponent} from "./components/board-admin/board-admin.component";
+import {BoardSupervisorComponent} from "./components/board-supervisor/board-supervisor.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'user', component: BoardUserComponent },
+  { path: 'supervisor', component: BoardSupervisorComponent },
+  { path: 'admin', component: BoardAdminComponent },
   { path: 'register', component: RegisterComponent },
 
 
