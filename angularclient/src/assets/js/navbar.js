@@ -25,13 +25,41 @@ function scrollFunction() {
 
 }
 
-window.onload = function() {colapse()};
 
 function colapse() {
-  if (document.getElementById("sideNavbar").style.display === "none") {
-    document.getElementById("sideNavbar").style.display = "block";
+  // if (document.getElementById("sideNavbar").style.display === "none") {
+  //   document.getElementById("sideNavbar").style.display = "block";
+  // } else {
+  //   document.getElementById("sideNavbar").style.display = "none";
+  // }
+  // var hint = document.getElementById('sideNavbar');
+  // if (hint.classList.contains('h-hide')) {
+  //   hint.classList.remove('h-hide');
+  //   setTimeout(function () {
+  //     box.classList.remove('visuallyhidden');
+  //   }, 20);
+  //
+  //
+  // } else {
+  //   hint.classList.add('h-hide');
+  // }
+  let box = document.getElementById('sideNavbar');
+
+  if (box.classList.contains('hidden')) {
+    box.classList.remove('hidden');
+    setTimeout(function () {
+      box.classList.remove('visuallyhidden');
+    }, 20);
   } else {
-    document.getElementById("sideNavbar").style.display = "none";
+    box.classList.add('visuallyhidden');
+    box.addEventListener('transitionend', function(e) {
+      box.classList.add('hidden');
+    }, {
+      capture: false,
+      once: true,
+      passive: false
+    });
   }
+
 }
 

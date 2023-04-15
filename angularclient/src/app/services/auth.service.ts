@@ -38,7 +38,16 @@ export class AuthService {
   }
 
 
-  logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
-  }
+    logout() {
+        return this.http.post(AUTH_API + 'logout', { }, httpOptions).subscribe(
+            response => {
+                console.log('Logged out successfully');
+                // Redirect to the login page or update the UI as needed
+            },
+            error => {
+                console.error('Error logging out:', error);
+                // Handle the error as needed
+            }
+        );
+    }
 }

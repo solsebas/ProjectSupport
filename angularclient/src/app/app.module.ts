@@ -15,6 +15,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {httpInterceptorProviders} from "./helpers/auth.interceptor";
 import { RegisterComponent } from './components/register/register.component';
+import { BoardAdminComponent } from './components/board-admin/board-admin.component';
+import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardSupervisorComponent } from './components/board-supervisor/board-supervisor.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
+    BoardSupervisorComponent
   ],
   imports: [
     BrowserModule,
