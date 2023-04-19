@@ -1,6 +1,5 @@
 package pl.polsl.projectsupport.payload.response;
 
-
 public class MessageResponse {
     private String message;
 
