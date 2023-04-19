@@ -2,4 +2,13 @@
     <header class="jumbotron">
         <p>{{ content }}</p>
     </header>
+
+  <form (ngSubmit)="onSubmit()" >
+    Topic
+    <input name="topic" [(ngModel)]="form.topic" >
+    Name character
+    <input name="name_character" [(ngModel)]="form.name_character" >
+
+    <button type="submit">Add</button>
+  </form>
 </div>
