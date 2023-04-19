@@ -7,6 +7,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {BoardUserComponent} from "./components/board-user/board-user.component";
 import {BoardAdminComponent} from "./components/board-admin/board-admin.component";
 import {BoardSupervisorComponent} from "./components/board-supervisor/board-supervisor.component";
+import {TopicFormComponent} from "./components/topic-form/topic-form.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'supervisor', component: BoardSupervisorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'register', component: RegisterComponent },
-
+  { path: 'furs', component: TopicFormComponent},
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

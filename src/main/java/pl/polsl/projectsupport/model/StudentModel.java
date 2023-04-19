@@ -21,6 +21,10 @@ public class StudentModel {
 
     String surname;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    TestUserModel user;
+
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     List<StudentTermModel> terms;

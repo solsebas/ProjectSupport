@@ -21,6 +21,10 @@ public class SupervisorModel {
 
     String surname;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    TestUserModel user;
+
     @OneToMany(mappedBy = "supervisor")
     @JsonIgnore
     List<TopicModel> topics;
