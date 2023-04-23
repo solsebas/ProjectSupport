@@ -6,6 +6,6 @@ import lombok.Data;
 public class TopicDto {
     Long id;
     String topicName;
-    //String topicDescription;
+    String topicDescription;
 }
 

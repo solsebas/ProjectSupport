@@ -44,5 +44,37 @@
       background-color: #dc3545;
       display: inline-block;
     }
+
+    table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 100%;
+
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    }
+
+    table.hide {
+      display: none;
+    }
+  }
+
+  button:last-of-type {
+    margin-top: 20px;
+  }
+
+  button:last-of-type:focus + form table.hide {
+    display: block;
   }
 }

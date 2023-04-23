@@ -23,8 +23,8 @@ public class StudentController {
     {
         topicService.create(topicModel);
     }
-    //@GetMapping("/topics")
-    //public List<TopicDto> getTopic(){ return topicService.getTopicDtos();}
+    @GetMapping("/topics")
+    public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
     @GetMapping("/students")
     public List<StudentDto> getStudents(){
         return studentService.getStudentDtos();

@@ -24,4 +24,8 @@ export class TopicService {
     );
   }
 
+  getTopics(): Observable<any> {
+    return this.http.get<any>(AUTH_API + this.topicsUrl);
+  }
+
 }

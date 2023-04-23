@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TopicService } from "../../services/topic.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-topic-form',
@@ -12,8 +13,22 @@ export class TopicFormComponent {
   showForm = false;
   formValid = false;
   message = '';
+  currentUser: any; //potrzebne do pokazania, który użytkownik aktualnie jest
+  showTopicsList = false;
+  topics: any[] = [];
 
-  constructor(private topicService: TopicService) { }
+  constructor(private topicService: TopicService) {
+
+    this.topicService.getTopics().subscribe({
+      next: data => {
+        this.topics = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+
+  }
 
   openForm() {
     this.showForm = true;
@@ -29,12 +44,12 @@ export class TopicFormComponent {
       this.topicService.createTopic(this.topicName, this.topicDescription).subscribe({
         next: data => {
           console.log(data);
-          this.message = 'Topic added successfully!';
+          this.message = 'Temat dodany poprawnie!';
           this.closeForm();
         },
         error: err => {
           console.error(err);
-          this.message = 'Failed to add topic';
+          this.message = 'Błąd przy dodawaniu tematu';
         }
       });
     }
@@ -43,5 +58,19 @@ export class TopicFormComponent {
   validateForm() {
     this.formValid = this.topicName.trim() !== '' && this.topicDescription.trim() !== '';
     return this.formValid;
+  }
+
+  showTopics() {
+    this.showTopicsList = true;
+    this.topicService.getTopics().subscribe({
+      next: data => {
+        console.log(data);
+        this.topics = data;
+      },
+      error: err => {
+        console.error(err);
+        this.message = 'Failed to get topics';
+      }
+    });
   }
 }
