@@ -40,8 +40,6 @@ export class TopicFormComponent {
 
   submitForm(event: Event) {
     let topic: Topic = new Topic(this.topicName, this.topicDescription);
-
-
     event.preventDefault();
     if (this.validateForm()) {
       this.topicService.createTopic(topic).subscribe({
