@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TopicService } from "../../services/topic.service";
 import { AuthService } from "../../services/auth.service";
 import {Topic} from "../../models/topic";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-topic-form',
@@ -11,6 +12,7 @@ import {Topic} from "../../models/topic";
 export class TopicFormComponent {
   topicName = '';
   topicDescription = '';
+  idUser = 0;
   showForm = false;
   formValid = false;
   message = '';
@@ -18,7 +20,7 @@ export class TopicFormComponent {
   showTopicsList = false;
   topics: any[] = [];
 
-  constructor(private topicService: TopicService) {
+  constructor(private topicService: TopicService, private storageService: StorageService) {
 
     this.topicService.getTopics().subscribe({
       next: data => {
@@ -39,24 +41,24 @@ export class TopicFormComponent {
   }
 
   submitForm(event: Event) {
-    let topic: Topic = new Topic(this.topicName, this.topicDescription);
-
-
-    event.preventDefault();
-    if (this.validateForm()) {
-      this.topicService.createTopic(topic).subscribe({
-        next: data => {
-          this.topicName = "";
-          this.topicDescription = "";
-          console.log(data);
-          this.message = 'Temat dodany poprawnie!';
-          this.closeForm();
-        },
-        error: err => {
-          console.error(err);
-          this.message = 'Błąd przy dodawaniu tematu';
-        }
-      });
+    if (this.storageService.isLoggedIn()) {
+      let topic: Topic = new Topic(this.topicName, this.topicDescription, this.storageService.getUser().id);
+      event.preventDefault();
+      if (this.validateForm()) {
+        this.topicService.createTopic(topic).subscribe({
+          next: data => {
+            this.topicName = "";
+            this.topicDescription = "";
+            console.log(data);
+            this.message = 'Temat dodany poprawnie!';
+            this.closeForm();
+          },
+          error: err => {
+            console.error(err);
+            this.message = 'Błąd przy dodawaniu tematu';
+          }
+        });
+      } else this.message = 'Błąd przy logowaniu';
     }
   }
 

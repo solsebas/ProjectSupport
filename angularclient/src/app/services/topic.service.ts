@@ -24,9 +24,7 @@ export class TopicService {
   }
 
   getTopics(): Observable<any> {
-    // if user log
-    this.storageService.getUser().id;
-    
+
 
     const headers = this.getHeaderWithToken();
     return this.http.get<any>(API_URL + 'topics', { headers } );

@@ -6,4 +6,5 @@ import lombok.Data;
 public class TopicDto {
     String topicName;
     String topicDescription;
+    Long idUser;
 }
