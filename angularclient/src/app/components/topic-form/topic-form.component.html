@@ -18,9 +18,18 @@
 
 <div *ngIf="showTopicsList">
   <h2>Lista tematów</h2>
-  <ul>
-    <li *ngFor="let topic of topics">
-      {{ topic.topicName }} - {{ topic.topicDescription }}
-    </li>
-  </ul>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nazwa tematu</th>
+        <th scope="col">Opis tematu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let topic of topics">
+        <td>{{ topic.topicName }}</td>
+        <td>{{ topic.topicDescription }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
