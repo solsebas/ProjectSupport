@@ -1,42 +1,55 @@
 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" >
   <li class="nav-item">
-    <a [routerLink]="'register'" class="nav-link align-middle px-0  w-100" >
-      <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Rejestracja</span>
+    <a [routerLink]="'home'" class="nav-link align-middle px-0  w-100" >
+      <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Główna strona</span>
     </a>
   </li>
+
   <li class="nav-item" *ngIf="showAdminBoard">
-    <a [routerLink]="'admin'" class="nav-link px-0 align-middle  w-100">
-      <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline"></span>Panel admina</a>
-  </li>
-  <li class="nav-item" *ngIf="showModeratorBoard">
-    <a [routerLink]="'supervisor'" class="nav-link px-0 align-middle w-100">
-      <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Panel nadzorczy</span></a>
-  </li>
-  <li class="nav-item">
-    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
-      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Lista rozwijana</span><i class="bi bi-caret-down-fill"></i>
+    <a href="#adminSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel admina</span><i class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-      <li class="w-100">
-        <a [routerLink]="" class="nav-link px-0  w-100">
-          <i class="bi bi-card-checklist"></i><span class="ms-1 d-sm-inline">Opcja 1</span>
-        </a>
+    <ul class="collapse nav flex-column ms-1" id="adminSubmenu" data-bs-parent="#menu">
+      <li>
+        <a [routerLink]="'admin'" class="nav-link px-0 w-100">
+          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline"></span>Panel admina</a>
       </li>
       <li>
-        <a [routerLink]="" class="nav-link px-0  w-100">
-          <i class="bi bi-exclamation-circle"></i><span class="ms-1 d-sm-inline">Opcja 2</span>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="" class="nav-link px-0  w-100">
-          <i class="bi bi-award-fill"></i><span class="ms-1 d-sm-inline">Opcja 3</span>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="" class="nav-link px-0  w-100">
-          <i class="bi bi-file-earmark-bar-graph"></i><span class="ms-1 d-sm-inline">Opcja 4</span>
+        <a [routerLink]="'register'" class="nav-link px-0 w-100" >
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Rejestracja</span>
         </a>
       </li>
     </ul>
   </li>
+
+
+  <li class="nav-item" *ngIf="showModeratorBoard">
+    <a href="#supervizorSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel proawdzącego</span><i class="bi bi-caret-down-fill"></i>
+    </a>
+    <ul class="collapse nav flex-column ms-1" id="supervizorSubmenu" data-bs-parent="#menu">
+      <li>
+        <a [routerLink]="'supervisor'" class="nav-link px-0 w-100">
+          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Panel nadzorczy</span></a>
+      </li>
+      <li>
+        <a [routerLink]="'topic'" class="nav-link px-0 w-100">
+          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline"> projektów</span></a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="nav-item" *ngIf="showStudentBoard">
+    <a href="#studentSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel studenta</span><i class="bi bi-caret-down-fill"></i>
+    </a>
+    <ul class="collapse nav flex-column ms-1" id="studentSubmenu" data-bs-parent="#menu">
+      <li>
+        <a [routerLink]="''" class="nav-link px-0 w-100">
+          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Puste</span></a>
+      </li>
+    </ul>
+  </li>
+
+
 </ul>

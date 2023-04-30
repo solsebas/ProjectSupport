@@ -12,6 +12,7 @@ export class SideNavbarComponent implements OnInit {
   private roles: string[] = [];
   showAdminBoard = false;
   showModeratorBoard = false;
+  showStudentBoard = false;
   isLoggedIn = false;
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
@@ -25,6 +26,7 @@ export class SideNavbarComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_SUPERVISOR');
+      this.showStudentBoard = this.roles.includes('ROLE_USER');
 
     }
 
