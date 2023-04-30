@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'supervisor', component: BoardSupervisorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'furs', component: TopicFormComponent},
+  { path: 'topic', component: TopicFormComponent},
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

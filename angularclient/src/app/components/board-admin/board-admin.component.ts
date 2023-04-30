@@ -18,6 +18,7 @@ export class BoardAdminComponent implements OnInit {
         this.content = data;
       },
       error: err => {
+        console.log(err)
         if (err.error) {
           try {
             const res = JSON.parse(err.error);

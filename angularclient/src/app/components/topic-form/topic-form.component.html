@@ -1,1 +1,26 @@
 <p>topic-form works!</p>
+<button (click)="openForm()">Dodaj temat</button>
+<button (click)="showTopics()">Pokaż listę tematów</button>
+
+<div class="form-popup" [hidden]="!showForm">
+  <form name="topic-form"(submit)="submitForm($event)">
+    <label for="topic-name">Nazwa tematu:</label>
+    <input (change)="validateForm()" type="text" id="topic-name" name="topic-name" [(ngModel)]="topicName" required>
+
+    <label for="topic-description">Opis tematu:</label>
+    <textarea (change)="validateForm()" id="topic-description" name="topic-description" rows="4" cols="50" [(ngModel)]="topicDescription" required></textarea>
+
+    <button type="submit" [disabled]="!formValid">Dodaj</button>
+    <button type="button" (click)="closeForm()">Anuluj</button>
+    <div *ngIf="message">{{ message }}</div>
+  </form>
+</div>
+
+<div *ngIf="showTopicsList">
+  <h2>Lista tematów</h2>
+  <ul>
+    <li *ngFor="let topic of topics">
+      {{ topic.topicName }} - {{ topic.topicDescription }}
+    </li>
+  </ul>
+</div>

@@ -11,26 +11,30 @@ const API_URL = 'http://localhost:8080/api/test/';
 export class UserService {
   constructor(private http: HttpClient, private storageService: StorageService) {}
 
+
+  private getHeaderWithToken(): HttpHeaders {
+    return new HttpHeaders().set('Authorization', 'Bearer ' + this.storageService.getUser().token);
+  }
+
   getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' });
+    const headers = this.getHeaderWithToken();
+    return this.http.get(API_URL + 'all', { responseType: 'text', headers });
   }
   getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'studentUser', { responseType: 'text' });
+    const headers = this.getHeaderWithToken();
+    return this.http.get(API_URL + 'studentUser', { responseType: 'text', headers  });
   }
 
   getSupervisorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'supervisorUser', { responseType: 'text' });
+    const headers = this.getHeaderWithToken();
+    return this.http.get(API_URL + 'supervisorUser', { responseType: 'text', headers  });
   }
 
   getAdminBoard(): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', this.storageService.getUser().token);
-    // PROBLEM Z NAGŁÓWKIEM Bearer $token - i krzyczy na back w AuthEntryPointJwt że nie
-    // !!!!!!!!!!!
-    // !!!!!!!!!!!
-    // !!!!!!!!!!!
-    // !!!!!!!!!!!
-    // TO DO
+    // var cos = this.storageService.getUser().token; /* "token..." */
+    // var test2 = this.storageService.getUser(); // Object { token: "token... }
 
+    const headers = this.getHeaderWithToken();
     return this.http.get(API_URL + 'admin', { responseType: 'text', headers });
   }
 }

@@ -2,3 +2,20 @@
   min-height: 50px;
   min-width: 150px;
 }
+
+.nav-item a {
+  color: white;
+  font-weight: normal;
+}
+
+.nav-item a:hover {
+  text-shadow:
+    -0.5px -0.5px 0 #919498,
+    0.5px -0.5px 0 #919498,
+    -0.5px 0.5px 0 #919498,
+    0.5px 0.5px 0 #919498;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
