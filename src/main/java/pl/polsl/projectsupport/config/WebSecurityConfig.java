@@ -68,7 +68,7 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/studentUser").hasRole("USER")
+                .antMatchers("/api/test/studentUser").hasRole("STUDENT")
                 .antMatchers("/api/test/admin").hasRole("ADMIN")
                 .antMatchers("/api/test/supervisorUser").hasRole("SUPERVISOR")
                 .antMatchers("/api/test/all").permitAll()

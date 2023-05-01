@@ -87,7 +87,7 @@ public class AuthController {
         Set<RoleModel> roles = new HashSet<>();
 
         if (strRoles == null) {
-            RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
@@ -105,7 +105,7 @@ public class AuthController {
 
                         break;
                     default:
-                        RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_USER)
+                        RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }

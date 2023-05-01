@@ -26,7 +26,7 @@ export class SideNavbarComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_SUPERVISOR');
-      this.showStudentBoard = this.roles.includes('ROLE_USER');
+      this.showStudentBoard = this.roles.includes('ROLE_STUDENT');
 
     }
 

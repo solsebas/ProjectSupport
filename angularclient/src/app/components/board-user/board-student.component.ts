@@ -5,10 +5,10 @@ import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-board-user',
-  templateUrl: './board-user.component.html',
-  styleUrls: ['./board-user.component.scss']
+  templateUrl: './board-student.component.html',
+  styleUrls: ['./board-student.component.scss']
 })
-export class BoardUserComponent  implements OnInit {
+export class BoardStudentComponent implements OnInit {
   content?: string;
 
   constructor(private userService: UserService, private storageService: StorageService) { }
