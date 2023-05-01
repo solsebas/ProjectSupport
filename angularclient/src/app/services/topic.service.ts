@@ -20,13 +20,13 @@ export class TopicService {
   createTopic(topic: Topic): Observable<any> {
 
     const headers = this.getHeaderWithToken();
-    return this.http.post(API_URL + 'topics',  JSON.parse(JSON.stringify(topic)), { headers } );
+    return this.http.post(API_URL + 'topics',  topic, { headers } );
   }
 
   getTopics(): Observable<any> {
     // if user log
     this.storageService.getUser().id;
-    
+
 
     const headers = this.getHeaderWithToken();
     return this.http.get<any>(API_URL + 'topics', { headers } );
