@@ -1,5 +1,5 @@
 -- ROLE TABLE --
-INSERT INTO public.role(id, name) VALUES (1, 'ROLE_USER');
+INSERT INTO public.role(id, name) VALUES (1, 'ROLE_STUDENT');
 INSERT INTO public.role(id, name) VALUES (2, 'ROLE_SUPERVISOR');
 INSERT INTO public.role(id, name) VALUES (3, 'ROLE_ADMIN');
 
@@ -52,16 +52,16 @@ INSERT INTO public.term(term_id, major, term_number, year) VALUES (11, 'Automaty
 INSERT INTO public.term(term_id, major, term_number, year) VALUES (12, 'Automatyka i Robotyka', 6, 2023);
 
 -- TEAM TABLE --
--- REGISTRATION -> OPEN -> CLOSE or CANCEL --
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (1, 1, 'CLOSE', 1, 1); 			-- TERM 1, 'Informatyka', 1, 2022
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (2, 1, 'CLOSE', 4, 4); 			-- TERM 4, 'Automatyka i Robotyka', 1, 2022
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (3, 1, 'CLOSE', 1, 2); 			-- TERM 1, 'Informatyka', 1, 2022
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (4, 1, 'CANCEL', 4, 5); 			-- TERM 4, 'Automatyka i Robotyka', 1, 2022
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (5, 2, 'OPEN', 7, 1); 			-- TERM 7, 'Informatyka', 2, 2023
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (6, 1, 'OPEN', 10, 4); 			-- TERM 10, 'Automatyka i Robotyka', 2, 2023
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (7, 5, 'REGISTRATION', 7, 3); 		-- TERM 7, 'Informatyka', 2, 2023
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (8, 3, 'REGISTRATION', 8, 2); 		-- TERM 8, 'Informatyka', 4, 2023
-INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (9, 4, 'REGISTRATION', 10, 6); 	-- TERM 10, 'Automatyka i Robotyka', 2, 2023
+-- NEW -> ACTIVE -> CLOSED or CANCELED --
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (1, 1, 'CLOSED', 1, 1); 			-- TERM 1, 'Informatyka', 1, 2022
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (2, 1, 'CLOSED', 4, 4); 			-- TERM 4, 'Automatyka i Robotyka', 1, 2022
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (3, 1, 'CLOSED', 1, 2); 			-- TERM 1, 'Informatyka', 1, 2022
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (4, 1, 'CANCELED', 4, 5); 			-- TERM 4, 'Automatyka i Robotyka', 1, 2022
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (5, 2, 'ACTIVE', 7, 1); 			-- TERM 7, 'Informatyka', 2, 2023
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (6, 1, 'ACTIVE', 10, 4); 			-- TERM 10, 'Automatyka i Robotyka', 2, 2023
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (7, 5, 'NEW', 7, 3); 		-- TERM 7, 'Informatyka', 2, 2023
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (8, 3, 'NEW', 8, 2); 		-- TERM 8, 'Informatyka', 4, 2023
+INSERT INTO public.team(team_id, member_limit, status, term_id, topic_id) VALUES (9, 4, 'NEW', 10, 6); 	-- TERM 10, 'Automatyka i Robotyka', 2, 2023
 
 -- STUDENT_TERM TABLE --
 INSERT INTO public.student_term(student_term_id, student_id, term_id) VALUES (1, 1, 1);

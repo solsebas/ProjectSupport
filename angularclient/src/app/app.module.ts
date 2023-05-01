@@ -16,7 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {httpInterceptorProviders} from "./helpers/auth.interceptor";
 import { RegisterComponent } from './components/register/register.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
-import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardStudentComponent } from './components/board-user/board-student.component';
 import { BoardSupervisorComponent } from './components/board-supervisor/board-supervisor.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
 
@@ -32,7 +32,7 @@ import { TopicFormComponent } from './components/topic-form/topic-form.component
     ProfileComponent,
     RegisterComponent,
     BoardAdminComponent,
-    BoardUserComponent,
+    BoardStudentComponent,
     BoardSupervisorComponent,
     TopicFormComponent
   ],

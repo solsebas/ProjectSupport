@@ -20,7 +20,7 @@ public class UsersController {
     }
 
     @GetMapping("/studentUser")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('STUDENT')")
     public String studentUserAccess() {
         return "STUDENT user content";
     }
