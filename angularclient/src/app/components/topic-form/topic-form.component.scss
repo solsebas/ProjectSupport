@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
 
-  form {
+  .form-form {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -30,51 +30,53 @@
       border: 1px solid #ccc;
     }
 
-    button {
-      padding: 10px 20px;
-      border-radius: 5px;
-      border: none;
-      color: white;
-      background-color: #007bff;
-      cursor: pointer;
-      display: inline-block;
-    }
-
-    button[type="button"] {
-      background-color: #dc3545;
-      display: inline-block;
-    }
-
-    table {
-      margin-top: 20px;
-      border-collapse: collapse;
-      width: 100%;
-
-      th, td {
-        text-align: left;
-        padding: 8px;
-      }
-
-      th {
-        background-color: #007bff;
-        color: white;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-    }
-
-    table.hide {
-      display: none;
-    }
-  }
-
-  button:last-of-type {
-    margin-top: 20px;
-  }
-
-  button:last-of-type:focus + form table.hide {
-    display: block;
   }
 }
+
+
+
+
+
+.btn-add-topic {
+  background-color: red;
+  border-color: darkred;
+}
+
+.btn-view-topic {
+  background-color: lightblue;
+  border-color: #6da0af;
+}
+
+.button-open-menu {
+
+  //height: 0;
+  //padding-bottom:20%;
+  //background-color:red
+
+  border-radius: 4px;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  width: 45%;
+  height: 45%;
+  //margin-right: 5%;
+  margin: min(5px, 5%);
+  min-height: 100px;
+  min-width: 100px;
+  transition: 0.5s;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+.button-open-menu:hover {
+  filter: brightness(75%);
+  box-shadow: 0 0 3px black;
+  margin-top: -10px;
+  font-weight: bold;
+}
+
+.button-open-menu h3 {
+  margin: auto;
+}
+
+

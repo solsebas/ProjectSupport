@@ -1,35 +1,72 @@
-<p>topic-form works!</p>
-<button (click)="openForm()">Dodaj temat</button>
-<button (click)="showTopics()">Pokaż listę tematów</button>
 
-<div class="form-popup" [hidden]="!showForm">
-  <form name="topic-form"(submit)="submitForm($event)">
-    <label for="topic-name">Nazwa tematu:</label>
-    <input (change)="validateForm()" type="text" id="topic-name" name="topic-name" [(ngModel)]="topicName" required>
 
-    <label for="topic-description">Opis tematu:</label>
-    <textarea (change)="validateForm()" id="topic-description" name="topic-description" rows="4" cols="50" [(ngModel)]="topicDescription" required></textarea>
+<div class="container w-100 justify-content-center flex p-3">
+  <h1 class="mb-4">Pulpit:</h1>
+  <div class="row w-100 "> <!--justify-content-between-->
+    <button class="button-open-menu btn-add-topic" (click)="openFormAddTopic()"><h3>Dodaj temat</h3></button>
+    <button class="button-open-menu btn-view-topic" (click)="openFormViewTopic()"><h3>Pokaż listę tematów</h3></button>
+  </div>
+</div>
 
-    <button type="submit" [disabled]="!formValid">Dodaj</button>
-    <button type="button" (click)="closeForm()">Anuluj</button>
-    <div *ngIf="message">{{ message }}</div>
+
+
+
+
+<div class="form-popup" [hidden]="!showFormAddTopics">
+  <form class="form-form" name="topic-form"(submit)="submitForm($event)">
+
+    <label for="topic-name"><h2>Nazwa tematu:</h2></label>
+    <input (change)="validateForm()" type="text" id="topic-name" name="topic-name" placeholder="nazwa tematu" [(ngModel)]="topicName" required>
+
+    <label for="topic-description"><h2>Opis tematu:</h2></label>
+    <textarea (change)="validateForm()" id="topic-description" name="topic-description" placeholder="opis tematu" rows="4" cols="50" [(ngModel)]="topicDescription" required></textarea>
+
+    <div class="btn-toolbar m-2">
+      <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formValid">Dodaj</button>
+      <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTopic()">Anuluj</button>
+    </div>
+
+    <div class="alert alert-success" role="alert" *ngIf="messageAdd.substring(0,4) == 'Tema' && messageAdd">
+      {{ messageAdd }}
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="messageAdd.substring(0,4) == 'Błąd' && messageAdd"> <!---->
+      {{ messageAdd }}
+    </div>
   </form>
 </div>
 
-<div *ngIf="showTopicsList">
-  <h2>Lista tematów</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Nazwa tematu</th>
-        <th scope="col">Opis tematu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let topic of topics">
-        <td>{{ topic.topicName }}</td>
-        <td>{{ topic.topicDescription }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="form-popup" [hidden]="!showFormViewTopics">
+  <div class="form-form">
+    <h2>Lista tematów</h2>
+    <div  *ngIf="showTopicsList && !messageView">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nazwa tematu</th>
+          <th scope="col">Opis tematu</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let topic of topics">
+          <td>{{ topic.topicName }}</td>
+          <td>{{ topic.topicDescription }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-danger m-3" role="alert" *ngIf="messageView">
+      {{ messageView }}
+    </div>
+    <div class="btn-toolbar m-2">
+      <button type="button" class="btn btn-primary m-2" (click)="showTopics()">Odśwież listę tematów</button>
+      <button type="button" class="btn btn-danger m-2" (click)="closeFormViewTopic()">Anuluj</button>
+    </div>
+
+  </div>
+
+
 </div>
+
+
+
+

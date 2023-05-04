@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import { TopicService } from "../../services/topic.service";
 import { AuthService } from "../../services/auth.service";
 import {Topic} from "../../models/topic";
@@ -11,12 +11,16 @@ import {Topic} from "../../models/topic";
 export class TopicFormComponent {
   topicName = '';
   topicDescription = '';
-  showForm = false;
+  showFormAddTopics = false; // czy ma być wyświetlone formularz do dodawania tematów
+  showFormViewTopics = false; // czy ma być wyświetlone formularz do wyświetlania tematów
+
   formValid = false;
-  message = '';
-  currentUser: any; //potrzebne do pokazania, który użytkownik aktualnie jest
+  messageAdd = '';
+  messageView = '';
+
   showTopicsList = false;
   topics: any[] = [];
+
 
   constructor(private topicService: TopicService) {
 
@@ -30,12 +34,21 @@ export class TopicFormComponent {
     });
   }
 
-  openForm() {
-    this.showForm = true;
+  openFormAddTopic() {
+    this.showFormAddTopics = true;
   }
 
-  closeForm() {
-    this.showForm = false;
+  closeFormAddTopic() {
+    this.showFormAddTopics = false;
+  }
+
+  openFormViewTopic() {
+    this.showTopics();
+    this.showFormViewTopics = true;
+  }
+
+  closeFormViewTopic() {
+    this.showFormViewTopics = false;
   }
 
   submitForm(event: Event) {
@@ -47,12 +60,12 @@ export class TopicFormComponent {
           this.topicName = "";
           this.topicDescription = "";
           console.log(data);
-          this.message = 'Temat dodany poprawnie!';
-          this.closeForm();
+          this.messageAdd = 'Temat dodany poprawnie!';
+          this.closeFormAddTopic();
         },
         error: err => {
           console.error(err);
-          this.message = 'Błąd przy dodawaniu tematu';
+          this.messageAdd = 'Błąd przy dodawaniu tematu';
         }
       });
     }
@@ -64,6 +77,7 @@ export class TopicFormComponent {
   }
 
   showTopics() {
+    this.messageView = '';
     this.showTopicsList = true;
     this.topicService.getTopics().subscribe({
       next: data => {
@@ -72,8 +86,17 @@ export class TopicFormComponent {
       },
       error: err => {
         console.error(err);
-        this.message = 'Failed to get topics';
+        this.messageView = 'Nie udało się pobrać tematów.';
       }
     });
   }
+
+
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.keyCode === 27) { // 27 - ESC_KEY code
+      this.showFormAddTopics = false;
+      this.showFormViewTopics = false;
+    }
+  }
+
 }
