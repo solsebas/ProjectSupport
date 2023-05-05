@@ -20,10 +20,10 @@ public class StudentController {
     //@GetMapping("/supervisorId")
     //public List<SupervisorDto> getSupervisors(){ return supervisorService.getSupervisorDtos();}
 
-    @PostMapping("/topics")
-    public void addTopic(@RequestBody TopicDto topicDto) {
-        topicService.create(topicDto);
-    }
+    @PostMapping("/topics/delete")
+    public void deleteTopic(@RequestBody TopicDto topicDto) {topicService.delete(topicDto);}
+    @PostMapping("/topics/add")
+    public void addTopic(@RequestBody TopicDto topicDto) {topicService.create(topicDto);}
     @GetMapping("/topics")
     public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
 
