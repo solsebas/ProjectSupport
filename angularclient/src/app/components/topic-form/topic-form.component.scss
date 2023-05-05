@@ -34,18 +34,58 @@
 }
 
 
+.btn-add-topic::before {
+  content: "";
+  background-image: url('img/form-add-icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 10px;
 
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.4;
+
+
+}
 
 
 .btn-add-topic {
-  background-color: red;
-  border-color: darkred;
+  //background-image: url('img/form-add-icon.png');
+  position: relative;
+  background-color: rgba(255,0,0,0.5);
+  border-color: rgba(182, 3, 3, 0.5);;
+  text-align: center;
 }
 
-.btn-view-topic {
-  background-color: lightblue;
-  border-color: #6da0af;
+
+
+.btn-view-topic::before {
+  content: "";
+  background-image: url('img/form-show-icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 10px;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.4;
+
+
 }
+.btn-view-topic {
+  position: relative;
+  background-color: rgba(0,255,0,0.5);
+  border-color: rgba(0, 187, 0, 0.5);
+}
+
+
+
 
 .button-open-menu {
 
@@ -53,7 +93,7 @@
   //padding-bottom:20%;
   //background-color:red
 
-  border-radius: 4px;
+  border-radius: 10px;
   color: black;
   text-align: center;
   vertical-align: middle;
@@ -61,22 +101,19 @@
   height: 45%;
   //margin-right: 5%;
   margin: min(5px, 5%);
-  min-height: 100px;
+  min-height: 180px;
   min-width: 100px;
   transition: 0.5s;
   margin-bottom: 20px;
-  font-weight: normal;
 }
 
 .button-open-menu:hover {
   filter: brightness(75%);
   box-shadow: 0 0 3px black;
   margin-top: -10px;
-  font-weight: bold;
 }
 
 .button-open-menu h3 {
   margin: auto;
+  font-weight: 750;
 }
-
-
