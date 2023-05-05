@@ -59,4 +59,12 @@ public class TopicServiceImpl implements TopicService {
         TopicModel topicModel = convertToModel(topicDto);
         topicDao.save(topicModel);
     }
+
+    @Override
+    public void delete(TopicDto topicDto) {
+        TopicModel topicModel = convertToModel(topicDto);
+        topicDao.delete(topicModel);
+    }
+
+
 }

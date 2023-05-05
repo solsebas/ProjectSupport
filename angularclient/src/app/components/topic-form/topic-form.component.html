@@ -44,12 +44,14 @@
         <tr>
           <th scope="col">Nazwa tematu</th>
           <th scope="col">Opis tematu</th>
+          <th scope="col">Usuń</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let topic of topics">
           <td>{{ topic.topicName }}</td>
           <td>{{ topic.topicDescription }}</td>
+          <td><button class="btn btn-danger" (click)="deleteTopic(topic.id)">Usuń</button></td>
         </tr>
         </tbody>
       </table>
