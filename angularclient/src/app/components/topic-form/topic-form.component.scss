@@ -39,6 +39,7 @@
   background-image: url('img/form-add-icon.png');
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   margin: 10px;
 
   position: absolute;
@@ -50,14 +51,10 @@
 
 
 }
-
-
 .btn-add-topic {
-  //background-image: url('img/form-add-icon.png');
   position: relative;
   background-color: rgba(255,0,0,0.5);
   border-color: rgba(182, 3, 3, 0.5);;
-  text-align: center;
 }
 
 
@@ -67,6 +64,7 @@
   background-image: url('img/form-show-icon.png');
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   margin: 10px;
 
   position: absolute;
@@ -115,5 +113,16 @@
 
 .button-open-menu h3 {
   margin: auto;
-  font-weight: 750;
+  font-weight: 700;
+  position: relative;
+  text-shadow:
+    /* first layer at 1px */
+    -1px -1px 0px #fff,
+    0px -1px 0px #fff,
+    1px -1px 0px #fff,
+    -1px  0px 0px #fff,
+    1px  0px 0px #fff,
+    -1px  1px 0px #fff,
+    0px  1px 0px #fff,
+    1px  1px 0px #fff;
 }
