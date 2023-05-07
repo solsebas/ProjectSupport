@@ -1,0 +1,48 @@
+<div class="container w-100 justify-content-center flex p-3">
+  <h1 class="mb-4">Pulpit:</h1>
+  <div class="row w-100 "> <!--justify-content-between-->
+    <button class="button-open-menu btn-add-topic"><h3>Dodaj zespół</h3></button>
+    <button class="button-open-menu btn-view-topic" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
+  </div>
+</div>
+
+<div class="form-popup" [hidden]="!showFormViewTeams">
+  <div class="form-form">
+    <h2>Lista tematów</h2>
+    <div  *ngIf="showTeamsList">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id zespołu</th>
+          <th scope="col">Limit</th>
+          <th scope="col">Temat</th>
+          <th scope="col">ID Semestru</th>
+          <th scope="col">Status</th>
+          <th scope="col">Uczestnicy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let team of teams">
+          <td>{{ team.id }}</td>
+          <td>{{ team.studentList.length }} / {{ team.limit }}</td>
+          <td>{{ team.topic.topicName }} ({{ team.topic.topicDescription }})</td>
+          <td>{{ team.term }}</td>
+          <td>{{ team.status }}</td>
+          <td>
+            <span *ngFor="let student of team.studentList">
+            {{student.firstName + ' ' + student.surname}} <br/>
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btn-toolbar m-2">
+      <button type="button" class="btn btn-primary m-2" (click)="showTeams()">Odśwież listę tematów</button>
+      <button type="button" class="btn btn-danger m-2" (click)="closeFormViewTeam()">Anuluj</button>
+    </div>
+
+  </div>
+
+
+</div>
