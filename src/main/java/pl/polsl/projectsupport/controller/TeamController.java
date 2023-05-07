@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.TeamDto;
+import pl.polsl.projectsupport.dto.TeamStudentDto;
 import pl.polsl.projectsupport.service.TeamService;
 
 import java.util.List;
@@ -22,5 +23,10 @@ public class TeamController {
     @PostMapping("/teams")
     public void addTeam(@RequestBody TeamDto teamDto){
         teamService.create(teamDto);
+    }
+
+    @PostMapping("teams/student")
+    public void addStudent(@RequestBody TeamStudentDto dto){
+        teamService.addStudent(dto);
     }
 }
