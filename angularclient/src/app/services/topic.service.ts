@@ -23,13 +23,13 @@ export class TopicService {
     return this.http.post(API_URL + 'topics',  topic, { headers } );
   }
 
-  getTopics(): Observable<any> {
+  getTopics(): Observable<Topic> {
     // if user log
     this.storageService.getUser().id;
 
 
     const headers = this.getHeaderWithToken();
-    return this.http.get<any>(API_URL + 'topics', { headers } );
+    return this.http.get<Topic>(API_URL + 'topics', { headers } );
   }
 
 }
