@@ -19,6 +19,7 @@ import { BoardAdminComponent } from './components/board-admin/board-admin.compon
 import { BoardStudentComponent } from './components/board-user/board-student.component';
 import { BoardSupervisorComponent } from './components/board-supervisor/board-supervisor.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
+import { TeamFormComponent } from './components/team-form/team-form.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TopicFormComponent } from './components/topic-form/topic-form.component
     BoardAdminComponent,
     BoardStudentComponent,
     BoardSupervisorComponent,
-    TopicFormComponent
+    TopicFormComponent,
+    TeamFormComponent
   ],
   imports: [
     BrowserModule,
