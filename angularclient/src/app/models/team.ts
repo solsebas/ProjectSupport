@@ -3,24 +3,19 @@ import {Student} from "./student";
 
 export class Team {
 
-  id: bigint
+  id?: bigint
 
-  limit: bigint
+  limit: number
 
-  status: string
+  status?: string
 
-  topic: Topic
+  topic?: Topic
 
-  term: bigint
+  term?: bigint
 
-  studentList: Student[]
+  studentList?: Student[]
 
-  constructor(id: bigint, limit: bigint, status: string, topic: Topic, term: bigint, student: Student[]) {
-    this.id = id;
+  constructor(limit: number) {
     this.limit = limit;
-    this.status = status;
-    this.topic = topic;
-    this.term = term;
-    this.studentList = student;
   }
 }

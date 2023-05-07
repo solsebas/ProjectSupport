@@ -8,6 +8,7 @@ import java.util.List;
 public class TeamDto {
 
     Long id;
+
     Short limit;
 
     String status;

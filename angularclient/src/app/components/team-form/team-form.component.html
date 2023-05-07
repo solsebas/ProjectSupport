@@ -1,9 +1,29 @@
 <div class="container w-100 justify-content-center flex p-3">
   <h1 class="mb-4">Pulpit:</h1>
   <div class="row w-100 "> <!--justify-content-between-->
-    <button class="button-open-menu btn-add-topic"><h3>Dodaj zespół</h3></button>
+    <button class="button-open-menu btn-add-topic" (click)="openForAddTeam()"><h3>Dodaj zespół</h3></button>
     <button class="button-open-menu btn-view-topic" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
   </div>
+</div>
+
+<div class="form-popup" [hidden]="!showFormAddTeam">
+  <form class="form-form" name="topic-form" (submit)="submitTeamForm($event)">
+
+    <label for="limit"><h2>Limit członków:</h2> {{ limit }}</label>
+    <input (change)="validateForm()" type="range" min="1" max="6" step="1" id="limit" name="limit" placeholder="Limit członków" [(ngModel)]="limit" required>
+
+    <div class="btn-toolbar m-2">
+      <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formTeamValid">Dodaj</button>
+      <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
+    </div>
+
+<!--    <div class="alert alert-success" role="alert" *ngIf="messageAdd.substring(0,4) == 'Tema' && messageAdd">-->
+<!--      {{ messageAdd }}-->
+<!--    </div>-->
+<!--    <div class="alert alert-danger" role="alert" *ngIf="messageAdd.substring(0,4) == 'Błąd' && messageAdd"> &lt;!&ndash;&ndash;&gt;-->
+<!--      {{ messageAdd }}-->
+<!--    </div>-->
+  </form>
 </div>
 
 <div class="form-popup" [hidden]="!showFormViewTeams">
@@ -23,15 +43,16 @@
         </thead>
         <tbody>
         <tr *ngFor="let team of teams">
-          <td>{{ team.id }}</td>
-          <td>{{ team.studentList.length }} / {{ team.limit }}</td>
-          <td>{{ team.topic.topicName }} ({{ team.topic.topicDescription }})</td>
+          <td>{{ team.id}}</td>
+          <td>{{ team.studentList?.length }} / {{ team.limit }}</td>
+          <td>{{ team.topic?.topicName }} ({{ team.topic?.topicDescription }})</td>
           <td>{{ team.term }}</td>
           <td>{{ team.status }}</td>
           <td>
             <span *ngFor="let student of team.studentList">
             {{student.firstName + ' ' + student.surname}} <br/>
             </span>
+            <button (click)="openForAddStudent(team.id?team.id:teamId)" class="btn-add-stud" *ngIf="team.studentList?.length != team.limit">+</button>
           </td>
         </tr>
         </tbody>
@@ -45,4 +66,27 @@
   </div>
 
 
+</div>
+
+<div class="form-popup" [hidden]="!showStudentList">
+  <div class="form-form">
+  <h2>Lista studentów:</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Imię</th>
+      <th scope="col">Nazwisko</th>
+      <th scope="col">Dodaj</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.firstName }}</td>
+      <td>{{ student.surname }}</td>
+      <td> <button (click)="submitStudent(student.id)" class="btn btn-primary m-2" type="button" style="min-width: 100px;">Dodaj</button> </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-danger m-2" (click)="closeFormAddStudent()">Anuluj</button>
+  </div>
 </div>
