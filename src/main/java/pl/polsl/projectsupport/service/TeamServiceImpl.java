@@ -50,6 +50,7 @@ public class TeamServiceImpl implements TeamService {
         studentTeamModel.setStudent(student.get());
         studentTeamModel.setTeam(team.get());
         studentTeamDao.save(studentTeamModel);
+        //todo: walidacja od strony backendu czy już jest takie połączenie
     }
 
     @Override
