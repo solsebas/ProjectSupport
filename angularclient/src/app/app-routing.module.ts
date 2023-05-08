@@ -8,6 +8,7 @@ import {BoardStudentComponent} from "./components/board-user/board-student.compo
 import {BoardAdminComponent} from "./components/board-admin/board-admin.component";
 import {BoardSupervisorComponent} from "./components/board-supervisor/board-supervisor.component";
 import {TopicFormComponent} from "./components/topic-form/topic-form.component";
+import {TeamFormComponent} from "./components/team-form/team-form.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'topic', component: TopicFormComponent},
+  { path: 'team', component: TeamFormComponent},
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

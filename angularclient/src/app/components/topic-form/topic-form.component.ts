@@ -19,7 +19,7 @@ export class TopicFormComponent {
   messageView = '';
 
   showTopicsList = false;
-  topics: any[] = [];
+  topics: Topic[] = [];
 
 
   constructor(private topicService: TopicService) {

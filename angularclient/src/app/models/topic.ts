@@ -1,8 +1,8 @@
 export class Topic {
+  id?: bigint
   topicName: string;
   topicDescription: string;
 
-  // id user - KONTA SUPERVIOZR
 
   constructor(topicName: string, topicDescription: string) {
     this.topicName = topicName;
