@@ -74,6 +74,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Od migracji sql do javy  -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -92,6 +99,7 @@
                     </excludes>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
