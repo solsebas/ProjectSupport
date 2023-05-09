@@ -20,7 +20,8 @@ export class TopicService {
   createTopic(topic: Topic): Observable<any> {
 
     const headers = this.getHeaderWithToken();
-    return this.http.post(API_URL + 'topics',  topic, { headers } );
+    topic.idUser = this.storageService.getUser().id;
+    return this.http.post(API_URL + 'topics/add',  topic, { headers } );
   }
 
   getTopics(): Observable<Topic[]> {
@@ -29,7 +30,11 @@ export class TopicService {
 
 
     const headers = this.getHeaderWithToken();
-    return this.http.get<Topic[]>(API_URL + 'topics', { headers } );
+    return this.http.get<Topic[]>(API_URL + 'topics/get', { headers } );
   }
 
+  deleteTopic(topic: Topic): Observable<Topic[]> {
+    const headers = this.getHeaderWithToken();
+    return this.http.delete<any>(API_URL + 'topics/delete', { headers, body: topic });
+  }
 }

@@ -2,6 +2,6 @@ import { Topic } from './topic';
 
 describe('Topic', () => {
   it('should create an instance', () => {
-    expect(new Topic("","")).toBeTruthy();
+    expect(new Topic("","", 0)).toBeTruthy();
   });
 });

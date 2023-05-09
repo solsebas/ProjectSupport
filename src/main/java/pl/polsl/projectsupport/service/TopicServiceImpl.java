@@ -3,10 +3,13 @@ package pl.polsl.projectsupport.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.polsl.projectsupport.dao.SupervisorDao;
 import pl.polsl.projectsupport.dao.TopicDao;
 import pl.polsl.projectsupport.dto.TopicDto;
+import pl.polsl.projectsupport.model.SupervisorModel;
 import pl.polsl.projectsupport.model.TopicModel;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     private TopicDao topicDao;
+
+    @Autowired
+    private SupervisorDao supervisorDao;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -28,7 +34,11 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public TopicModel convertToModel(TopicDto topicDto) {
+        //modelMapper.addMapping(mapper -> mapper.skip(TopicModel::setId));  TODO cleaner rozwiązanie
         TopicModel topicModel = modelMapper.map(topicDto, TopicModel.class);
+        topicModel.setId(null);
+        SupervisorModel s = supervisorDao.findSupervisor(topicDto.getIdUser());
+        topicModel.setSupervisor(s);
         return topicModel;
     }
 

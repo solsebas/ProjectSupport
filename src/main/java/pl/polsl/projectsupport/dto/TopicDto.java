@@ -7,4 +7,5 @@ public class TopicDto {
     int id;
     String topicName;
     String topicDescription;
+    Long idUser;
 }

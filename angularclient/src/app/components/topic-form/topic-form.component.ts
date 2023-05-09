@@ -91,7 +91,6 @@ export class TopicFormComponent {
     });
   }
 
-
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.keyCode === 27) { // 27 - ESC_KEY code
       this.showFormAddTopics = false;
