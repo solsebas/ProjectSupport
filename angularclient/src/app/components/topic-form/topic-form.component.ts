@@ -91,23 +91,6 @@ export class TopicFormComponent {
     });
   }
 
-  deleteTopic(topic: Topic) {
-    if (confirm('Czy na pewno chcesz usunąć ten temat?')) {
-      this.topicService.deleteTopic(topic).subscribe({
-        next: data => {
-          console.log(data);
-          const index = this.topics.findIndex(t => t.topicName === topic.topicName && t.topicDescription === topic.topicDescription);
-          if (index !== -1) {
-            this.topics.splice(index, 1);
-          }
-        },
-        error: err => {
-          console.error(err);
-        }
-      });
-    }
-  }
-
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.keyCode === 27) { // 27 - ESC_KEY code
       this.showFormAddTopics = false;

@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface TopicService {
     public void create(TopicDto topicDto);
-    public void delete(TopicDto topicDto);
     public TopicDto convertToDto(TopicModel topicModel);
     public TopicModel convertToModel(TopicDto topicDto);
     public List<TopicModel> getTopics();

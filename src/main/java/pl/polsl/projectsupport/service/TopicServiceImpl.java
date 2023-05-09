@@ -34,7 +34,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public TopicModel convertToModel(TopicDto topicDto) {
+        //modelMapper.addMapping(mapper -> mapper.skip(TopicModel::setId));  TODO cleaner rozwiązanie
         TopicModel topicModel = modelMapper.map(topicDto, TopicModel.class);
+        topicModel.setId(null);
         SupervisorModel s = supervisorDao.findSupervisor(topicDto.getIdUser());
         topicModel.setSupervisor(s);
         return topicModel;
@@ -57,12 +59,4 @@ public class TopicServiceImpl implements TopicService {
         TopicModel topicModel = convertToModel(topicDto);
         topicDao.save(topicModel);
     }
-
-    @Override
-    public void delete(TopicDto topicDto) {
-        TopicModel topicModel = convertToModel(topicDto);
-        topicDao.delete(topicModel);
-    }
-
-
 }
