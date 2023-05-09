@@ -51,7 +51,6 @@
         <tr *ngFor="let topic of topics">
           <td>{{ topic.topicName }}</td>
           <td>{{ topic.topicDescription }}</td>
-          <td><button class="btn btn-danger" (click)="deleteTopic(topic.id)">Usuń</button></td>
         </tr>
         </tbody>
       </table>
