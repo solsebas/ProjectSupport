@@ -1,6 +1,7 @@
 package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.StudentDto;
 import pl.polsl.projectsupport.dto.TopicDto;
@@ -20,11 +21,11 @@ public class StudentController {
     //@GetMapping("/supervisorId")
     //public List<SupervisorDto> getSupervisors(){ return supervisorService.getSupervisorDtos();}
 
-    @PostMapping("/topics/delete")
-    public void deleteTopic(@RequestBody TopicDto topicDto) {topicService.delete(topicDto);}
     @PostMapping("/topics/add")
+    @PreAuthorize("hasRole('SUPERVISOR')")
     public void addTopic(@RequestBody TopicDto topicDto) {topicService.create(topicDto);}
-    @GetMapping("/topics")
+    @GetMapping("/topics/get")
+    @PreAuthorize("hasRole('SUPERVISOR')")
     public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
 
     @GetMapping("/students")
