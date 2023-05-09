@@ -1,4 +1,5 @@
 export class Topic {
+  id?: bigint
   topicName: string;
   topicDescription: string;
   idUser?: BigInt;
