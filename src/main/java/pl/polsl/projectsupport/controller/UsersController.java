@@ -20,13 +20,13 @@ public class UsersController {
     }
 
     @GetMapping("/studentUser")
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public String studentUserAccess() {
         return "STUDENT user content";
     }
 
     @GetMapping("/supervisorUser")
-    @PreAuthorize("hasRole('SUPERVISOR')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public String supervisorUserAccess() {
         return "SUPERVISOR user content";
     }

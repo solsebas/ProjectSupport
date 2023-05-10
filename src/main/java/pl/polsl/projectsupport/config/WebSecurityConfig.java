@@ -68,10 +68,11 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/studentUser").hasRole("STUDENT")
+                .antMatchers("/api/test/studentUser").hasAnyRole("STUDENT", "ADMIN")
                 .antMatchers("/api/test/admin").hasRole("ADMIN")
-                .antMatchers("/api/test/supervisorUser").hasRole("SUPERVISOR")
-                .antMatchers("/api/topics/**").hasRole("SUPERVISOR")
+                .antMatchers("/api/test/supervisorUser").hasAnyRole("SUPERVISOR", "ADMIN")
+                .antMatchers("/api/topics/**").hasAnyRole("SUPERVISOR", "ADMIN")
+                .antMatchers("/api/teams/**").hasAnyRole("SUPERVISOR", "ADMIN")
                 .antMatchers("/api/test/all").permitAll()
                 .anyRequest().authenticated();
 

@@ -1,12 +1,12 @@
 package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.polsl.projectsupport.dto.StudentDto;
-import pl.polsl.projectsupport.dto.TopicDto;
 import pl.polsl.projectsupport.service.StudentService;
-import pl.polsl.projectsupport.service.TopicService;
 
 import java.util.List;
 
@@ -16,17 +16,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentController {
     private final StudentService studentService;
-    private final TopicService topicService;
 
     //@GetMapping("/supervisorId")
     //public List<SupervisorDto> getSupervisors(){ return supervisorService.getSupervisorDtos();}
-
-    @PostMapping("/topics/add")
-    @PreAuthorize("hasRole('SUPERVISOR')")
-    public void addTopic(@RequestBody TopicDto topicDto) {topicService.create(topicDto);}
-    @GetMapping("/topics/get")
-    @PreAuthorize("hasRole('SUPERVISOR')")
-    public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
 
     @GetMapping("/students")
     public List<StudentDto> getStudents(){
