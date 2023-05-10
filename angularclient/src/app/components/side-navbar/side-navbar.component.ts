@@ -10,9 +10,9 @@ import {AuthService} from "../../services/auth.service";
 export class SideNavbarComponent implements OnInit {
 
   private roles: string[] = [];
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  showStudentBoard = false;
+  isUserAdmin = false;
+  isUserSupervisor = false;
+  isUserStudent = false;
   isLoggedIn = false;
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
@@ -24,9 +24,9 @@ export class SideNavbarComponent implements OnInit {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_SUPERVISOR');
-      this.showStudentBoard = this.roles.includes('ROLE_STUDENT');
+      this.isUserAdmin = this.roles.includes('ROLE_ADMIN');
+      this.isUserSupervisor = this.roles.includes('ROLE_SUPERVISOR');
+      this.isUserStudent = this.roles.includes('ROLE_STUDENT');
 
     }
 
