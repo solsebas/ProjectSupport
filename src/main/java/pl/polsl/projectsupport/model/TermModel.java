@@ -12,7 +12,7 @@ import java.util.List;
 public class TermModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "term_id")
     Long id;
 

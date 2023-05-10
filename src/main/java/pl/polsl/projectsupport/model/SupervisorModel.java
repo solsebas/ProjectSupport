@@ -12,7 +12,7 @@ import java.util.List;
 public class SupervisorModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "supervisor_id")
     Long id;
 

@@ -1,7 +1,8 @@
 package pl.polsl.projectsupport.model;
 
-import javax.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -9,7 +10,7 @@ import lombok.Data;
 public class StudentTermModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_term_id")
     Long id;
 

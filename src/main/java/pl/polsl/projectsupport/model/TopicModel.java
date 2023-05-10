@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "topic")
 public class TopicModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "topic_id")
     Long id;
 

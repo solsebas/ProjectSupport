@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class AttachmentModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attachment_id")
     Long id;
 

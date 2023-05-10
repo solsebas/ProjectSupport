@@ -1,9 +1,9 @@
 package pl.polsl.projectsupport.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -12,7 +12,7 @@ import java.util.List;
 public class StudentTeamModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_team_id")
     Long id;
 
