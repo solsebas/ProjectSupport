@@ -12,12 +12,6 @@ INSERT INTO public.users(email, password, username) VALUES ('marcel@admin.pl', '
 INSERT INTO public.users(email, password, username) VALUES ('seba@admin.pl', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'seba');             -- USERS_ID 6      -- PASSWORD = '12345678'
 
 -- USERS_ROLES TABLE --
--- INSERT INTO public.user_roles(role_id) VALUES (3); -- USERS_ROLES_ID 1
--- INSERT INTO public.user_roles(role_id) VALUES (2); -- USERS_ROLES_ID 2
--- INSERT INTO public.user_roles(role_id) VALUES (2); -- USERS_ROLES_ID 3
--- INSERT INTO public.user_roles(role_id) VALUES (1); -- USERS_ROLES_ID 4
--- INSERT INTO public.user_roles(role_id) VALUES (1); -- USERS_ROLES_ID 5
--- INSERT INTO public.user_roles(role_id) VALUES (1); -- USERS_ROLES_ID 6
 INSERT INTO public.user_roles(user_id, role_id) VALUES (1, 3);
 INSERT INTO public.user_roles(user_id, role_id) VALUES (2, 2);
 INSERT INTO public.user_roles(user_id, role_id) VALUES (3, 2);
@@ -109,5 +103,3 @@ INSERT INTO public.attendance(date, present, student_team_id) VALUES ('2023-04-1
 
 -- ATTACHMENT TABLE --
 -- INSERT INTO public.attachment(content, filename, student_team_id) VALUES (?, ?, ?);  -- ATTACHMENT_ID 1
-
-
