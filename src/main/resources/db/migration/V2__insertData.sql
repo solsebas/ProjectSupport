@@ -107,7 +107,6 @@ INSERT INTO public.attendance(date, present, student_team_id) VALUES ('2023-04-0
 INSERT INTO public.attendance(date, present, student_team_id) VALUES ('2023-04-07', TRUE, 6);     -- ATTENDANCE_ID 13
 INSERT INTO public.attendance(date, present, student_team_id) VALUES ('2023-04-12', TRUE, 7);     -- ATTENDANCE_ID 14
 
-
 -- ATTACHMENT TABLE --
 -- INSERT INTO public.attachment(content, filename, student_team_id) VALUES (?, ?, ?);  -- ATTACHMENT_ID 1
 
