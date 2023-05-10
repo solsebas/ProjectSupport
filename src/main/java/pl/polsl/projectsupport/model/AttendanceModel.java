@@ -11,7 +11,7 @@ import java.util.Date;
 public class AttendanceModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendance_id")
     Long id;
 
