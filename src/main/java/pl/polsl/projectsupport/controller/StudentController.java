@@ -17,9 +17,6 @@ import java.util.List;
 public class StudentController {
     private final StudentService studentService;
 
-    //@GetMapping("/supervisorId")
-    //public List<SupervisorDto> getSupervisors(){ return supervisorService.getSupervisorDtos();}
-
     @GetMapping("/students")
     public List<StudentDto> getStudents(){
         return studentService.getStudentDtos();
