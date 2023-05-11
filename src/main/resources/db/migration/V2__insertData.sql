@@ -103,5 +103,3 @@ INSERT INTO public.attendance(date, present, student_team_id) VALUES ('2023-04-1
 
 -- ATTACHMENT TABLE --
 -- INSERT INTO public.attachment(content, filename, student_team_id) VALUES (?, ?, ?);  -- ATTACHMENT_ID 1
-
-
