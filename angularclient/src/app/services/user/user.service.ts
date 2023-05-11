@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {StorageService} from "./storage.service";
+import {StorageService} from "../storage/storage.service";
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'http://localhost:8080/api/';
 
 @Injectable({
   providedIn: 'root',
@@ -18,22 +18,19 @@ export class UserService {
 
   getPublicContent(): Observable<any> {
     const headers = this.getHeaderWithToken();
-    return this.http.get(API_URL + 'all', { responseType: 'text', headers });
+    return this.http.get(API_URL + 'public', { responseType: 'text', headers });
   }
   getUserBoard(): Observable<any> {
     const headers = this.getHeaderWithToken();
-    return this.http.get(API_URL + 'studentUser', { responseType: 'text', headers  });
+    return this.http.get(API_URL + 'student/userBoard', { responseType: 'text', headers  });
   }
 
   getSupervisorBoard(): Observable<any> {
     const headers = this.getHeaderWithToken();
-    return this.http.get(API_URL + 'supervisorUser', { responseType: 'text', headers  });
+    return this.http.get(API_URL + 'supervisor/userBoard', { responseType: 'text', headers  });
   }
 
   getAdminBoard(): Observable<any> {
-    // var cos = this.storageService.getUser().token; /* "token..." */
-    // var test2 = this.storageService.getUser(); // Object { token: "token... }
-
     const headers = this.getHeaderWithToken();
     return this.http.get(API_URL + 'admin', { responseType: 'text', headers });
   }

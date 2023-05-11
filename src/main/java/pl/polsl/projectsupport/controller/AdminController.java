@@ -10,30 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
-@RequestMapping("/api/test")
-public class UsersController {
+@RequestMapping("/api/admin")
+public class AdminController {
 
-    @GetMapping("/admin")
+
+    //region user Implementation
+    //---------------------------------------------------------------------------------------
+    @GetMapping("")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {
         return "ADMIN content";
     }
-
-    @GetMapping("/studentUser")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
-    public String studentUserAccess() {
-        return "STUDENT user content";
-    }
-
-    @GetMapping("/supervisorUser")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
-    public String supervisorUserAccess() {
-        return "SUPERVISOR user content";
-    }
-
-    @GetMapping("/all")
-    public String allAccess() {
-        return "Public content";
-    }
+    //---------------------------------------------------------------------------------------
+    //endregion
 
 }

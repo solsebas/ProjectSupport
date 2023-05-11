@@ -67,13 +67,15 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/studentUser").hasAnyRole("STUDENT", "ADMIN")
-                .antMatchers("/api/test/admin").hasRole("ADMIN")
-                .antMatchers("/api/test/supervisorUser").hasAnyRole("SUPERVISOR", "ADMIN")
-                .antMatchers("/api/topics/**").hasAnyRole("SUPERVISOR", "ADMIN")
-                .antMatchers("/api/teams/**").hasAnyRole("SUPERVISOR", "ADMIN")
-                .antMatchers("/api/test/all").permitAll()
+                .antMatchers("/api/auth/signin").permitAll()
+                .antMatchers("/api/auth/logout").permitAll()
+                .antMatchers("/api/auth/signup").hasRole("ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN")
+                .antMatchers("/api/supervisor/**").hasAnyRole("SUPERVISOR", "ADMIN")
+                .antMatchers("/api/topics/**").permitAll() // todo
+                .antMatchers("/api/teams/**").permitAll() // todo
+                .antMatchers("/api/public/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

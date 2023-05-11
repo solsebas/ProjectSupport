@@ -19,7 +19,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class TestUserModel {
+public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,7 +50,7 @@ public class TestUserModel {
     private Set<RoleModel> roles = new HashSet<>();
 
 
-    public TestUserModel(String username, String email, String encode) {
+    public UserModel(String username, String email, String encode) {
         this.username = username;
         this.email = email;
         this.password = encode;

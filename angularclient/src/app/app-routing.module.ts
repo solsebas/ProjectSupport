@@ -14,16 +14,19 @@ import {BlockUrlGuard} from './block-url.guard'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'studentBoard', component: BoardStudentComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'supervisor', component: BoardSupervisorComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'admin', component: BoardAdminComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'register', component: RegisterComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'topic', component: TopicFormComponent, canActivate: [BlockUrlGuard] },
-  { path: 'team', component: TeamFormComponent, canActivate: [BlockUrlGuard] },
   { path: 'access-denied', component: AccessDeniedComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [BlockUrlGuard]  },
+
+  { path: 'student', component: BoardStudentComponent, canActivate: [BlockUrlGuard]  },
+
+  { path: 'admin', component: BoardAdminComponent, canActivate: [BlockUrlGuard]  },
+  { path: 'admin/register', component: RegisterComponent, canActivate: [BlockUrlGuard]  },
+
+  { path: 'supervisor', component: BoardSupervisorComponent, canActivate: [BlockUrlGuard]  },
+  { path: 'supervisor/topic', component: TopicFormComponent, canActivate: [BlockUrlGuard] },
+  { path: 'supervisor/team', component: TeamFormComponent, canActivate: [BlockUrlGuard] },
+
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -11,10 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.JSONWebToken.JwtUtils;
 import pl.polsl.projectsupport.dao.RoleDao;
-import pl.polsl.projectsupport.dao.TestUserDao;
+import pl.polsl.projectsupport.dao.UserDao;
 import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
-import pl.polsl.projectsupport.model.TestUserModel;
+import pl.polsl.projectsupport.model.UserModel;
 import pl.polsl.projectsupport.payload.request.LoginRequest;
 import pl.polsl.projectsupport.payload.request.SignupRequest;
 import pl.polsl.projectsupport.payload.response.JwtResponse;
@@ -38,7 +38,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    TestUserDao userRepository;
+    UserDao userRepository;
 
     @Autowired
     RoleDao roleRepository;
@@ -52,7 +52,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
         SecurityContextHolder.clearContext();
-        return ResponseEntity.ok("Logged out successfully");
+        return ResponseEntity.ok("Wylogowano pomyślnie");
     }
 
     @PostMapping("/signin")
@@ -73,40 +73,40 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: nazwa użytkownika jest już zajęta!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: e-mail jest już używany!"));
         }
 
         // Create new user's account
-        TestUserModel user = new TestUserModel(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+        UserModel user = new UserModel(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<RoleModel> roles = new HashSet<>();
 
         if (strRoles == null) {
-            RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
-                        RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    case "student":
+                        RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
+                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                         roles.add(modRole);
 
                         break;
                     default:
-                        RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
+                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                         roles.add(userRole);
                 }
             });
@@ -115,6 +115,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie!"));
     }
 }

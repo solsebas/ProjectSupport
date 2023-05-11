@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {StorageService} from "./storage.service";
+import {StorageService} from "../storage/storage.service";
 import {Observable} from "rxjs";
-import {Student} from "../models/student";
+import {Student} from "../../models/student";
 
-const API_URL = 'http://localhost:8080/api/';
+const API_STUDENT_URL = 'http://localhost:8080/api/student/';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +17,9 @@ export class StudentService {
   }
 
   getStudents(): Observable<Student[]>{
-    this.storageService.getUser().id
+    this.storageService.getUser().id;
 
     const headers = this.getHeaderWithToken();
-    return this.http.get<Student[]>(API_URL + 'students', {headers})
+    return this.http.get<Student[]>(API_STUDENT_URL + 'students', {headers})
   }
 }
