@@ -20,6 +20,8 @@ import { BoardStudentComponent } from './components/board-user/board-student.com
 import { BoardSupervisorComponent } from './components/board-supervisor/board-supervisor.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
 import { TeamFormComponent } from './components/team-form/team-form.component';
+import { BlockUrlGuard } from './block-url.guard';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { TeamFormComponent } from './components/team-form/team-form.component';
     BoardStudentComponent,
     BoardSupervisorComponent,
     TopicFormComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { TeamFormComponent } from './components/team-form/team-form.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ httpInterceptorProviders ],
+  providers: [ httpInterceptorProviders, BlockUrlGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@
     </a>
   </li>
 
-  <li class="nav-item" *ngIf="showAdminBoard">
+  <li class="nav-item" *ngIf="isUserAdmin">
     <a href="#adminSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel admina</span><i class="bi bi-caret-down-fill"></i>
     </a>
@@ -23,7 +23,7 @@
   </li>
 
 
-  <li class="nav-item" *ngIf="showModeratorBoard">
+  <li class="nav-item" *ngIf="isUserSupervisor || isUserAdmin">
     <a href="#supervizorSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel proawdzącego</span><i class="bi bi-caret-down-fill"></i>
     </a>
@@ -43,7 +43,7 @@
     </ul>
   </li>
 
-  <li class="nav-item" *ngIf="showStudentBoard">
+  <li class="nav-item" *ngIf="isUserStudent || isUserAdmin">
     <a href="#studentSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel studenta</span><i class="bi bi-caret-down-fill"></i>
     </a>

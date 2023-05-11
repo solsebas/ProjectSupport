@@ -9,6 +9,7 @@ import {Topic} from "../../models/topic";
   styleUrls: ['./topic-form.component.scss']
 })
 export class TopicFormComponent {
+
   topicName = '';
   topicDescription = '';
   showFormAddTopics = false; // czy ma być wyświetlone formularz do dodawania tematów
