@@ -2,8 +2,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AuthService} from "../../services/auth.service";
-import {StorageService} from "../../services/storage.service";
+import {AuthService} from "../../services/auth/auth.service";
+import {StorageService} from "../../services/storage/storage.service";
 
 @Component({
   selector: 'app-login',

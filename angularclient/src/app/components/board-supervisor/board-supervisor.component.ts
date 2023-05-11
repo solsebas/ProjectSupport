@@ -1,5 +1,5 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../services/user/user.service";
 import {HttpClient} from "@angular/common/http";
 
 @Component({

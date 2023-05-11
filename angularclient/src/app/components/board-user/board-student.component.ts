@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {StorageService} from "../../services/storage.service";
-import {AuthService} from "../../services/auth.service";
+import {UserService} from "../../services/user/user.service";
+import {StorageService} from "../../services/storage/storage.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-board-user',

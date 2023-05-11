@@ -12,25 +12,32 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
-@RequestMapping("/api")
+@RequestMapping("/api/teams")
 public class TeamController {
+
     private final TeamService teamService;
 
-    @GetMapping("/teams")
+
+    //region TeamService Implementation
+    //---------------------------------------------------------------------------------------
+    @GetMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TeamDto> getTeams() {
         return teamService.getTeamDtos();
     }
 
-    @PostMapping("/teams")
+    @PostMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addTeam(@RequestBody TeamDto teamDto){
         teamService.create(teamDto);
     }
 
-    @PostMapping("teams/student")
+    @PostMapping("/student")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addStudent(@RequestBody TeamStudentDto dto){
         teamService.addStudent(dto);
     }
+    //---------------------------------------------------------------------------------------
+    //endregion
+
 }

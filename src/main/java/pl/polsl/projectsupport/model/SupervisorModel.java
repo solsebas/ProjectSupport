@@ -23,7 +23,7 @@ public class SupervisorModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    TestUserModel user;
+    UserModel user;
 
     @OneToMany(mappedBy = "supervisor")
     @JsonIgnore

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {Team} from "../../models/team";
-import {TeamService} from "../../services/team.service";
+import {TeamService} from "../../services/team/team.service";
 import {Topic} from "../../models/topic";
 import {Student} from "../../models/student";
-import {StudentService} from "../../services/student.service";
+import {StudentService} from "../../services/student/student.service";
 
 @Component({
   selector: 'app-team-form',

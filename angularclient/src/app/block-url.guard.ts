@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { StorageService } from './services/storage.service';
+import { StorageService } from './services/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class BlockUrlGuard implements CanActivate {
       }
     }
     else {
-      this.router.navigate(['/access-denied']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

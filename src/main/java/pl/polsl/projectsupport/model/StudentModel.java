@@ -23,7 +23,7 @@ public class StudentModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    TestUserModel user;
+    UserModel user;
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore

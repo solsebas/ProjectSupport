@@ -6,35 +6,22 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.polsl.projectsupport.dto.StudentDto;
-import pl.polsl.projectsupport.service.StudentService;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
-@RequestMapping("/api/student")
-public class StudentController {
-    private final StudentService studentService;
+@RequestMapping("/api/supervisor")
+public class SupervisorController {
 
 
-    //region StudentService Implementation
-    //---------------------------------------------------------------------------------------
-    @GetMapping("/students")
-    public List<StudentDto> getStudents(){
-        return studentService.getStudentDtos();
-    }
-    //---------------------------------------------------------------------------------------
-    //endregion
 
 
     //region user Implementation
     //---------------------------------------------------------------------------------------
     @GetMapping("/userBoard")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
-    public String studentUserAccess() {
-        return "STUDENT user content";
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public String supervisorUserAccess() {
+        return "SUPERVISOR user content";
     }
     //---------------------------------------------------------------------------------------
     //endregion

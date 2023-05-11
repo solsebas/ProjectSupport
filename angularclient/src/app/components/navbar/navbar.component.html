@@ -9,10 +9,10 @@
   </div>
 
   <div class="d-flex justify-content-center" style="position: relative; left:2.2vw;">
-    <a class="navbar-brand my-auto" [routerLink]="'home'" >
+    <a class="navbar-brand my-auto" [routerLink]="''" >
       <img id="logo" src="/assets/img/logo-ProjectSupport.png" alt="logo-ProjectSupport.png" />
     </a>
-    <a class="navbar-brand my-auto" [routerLink]="'home'" >
+    <a class="navbar-brand my-auto" [routerLink]="''" >
       <h1  id="logo-text" class="project-name my-auto">ProjectSupport</h1>
     </a>
   </div>
@@ -38,9 +38,6 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="navbarDropdownMenuLink">
               <li>
                 <a class="dropdown-item" [routerLink]="'profile'">Mój profil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="">Ustawienia</a>
               </li>
               <li>
                 <a class="dropdown-item" (click)="logout()">Wyloguj</a>

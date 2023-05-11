@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppComponent} from "../../app.component";
-import {StorageService} from "../../services/storage.service";
-import {AuthService} from "../../services/auth.service";
+import {StorageService} from "../../services/storage/storage.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 
 

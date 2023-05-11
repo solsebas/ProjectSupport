@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
-import { TopicService } from "../../services/topic.service";
-import { AuthService } from "../../services/auth.service";
+import { TopicService } from "../../services/topic/topic.service";
+import { AuthService } from "../../services/auth/auth.service";
 import {Topic} from "../../models/topic";
 
 @Component({

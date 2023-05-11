@@ -11,16 +11,21 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
-@RequestMapping("/api")
+@RequestMapping("/api/topics")
 public class TopicController {
 
     private final TopicService topicService;
 
-    @PostMapping("/topics/add")
+
+    //region TopicService Implementation
+    //---------------------------------------------------------------------------------------
+    @PostMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addTopic(@RequestBody TopicDto topicDto) {topicService.create(topicDto);}
 
-    @GetMapping("/topics/get")
+    @GetMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
+    //---------------------------------------------------------------------------------------
+    //endregion
 }
