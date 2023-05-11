@@ -12,13 +12,12 @@ import pl.polsl.projectsupport.model.UserModel;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    UserDao userRepository;
+    UserDao userDao;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserModel user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+        UserModel user = userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
         return UserDetailsImpl.build(user);
     }
