@@ -77,7 +77,6 @@ public class WebSecurityConfig {
                 .antMatchers("/api/topics/**").permitAll() // todo
                 .antMatchers("/api/teams/**").permitAll() // todo
                 .antMatchers("/api/public/**").permitAll()
-//                .anyRequest().permitAll();
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());
