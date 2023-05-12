@@ -69,6 +69,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/logout").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .antMatchers("/api/auth/signup").hasRole("ADMIN")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN")

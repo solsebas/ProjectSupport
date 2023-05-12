@@ -50,3 +50,7 @@ The following guides illustrate how to use some features concretely:
 
 #### Przydatne:
 - włączenie: `ng serve --open` w folderze z angularem (tj. [...]\InteliJDepos\ProjectSupporter\project-supporter-client)
+
+
+### Swagger:
+- http://localhost:8080/swagger-ui/#/
