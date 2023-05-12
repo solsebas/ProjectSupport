@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.JSONWebToken.JwtUtils;
 import pl.polsl.projectsupport.dao.RoleDao;
 import pl.polsl.projectsupport.dao.UserDao;
+import pl.polsl.projectsupport.dto.SupervisorDto;
 import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
 import pl.polsl.projectsupport.model.UserModel;
 import pl.polsl.projectsupport.payload.request.LoginRequest;
-import pl.polsl.projectsupport.payload.request.SignupRequest;
+import pl.polsl.projectsupport.payload.request.RegisterRequest;
 import pl.polsl.projectsupport.payload.response.JwtResponse;
 import pl.polsl.projectsupport.payload.response.MessageResponse;
+import pl.polsl.projectsupport.service.SupervisorService;
 import pl.polsl.projectsupport.service.UserDetailsImpl;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +41,13 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserDao userRepository;
+    UserDao userDao;
+
+    @Autowired
+    EntityManager entityManager;
+
+    @Autowired
+    SupervisorService supervisorService;
 
     @Autowired
     RoleDao roleRepository;
@@ -71,12 +80,12 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+        if (userDao.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: nazwa użytkownika jest już zajęta!"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userDao.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: e-mail jest już używany!"));
         }
 
@@ -113,7 +122,15 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+        userDao.save(user);
+
+        UserModel userModel = userDao.findUserByName(signUpRequest.getUsername());
+
+        SupervisorDto supervisorDto = new SupervisorDto();
+        supervisorDto.setFirstname(signUpRequest.getFirstname());
+        supervisorDto.setSurname(signUpRequest.getSurname());
+        supervisorDto.setUser(userModel);
+        supervisorService.create(supervisorDto);
 
         return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie!"));
     }
