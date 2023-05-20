@@ -31,7 +31,7 @@ public class TeamModel {
     @JoinColumn(name = "term_id")
     TermModel term;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @JsonIgnore
     List<StudentTeamModel> students;
 }
