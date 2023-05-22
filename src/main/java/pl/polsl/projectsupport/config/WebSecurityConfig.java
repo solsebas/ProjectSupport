@@ -72,7 +72,7 @@ public class WebSecurityConfig {
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .antMatchers("/api/auth/signup").hasRole("ADMIN")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN")
+                .antMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN","SUPERVISOR")
                 .antMatchers("/api/supervisor/**").hasAnyRole("SUPERVISOR", "ADMIN")
                 .antMatchers("/api/topics/**").permitAll() // todo
                 .antMatchers("/api/teams/**").permitAll() // todo

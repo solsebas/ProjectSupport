@@ -33,4 +33,5 @@ export class TeamService {
     const headers = this.getHeaderWithToken();
     return this.http.get<Team[]>(API_TEAMS_URL, {headers})
   }
+
 }
