@@ -3,8 +3,11 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {StorageService} from "../storage/storage.service";
 import {Observable} from "rxjs";
 import {Team} from "../../models/team";
+import {Student} from "../../models/student";
+import {Topic} from "../../models/topic";
 
 const API_TEAMS_URL = 'http://localhost:8080/api/teams/';
+const API_STUDENT_URL = 'http://localhost:8080/api/student/';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +36,5 @@ export class TeamService {
     const headers = this.getHeaderWithToken();
     return this.http.get<Team[]>(API_TEAMS_URL, {headers})
   }
+
 }
