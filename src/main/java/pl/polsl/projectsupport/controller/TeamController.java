@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pl.polsl.projectsupport.dto.StudentTeamDto;
 import pl.polsl.projectsupport.dto.TeamDto;
 import pl.polsl.projectsupport.dto.TeamStudentDto;
 import pl.polsl.projectsupport.service.TeamService;
@@ -24,6 +25,17 @@ public class TeamController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TeamDto> getTeams() {
         return teamService.getTeamDtos();
+    }
+
+    @GetMapping("/student")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public List<TeamDto> getTeamsForStudent(@RequestParam Long id) {
+        return teamService.getTeamDtosByStudent(id);
+    }
+
+    @GetMapping("/member")
+    public StudentTeamDto getTeamMember(@RequestParam Long userId, @RequestParam Long teamId){
+        return teamService.getStudentTeamDto(userId, teamId);
     }
 
     @PostMapping("")

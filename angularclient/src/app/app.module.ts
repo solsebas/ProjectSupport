@@ -22,6 +22,8 @@ import { TopicFormComponent } from './components/topic-form/topic-form.component
 import { TeamFormComponent } from './components/team-form/team-form.component';
 import { BlockUrlGuard } from './block-url.guard';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import {StudentTeamComponent} from "./components/student-team/student-team.component";
+import { StudentsTeamBoardComponent } from './components/student-team/students-team-board/students-team-board.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
     BoardSupervisorComponent,
     TopicFormComponent,
     TeamFormComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    StudentTeamComponent,
+    StudentsTeamBoardComponent
   ],
   imports: [
     BrowserModule,

@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.polsl.projectsupport.dao.StudentDao;
 import pl.polsl.projectsupport.dao.StudentTeamDao;
 import pl.polsl.projectsupport.dao.TeamDao;
-import pl.polsl.projectsupport.dto.StudentDto;
-import pl.polsl.projectsupport.dto.TeamDto;
-import pl.polsl.projectsupport.dto.TeamStudentDto;
+import pl.polsl.projectsupport.dto.*;
 import pl.polsl.projectsupport.enums.TeamStatus;
 import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.StudentTeamModel;
@@ -57,13 +55,25 @@ public class TeamServiceImpl implements TeamService {
     public TeamDto convertToDto(TeamModel teamModel) {
         TeamDto teamDto = modelMapper.map(teamModel, TeamDto.class);
         List<StudentDto> students = teamModel.getStudents().stream()
-                .map(studentTeamModel -> studentTeamModel.getStudent())
+                .map(StudentTeamModel::getStudent)
                 .map(studentModel -> modelMapper.map(studentModel, StudentDto.class))
                 .collect(Collectors.toList());
         teamDto.setStudentList(students);
         return teamDto;
     }
 
+    public StudentTeamDto convertToDto(StudentTeamModel studentTeamModel) {
+        StudentTeamDto studentTeamDto = modelMapper.map(studentTeamModel, StudentTeamDto.class);
+        List<StudentDto> students = studentDao.findByTeamId(studentTeamModel.getTeam().getId()).stream()
+                .map(studentModel -> modelMapper.map(studentModel, StudentDto.class))
+                .collect(Collectors.toList());
+        List<AttendanceDto> attendances = studentTeamModel.getAttendances().stream()
+                .map(attendanceModel -> modelMapper.map(attendanceModel, AttendanceDto.class))
+                .collect(Collectors.toList());
+        studentTeamDto.getTeam().setStudentList(students);
+        studentTeamDto.setAttendanceList(attendances);
+        return studentTeamDto;
+    }
     @Override
     public TeamModel convertToModel(TeamDto teamDto) {
         TeamModel teamModel = modelMapper.map(teamDto, TeamModel.class);
@@ -80,5 +90,26 @@ public class TeamServiceImpl implements TeamService {
         return getTeams().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentTeamModel getStudentTeam(Long userId, Long teamId) {
+        return studentTeamDao.findStudentTeamModelByTeamAndStudent(userId, teamId);
+    }
+
+    @Override
+    public StudentTeamDto getStudentTeamDto(Long userId, Long teamId) {
+        return convertToDto(getStudentTeam(userId, teamId));
+    }
+
+    @Override
+    public List<TeamDto> getTeamDtosByStudent(Long userId) {
+        return getTeamsByStudent(userId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<TeamModel> getTeamsByStudent(Long userId) {
+        return teamDao.findTeamsByParticipantUserId(userId);
     }
 }

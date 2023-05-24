@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {StorageService} from "../storage/storage.service";
 import {Observable} from "rxjs";
 import {Team} from "../../models/team";
+import {TeamMember} from "../../models/team-member";
 
 const API_TEAMS_URL = 'http://localhost:8080/api/teams/';
 
@@ -34,4 +35,22 @@ export class TeamService {
     return this.http.get<Team[]>(API_TEAMS_URL, {headers})
   }
 
+  getStudentsTeams(): Observable<Team[]>{
+    let id = this.storageService.getUser().id;
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("id",id);
+
+    const headers = this.getHeaderWithToken();
+    return this.http.get<Team[]>(API_TEAMS_URL + 'student', {headers, params:queryParams})
+  }
+
+  getTeamMember(teamId: number): Observable<TeamMember>{
+    let userId = this.storageService.getUser().id;
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("teamId",teamId);
+    queryParams = queryParams.append("userId",userId);
+
+    const headers = this.getHeaderWithToken();
+    return this.http.get<TeamMember>(API_TEAMS_URL + 'member', {headers, params:queryParams})
+  }
 }
