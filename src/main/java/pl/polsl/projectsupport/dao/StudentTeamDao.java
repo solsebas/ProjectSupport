@@ -19,5 +19,5 @@ public interface StudentTeamDao extends JpaRepository<StudentTeamModel, Long> {
     @Query(value = "select st.* " +
             "from student_team st " +
             "where st.team_id = :teamId" , nativeQuery = true)
-    List<StudentTeamModel> findMembersByTeamId(Long teamId);
+    List<StudentTeamModel> findMembersByTeamId(@Param("teamId") Long teamId);
 }
