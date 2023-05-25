@@ -28,4 +28,9 @@ public class TopicController {
     public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
     //---------------------------------------------------------------------------------------
     //endregion
+    @GetMapping("/supervisor/{supervisorId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public List<TopicDto> getTopicsBySupervisorId(@PathVariable Long supervisorId) {
+        return topicService.getTopicDtosBySupervisorId(supervisorId);
+    }
 }

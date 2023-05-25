@@ -16,7 +16,7 @@ export class TermService {
     return new HttpHeaders().set('Authorization', 'Bearer ' + this.storageService.getUser().token)
   }
 
-  getTerms(major: string, teamNumber: number): Observable<Term[]> {
+  getTerms(): Observable<Term[]> {
     const headers = this.getHeaderWithToken();
     const params = new HttpParams()
 

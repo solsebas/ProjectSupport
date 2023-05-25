@@ -5,6 +5,8 @@ import {Topic} from "../../models/topic";
 import {Student} from "../../models/student";
 import {StudentService} from "../../services/student/student.service";
 import { Term } from "../../models/term";
+import {TermService} from "../../services/term/term.service";
+import {TopicService} from "../../services/topic/topic.service";
 
 @Component({
   selector: 'app-team-form',
@@ -18,7 +20,9 @@ export class TeamFormComponent {
   showStudentList = false;
 
   terms: Term[] = [];
+  supervisorTopics: Topic[] = [];
   selectedTerm: Term | null = null;
+  selectedTopic: Topic | null = null;
 
   limit = 1;
 
@@ -32,10 +36,19 @@ export class TeamFormComponent {
   messageAdd = '';
 
 
-  constructor(private teamService: TeamService, private studentService: StudentService) {
+  constructor(private teamService: TeamService, private studentService: StudentService, private termService: TermService, private topicService: TopicService ) {
     this.teamService.getTeams().subscribe({
       next: data => {
         this.teams = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+
+    this.termService.getTerms().subscribe({
+      next: data => {
+        this.terms = data;
       },
       error: err => {
         console.error(err);
@@ -54,6 +67,14 @@ export class TeamFormComponent {
 
   openForAddTeam() {
     this.showFormAddTeam = true;
+    this.topicService.getTopicsSupervisor().subscribe({
+      next: data => {
+        this.supervisorTopics = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
   closeFormAddTeam(){
@@ -99,25 +120,30 @@ export class TeamFormComponent {
   }
 
   submitTeamForm(event: Event) {
-    let team: Team = new Team(this.limit);
     event.preventDefault();
-   // team.major = this.selectedTerm.major;
-   // team.termNumber = this.selectedTerm.termNumber;
-    if (this.validateForm()) {
-      this.teamService.createTeam(team).subscribe({
-        next: data => {
-          this.limit = 1;
-          console.log(data);
-          this.messageAdd = 'Zespół dodany poprawnie!';
-          this.closeFormAddTeam();
-        },
-        error: err => {
-          console.error(err);
-          this.messageAdd = 'Błąd przy dodawaniu zespołu';
-        }
-      });
+
+    if (this.selectedTerm && this.selectedTopic) {
+      const team: Team = new Team(this.limit);
+      team.term = this.selectedTerm;
+      team.topic = this.selectedTopic;
+
+      if (this.validateForm()) {
+        this.teamService.createTeam(team).subscribe({
+          next: data => {
+            this.limit = 1;
+            console.log(data);
+            this.messageAdd = 'Zespół dodany poprawnie!';
+            this.closeFormAddTeam();
+          },
+          error: err => {
+            console.error(err);
+            this.messageAdd = 'Błąd przy dodawaniu zespołu';
+          }
+        });
+      }
     }
   }
+
 
   submitStudent(studentId: bigint){
     this.teamService.addStudent({'studentId': studentId, 'teamId': this.teamId}).subscribe({

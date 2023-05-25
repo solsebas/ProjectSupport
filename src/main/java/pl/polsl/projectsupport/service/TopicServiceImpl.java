@@ -59,4 +59,12 @@ public class TopicServiceImpl implements TopicService {
         TopicModel topicModel = convertToModel(topicDto);
         topicDao.save(topicModel);
     }
+
+    @Override
+    public List<TopicDto> getTopicDtosBySupervisorId(Long supervisorId) {
+        return topicDao.findBySupervisorId(supervisorId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
 }

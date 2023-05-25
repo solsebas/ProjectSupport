@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Topic} from "../../models/topic";
 import {StorageService} from "../storage/storage.service";
@@ -31,4 +31,10 @@ export class TopicService {
     return this.http.get<Topic[]>(API_TOPICS_URL, { headers } );
   }
 
+  getTopicsSupervisor(): Observable<Topic[]> {
+    const supervisorId = this.storageService.getUser().id;
+    const headers = this.getHeaderWithToken();
+    const url = `${API_TOPICS_URL}?supervisorId=${supervisorId}`;
+    return this.http.get<Topic[]>(url, { headers });
+  }
 }
