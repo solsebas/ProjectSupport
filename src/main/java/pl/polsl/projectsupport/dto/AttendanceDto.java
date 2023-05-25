@@ -8,6 +8,6 @@ import java.util.Date;
 public class AttendanceDto {
     Long id;
     boolean present;
-    Date date;
-//    StudentTeamDto teamMember;
+    String date;
+    Long memberId;
 }

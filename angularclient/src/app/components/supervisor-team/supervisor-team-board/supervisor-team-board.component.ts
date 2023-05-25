@@ -3,7 +3,8 @@ import {TeamMember} from "../../../models/team-member";
 import {ActivatedRoute} from "@angular/router";
 import {TeamService} from "../../../services/team/team.service";
 import {Subscription} from "rxjs";
-import {Team} from "../../../models/team";
+import {Attendance} from "../../../models/attendance";
+import {AttendanceService} from "../../../services/attendance/attendance.service";
 
 @Component({
   selector: 'app-supervisor-team-board',
@@ -17,7 +18,11 @@ export class SupervisorTeamBoardComponent {
   graded_id: bigint = BigInt(0);
   grade: number = 5;
 
-  constructor(private route: ActivatedRoute, private teamService :TeamService) {
+  attendant_id: bigint = BigInt(0);
+  date: string = '';
+  attendance: boolean = false;
+
+  constructor(private route: ActivatedRoute, private teamService :TeamService, private attendanceService: AttendanceService) {
     const sub: Subscription =
       this.route.params.subscribe(params => {
         this.selectedId = params['id'];
@@ -37,11 +42,10 @@ export class SupervisorTeamBoardComponent {
 
   submitGradeForm(event: Event) {
     event.preventDefault();
-    // if(this.graded) this.graded.grade = this.grade
-    let graded = this.getGraded(this.graded_id)
-    if (graded) graded.grade = this.grade
+    let member = this.getMember(this.graded_id)
+    if (member) member.grade = this.grade
       // @ts-ignore
-    this.teamService.addGrade(graded).subscribe({
+    this.teamService.addGrade(member).subscribe({
         next: data => {
 
         },
@@ -52,7 +56,24 @@ export class SupervisorTeamBoardComponent {
 
   }
 
-  getGraded(id: bigint){
+  submitAttendanceForm(event: Event) {
+    event.preventDefault();
+    let member = this.getMember(this.attendant_id)
+    if (member) {
+      let attendance = new Attendance(this.attendance, this.date, this.attendant_id)
+      // @ts-ignore
+      this.attendanceService.createAttendance(attendance).subscribe({
+        next: data => {
+
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+    }
+  }
+
+  getMember(id: bigint){
     for (let mem of this.members){
       if (mem.id == id){
         return mem

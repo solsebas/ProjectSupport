@@ -33,3 +33,18 @@
   <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
 
 </form>
+
+<form name="attendance-form" (submit)="submitAttendanceForm($event)">
+
+  <select name="graded_id" [(ngModel)]="attendant_id">
+    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
+  </select>
+  <label for="date"><h5>Data:</h5> {{ date }}</label>
+  <input type="date" id="date" name="date" [(ngModel)]="date">
+
+  <label for="attendance"><h5>Obecny:</h5> {{ attendance }}</label>
+  <input type="checkbox" id="attendance" name="attendance" [(ngModel)]="attendance">
+
+  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
+
+</form>
