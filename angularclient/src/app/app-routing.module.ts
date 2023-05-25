@@ -11,6 +11,8 @@ import {TopicFormComponent} from "./components/topic-form/topic-form.component";
 import {TeamFormComponent} from "./components/team-form/team-form.component";
 import {AccessDeniedComponent} from "./components/access-denied/access-denied.component";
 import {BlockUrlGuard} from './block-url.guard'
+import {StudentTeamComponent} from "./components/student-team/student-team.component";
+import {StudentsTeamBoardComponent} from "./components/student-team/students-team-board/students-team-board.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [BlockUrlGuard]  },
 
   { path: 'student', component: BoardStudentComponent, canActivate: [BlockUrlGuard]  },
+  { path: 'student/team', component: StudentTeamComponent}, // todo: canActivate: [BlockUrlGuard]
+  { path: 'student/team/:id', component: StudentsTeamBoardComponent},
 
   { path: 'admin', component: BoardAdminComponent, canActivate: [BlockUrlGuard]  },
   { path: 'admin/register', component: RegisterComponent, canActivate: [BlockUrlGuard]  },

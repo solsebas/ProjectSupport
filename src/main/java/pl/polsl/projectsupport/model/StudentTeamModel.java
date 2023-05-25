@@ -26,7 +26,7 @@ public class StudentTeamModel {
     @JoinColumn(name = "student_id")
     StudentModel student;
 
-    @OneToMany(mappedBy = "participant")
+    @OneToMany(mappedBy = "participant", fetch = FetchType.EAGER)
     @JsonIgnore
     List<AttendanceModel> attendances;
 

@@ -1,0 +1,4 @@
+<select>
+  <option *ngFor="let team of teams" label="[{{team.id}}]{{team.topic?.topicName}}" [value]="team.id" [routerLink]="[team.id?.toString()]"></option>
+</select>
+<router-outlet></router-outlet>

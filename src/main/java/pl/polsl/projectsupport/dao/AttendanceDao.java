@@ -7,4 +7,5 @@ import pl.polsl.projectsupport.model.AttendanceModel;
 
 @Repository
 public interface AttendanceDao extends JpaRepository<AttendanceModel, Long> {
+
 }
