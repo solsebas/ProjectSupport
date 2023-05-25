@@ -38,6 +38,17 @@ public class TeamController {
         return teamService.getStudentTeamDto(userId, teamId);
     }
 
+    @GetMapping("/supervisor")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public List<TeamDto> getTeamsForSupervisor(@RequestParam Long id) {
+        return teamService.getTeamDtosBySupervisor(id);
+    }
+
+    @GetMapping("/members")
+    public List<StudentTeamDto> getTeamMembers(@RequestParam Long teamId){
+        return teamService.getTeamMemberDtos(teamId);
+    }
+
     @PostMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addTeam(@RequestBody TeamDto teamDto){

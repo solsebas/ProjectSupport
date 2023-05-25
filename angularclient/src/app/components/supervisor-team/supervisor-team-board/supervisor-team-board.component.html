@@ -1,0 +1,22 @@
+<h2>{{members.at(0)?.team?.topic?.topicName}} (limit: {{members.at(0)?.team?.limit}})</h2>
+<h5>{{members.at(0)?.team?.status}}</h5>
+<div *ngFor="let member of members">
+  <h3>{{member.student?.firstName}} {{member.student?.surname}}<br></h3>
+  <h4>Ocena: {{member.grade != 0 ? member.grade : "brak"}}</h4>
+  <h4>Obecności:</h4>
+  <table>
+    <thead>
+    <tr>
+      <td>Data</td>
+      <td>Obecność</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let attendance of member.attendanceList">
+      <td>{{attendance.date}}</td>
+      <td>{{attendance.present}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <hr>
+</div>

@@ -109,6 +109,28 @@ public class TeamServiceImpl implements TeamService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TeamDto> getTeamDtosBySupervisor(Long userId) {
+        return getTeamsBySupervisor(userId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentTeamDto> getTeamMemberDtos(Long teamId) {
+        return getTeamMembers(teamId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<StudentTeamModel> getTeamMembers(Long teamId) {
+        return studentTeamDao.findMembersByTeamId(teamId);
+    }
+
+    private List<TeamModel> getTeamsBySupervisor(Long userId) {
+        return teamDao.findTeamsBySupervisorUserId(userId);
+    }
+
     private List<TeamModel> getTeamsByStudent(Long userId) {
         return teamDao.findTeamsByParticipantUserId(userId);
     }
