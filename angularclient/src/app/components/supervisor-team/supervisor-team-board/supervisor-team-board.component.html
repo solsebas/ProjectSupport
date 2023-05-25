@@ -20,3 +20,16 @@
   </table>
   <hr>
 </div>
+
+<h4>Dodaj Ocene:</h4>
+<form name="grade-form" (submit)="submitGradeForm($event)">
+
+  <select name="graded_id" [(ngModel)]="graded_id">
+    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
+  </select>
+  <label for="grade"><h5>Ocena:</h5> {{ grade }}</label>
+  <input type="range" min="2" max="5" step="1" id="grade" name="grade" placeholder="Ocena" [(ngModel)]="grade" required>
+
+  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
+
+</form>

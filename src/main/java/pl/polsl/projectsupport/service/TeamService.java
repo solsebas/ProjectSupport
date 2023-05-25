@@ -13,6 +13,9 @@ public interface TeamService {
     void addStudent(TeamStudentDto dto);
     TeamDto convertToDto(TeamModel teamModel);
     TeamModel convertToModel(TeamDto teamDto);
+
+    StudentTeamModel convertToModel(StudentTeamDto studentTeamDto);
+
     List<TeamModel> getTeams();
     List<TeamDto> getTeamDtos();
     StudentTeamModel getStudentTeam(Long userId, Long teamId);
@@ -20,4 +23,5 @@ public interface TeamService {
     List<TeamDto> getTeamDtosByStudent(Long userId);
     List<TeamDto> getTeamDtosBySupervisor(Long userId);
     List<StudentTeamDto> getTeamMemberDtos(Long teamId);
+    StudentTeamDto editStudentTeamDto(StudentTeamDto studentTeamDto, Long id);
 }

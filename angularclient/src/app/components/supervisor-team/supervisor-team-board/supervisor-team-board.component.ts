@@ -14,6 +14,9 @@ export class SupervisorTeamBoardComponent {
   selectedId: number = 0;
   members: TeamMember[] = [];
 
+  graded_id: bigint = BigInt(0);
+  grade: number = 5;
+
   constructor(private route: ActivatedRoute, private teamService :TeamService) {
     const sub: Subscription =
       this.route.params.subscribe(params => {
@@ -29,5 +32,32 @@ export class SupervisorTeamBoardComponent {
           console.error(err);
         }
       });
+  }
+
+
+  submitGradeForm(event: Event) {
+    event.preventDefault();
+    // if(this.graded) this.graded.grade = this.grade
+    let graded = this.getGraded(this.graded_id)
+    if (graded) graded.grade = this.grade
+      // @ts-ignore
+    this.teamService.addGrade(graded).subscribe({
+        next: data => {
+
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+
+  }
+
+  getGraded(id: bigint){
+    for (let mem of this.members){
+      if (mem.id == id){
+        return mem
+      }
+    }
+    return ;
   }
 }

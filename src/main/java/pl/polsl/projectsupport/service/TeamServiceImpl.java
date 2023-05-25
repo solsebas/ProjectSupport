@@ -81,6 +81,12 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public StudentTeamModel convertToModel(StudentTeamDto studentTeamDto) {
+        StudentTeamModel studentTeamModel = modelMapper.map(studentTeamDto, StudentTeamModel.class);
+        return studentTeamModel;
+    }
+
+    @Override
     public List<TeamModel> getTeams() {
         return teamDao.findAll();
     }
@@ -121,6 +127,20 @@ public class TeamServiceImpl implements TeamService {
         return getTeamMembers(teamId).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentTeamDto editStudentTeamDto(StudentTeamDto studentTeamDto, Long id) {
+        return convertToDto(editStudentTeam(studentTeamDto, id));
+    }
+
+    private StudentTeamModel editStudentTeam(StudentTeamDto studentTeamDto, Long id){
+        return studentTeamDao.findById(id)
+                .map(studentTeamModel -> {
+                    studentTeamModel.setGrade((short)studentTeamDto.getGrade());
+                    return studentTeamDao.save(studentTeamModel);
+                })
+                .orElseGet(() -> studentTeamDao.save(convertToModel(studentTeamDto)));
     }
 
     private List<StudentTeamModel> getTeamMembers(Long teamId) {

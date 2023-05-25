@@ -71,4 +71,9 @@ export class TeamService {
     const headers = this.getHeaderWithToken();
     return this.http.get<TeamMember[]>(API_TEAMS_URL + 'members', {headers, params:queryParams})
   }
+
+  addGrade(member: TeamMember): Observable<any> {
+    const headers = this.getHeaderWithToken();
+    return this.http.put<TeamMember>(API_TEAMS_URL + 'member/' + member.id, member, { headers });
+  }
 }
