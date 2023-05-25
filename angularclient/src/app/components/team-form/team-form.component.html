@@ -17,14 +17,20 @@
       <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
     </div>
 
-<!--    <div class="alert alert-success" role="alert" *ngIf="messageAdd.substring(0,4) == 'Tema' && messageAdd">-->
-<!--      {{ messageAdd }}-->
-<!--    </div>-->
-<!--    <div class="alert alert-danger" role="alert" *ngIf="messageAdd.substring(0,4) == 'Błąd' && messageAdd"> &lt;!&ndash;&ndash;&gt;-->
-<!--      {{ messageAdd }}-->
+<!--    <div *ngIf="showFormAddTeam">-->
+<!--      <label for="major">Kierunek:</label>-->
+<!--      <select id="major" name="major" [(ngModel)]="selectedTerm?.major">-->
+<!--        <option *ngFor="let term of terms" [value]="term.major">{{ term.major }}</option>-->
+<!--      </select>-->
+
+<!--      <label for="termNumber">Numer semestru:</label>-->
+<!--      <select id="termNumber" name="termNumber" [(ngModel)]="selectedTerm.termNumber">-->
+<!--        <option *ngFor="let term of terms" [value]="term.termNumber">{{ term.termNumber }}</option>-->
+<!--      </select>-->
 <!--    </div>-->
   </form>
 </div>
+
 
 <div class="form-popup" [hidden]="!showFormViewTeams">
   <div class="form-form">

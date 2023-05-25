@@ -4,6 +4,7 @@ import {TeamService} from "../../services/team/team.service";
 import {Topic} from "../../models/topic";
 import {Student} from "../../models/student";
 import {StudentService} from "../../services/student/student.service";
+import { Term } from "../../models/term";
 
 @Component({
   selector: 'app-team-form',
@@ -16,6 +17,9 @@ export class TeamFormComponent {
   showTeamsList = false;
   showStudentList = false;
 
+  terms: Term[] = [];
+  selectedTerm: Term | null = null;
+
   limit = 1;
 
   teams: Team[] = [];
@@ -23,10 +27,10 @@ export class TeamFormComponent {
 
   teamId: bigint = BigInt(0);
 
-
   formTeamValid = false;
   formStudentValid = false;
   messageAdd = '';
+
 
   constructor(private teamService: TeamService, private studentService: StudentService) {
     this.teamService.getTeams().subscribe({
@@ -97,6 +101,8 @@ export class TeamFormComponent {
   submitTeamForm(event: Event) {
     let team: Team = new Team(this.limit);
     event.preventDefault();
+   // team.major = this.selectedTerm.major;
+   // team.termNumber = this.selectedTerm.termNumber;
     if (this.validateForm()) {
       this.teamService.createTeam(team).subscribe({
         next: data => {

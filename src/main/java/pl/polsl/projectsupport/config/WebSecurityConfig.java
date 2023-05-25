@@ -76,6 +76,7 @@ public class WebSecurityConfig {
                 .antMatchers("/api/supervisor/**").hasAnyRole("SUPERVISOR", "ADMIN")
                 .antMatchers("/api/topics/**").permitAll() // todo
                 .antMatchers("/api/teams/**").permitAll() // todo
+                .antMatchers("/api/terms/**").permitAll()
                 .antMatchers("/api/public/**").permitAll()
                 .anyRequest().authenticated();
 

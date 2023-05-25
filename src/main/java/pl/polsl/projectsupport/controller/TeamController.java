@@ -1,6 +1,7 @@
 package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.StudentTeamDto;
