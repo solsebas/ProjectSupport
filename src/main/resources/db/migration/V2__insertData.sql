@@ -4,12 +4,12 @@ INSERT INTO public.role(name) VALUES ('ROLE_SUPERVISOR');   -- ROLE_ID 2
 INSERT INTO public.role(name) VALUES ('ROLE_ADMIN');        -- ROLE_ID 3
 
 -- USERS TABLE --
-INSERT INTO public.users(email, password, username) VALUES ('admin@admin.pl', '$2a$10$DgtQ/lChSYbtPfMxofKXxeCN6Bnrvz6ILXU2jtjTLBjj370DBYm4y', 'admin');           -- USERS_ID 1      -- PASSWORD = 'admin123'
-INSERT INTO public.users(email, password, username) VALUES ('sawicki@supervisor.pl', '$2a$10$9c9iiVRn6gLaoi5rJFS6MezLeIpQjyyWsqsG6/OnPpnlL6rgSOvsa', 'sawicki');  -- USERS_ID 2      -- PASSWORD = 'sawicki'
-INSERT INTO public.users(email, password, username) VALUES ('drabik@supervisor.pl', '$2a$10$zOutCPSe9TX0J6N5rpiO0e9Gg8PYvQzA4wv0UEENMFkbpkUVWLy5G', 'drabik');    -- USERS_ID 3      -- PASSWORD = 'drabik'
-INSERT INTO public.users(email, password, username) VALUES ('szymon@admin.pl', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'szymon');         -- USERS_ID 4      -- PASSWORD = '12345678'
-INSERT INTO public.users(email, password, username) VALUES ('marcel@admin.pl', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'marcel');         -- USERS_ID 5      -- PASSWORD = '12345678'
-INSERT INTO public.users(email, password, username) VALUES ('seba@admin.pl', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'seba');             -- USERS_ID 6      -- PASSWORD = '12345678'
+INSERT INTO public.users(email, password, username) VALUES ('', '$2a$10$DgtQ/lChSYbtPfMxofKXxeCN6Bnrvz6ILXU2jtjTLBjj370DBYm4y', 'admin');           -- USERS_ID 1      -- PASSWORD = 'admin123'
+INSERT INTO public.users(email, password, username) VALUES ('', '$2a$10$9c9iiVRn6gLaoi5rJFS6MezLeIpQjyyWsqsG6/OnPpnlL6rgSOvsa', 'sawicki');  -- USERS_ID 2      -- PASSWORD = 'sawicki'
+INSERT INTO public.users(email, password, username) VALUES ('', '$2a$10$zOutCPSe9TX0J6N5rpiO0e9Gg8PYvQzA4wv0UEENMFkbpkUVWLy5G', 'drabik');    -- USERS_ID 3      -- PASSWORD = 'drabik'
+INSERT INTO public.users(email, password, username) VALUES ('ryszard.palka@interia.pl', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'szymon');         -- USERS_ID 4      -- PASSWORD = '12345678'
+INSERT INTO public.users(email, password, username) VALUES ('', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'marcel');         -- USERS_ID 5      -- PASSWORD = '12345678'
+INSERT INTO public.users(email, password, username) VALUES ('sebask133@gmail.com', '$2a$10$rEis8WZsMLzw6Vj8s7NJHu./Pgz03tMdaGX2F3.6cDYjaJSq3lVW.', 'seba');             -- USERS_ID 6      -- PASSWORD = '12345678'
 
 -- USERS_ROLES TABLE --
 INSERT INTO public.user_roles(user_id, role_id) VALUES (1, 3);
