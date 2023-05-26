@@ -11,6 +11,7 @@ import pl.polsl.projectsupport.enums.TeamStatus;
 import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.StudentTeamModel;
 import pl.polsl.projectsupport.model.TeamModel;
+import pl.polsl.projectsupport.service.email.EmailService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private StudentTeamDao studentTeamDao;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -48,6 +52,9 @@ public class TeamServiceImpl implements TeamService {
         studentTeamModel.setStudent(student.get());
         studentTeamModel.setTeam(team.get());
         studentTeamDao.save(studentTeamModel);
+
+        String targetEmail = studentTeamModel.getStudent().getUser().getEmail();
+        emailService.sendNewTeamNotification(targetEmail, convertToDto(studentTeamModel));
         //todo: walidacja od strony backendu czy już jest takie połączenie
     }
 
@@ -67,9 +74,12 @@ public class TeamServiceImpl implements TeamService {
         List<StudentDto> students = studentDao.findByTeamId(studentTeamModel.getTeam().getId()).stream()
                 .map(studentModel -> modelMapper.map(studentModel, StudentDto.class))
                 .collect(Collectors.toList());
-        List<AttendanceDto> attendances = studentTeamModel.getAttendances().stream()
-                .map(attendanceModel -> modelMapper.map(attendanceModel, AttendanceDto.class))
-                .collect(Collectors.toList());
+        List<AttendanceDto> attendances = null;
+        if (studentTeamModel.getAttendances() != null) {
+            attendances = studentTeamModel.getAttendances().stream()
+                    .map(attendanceModel -> modelMapper.map(attendanceModel, AttendanceDto.class))
+                    .collect(Collectors.toList());
+        }
         studentTeamDto.getTeam().setStudentList(students);
         studentTeamDto.setAttendanceList(attendances);
         return studentTeamDto;
@@ -130,8 +140,13 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public StudentTeamDto editStudentTeamDto(StudentTeamDto studentTeamDto, Long id) {
-        return convertToDto(editStudentTeam(studentTeamDto, id));
+    public StudentTeamDto editStudentTeamDto(StudentTeamDto dto, Long id) {
+        StudentTeamModel studentTeamModel = editStudentTeam(dto, id);
+
+        String targetEmail = studentTeamModel.getStudent().getUser().getEmail();
+        emailService.sendNewGradeNotification(targetEmail, dto);
+
+        return convertToDto(studentTeamModel);
     }
 
     private StudentTeamModel editStudentTeam(StudentTeamDto studentTeamDto, Long id){
