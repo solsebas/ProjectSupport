@@ -6,6 +6,8 @@ import java.util.List;
 
 @Data
 public class StudentTeamDto {
+
+    Long id;
     StudentDto student;
     int grade;
     TeamDto team;

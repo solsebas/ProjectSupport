@@ -13,6 +13,10 @@ import {AccessDeniedComponent} from "./components/access-denied/access-denied.co
 import {BlockUrlGuard} from './block-url.guard'
 import {StudentTeamComponent} from "./components/student-team/student-team.component";
 import {StudentsTeamBoardComponent} from "./components/student-team/students-team-board/students-team-board.component";
+import {SupervisorTeamComponent} from "./components/supervisor-team/supervisor-team.component";
+import {
+  SupervisorTeamBoardComponent
+} from "./components/supervisor-team/supervisor-team-board/supervisor-team-board.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +34,9 @@ const routes: Routes = [
   { path: 'supervisor', component: BoardSupervisorComponent, canActivate: [BlockUrlGuard]  },
   { path: 'supervisor/topic', component: TopicFormComponent, canActivate: [BlockUrlGuard] },
   { path: 'supervisor/team', component: TeamFormComponent, canActivate: [BlockUrlGuard] },
+  { path: 'supervisor/team-manage', component: SupervisorTeamComponent},
+  { path: 'supervisor/team-manage/:id', component: SupervisorTeamBoardComponent},
+
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }

@@ -1,0 +1,50 @@
+<h2>{{members.at(0)?.team?.topic?.topicName}} (limit: {{members.at(0)?.team?.limit}})</h2>
+<h5>{{members.at(0)?.team?.status}}</h5>
+<div *ngFor="let member of members">
+  <h3>{{member.student?.firstName}} {{member.student?.surname}}<br></h3>
+  <h4>Ocena: {{member.grade != 0 ? member.grade : "brak"}}</h4>
+  <h4>Obecności:</h4>
+  <table>
+    <thead>
+    <tr>
+      <td>Data</td>
+      <td>Obecność</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let attendance of member.attendanceList">
+      <td>{{attendance.date}}</td>
+      <td>{{attendance.present}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <hr>
+</div>
+
+<h4>Dodaj Ocene:</h4>
+<form name="grade-form" (submit)="submitGradeForm($event)">
+
+  <select name="graded_id" [(ngModel)]="graded_id">
+    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
+  </select>
+  <label for="grade"><h5>Ocena:</h5> {{ grade }}</label>
+  <input type="range" min="2" max="5" step="1" id="grade" name="grade" placeholder="Ocena" [(ngModel)]="grade" required>
+
+  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
+
+</form>
+
+<form name="attendance-form" (submit)="submitAttendanceForm($event)">
+
+  <select name="graded_id" [(ngModel)]="attendant_id">
+    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
+  </select>
+  <label for="date"><h5>Data:</h5> {{ date }}</label>
+  <input type="date" id="date" name="date" [(ngModel)]="date">
+
+  <label for="attendance"><h5>Obecny:</h5> {{ attendance }}</label>
+  <input type="checkbox" id="attendance" name="attendance" [(ngModel)]="attendance">
+
+  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
+
+</form>

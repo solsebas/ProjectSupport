@@ -1,11 +1,14 @@
+import {TeamMember} from "./team-member";
+
 export class Attendance {
-  id: bigint;
+  id?: bigint;
   present: boolean;
   date: string;
+  memberId: bigint;
 
-  constructor(id: bigint, present: boolean, date: string) {
-    this.id = id;
+  constructor(present: boolean, date: string, member: bigint) {
     this.present = present;
     this.date = date;
+    this.memberId = member;
   }
 }
