@@ -53,4 +53,27 @@ export class TeamService {
     const headers = this.getHeaderWithToken();
     return this.http.get<TeamMember>(API_TEAMS_URL + 'member', {headers, params:queryParams})
   }
+
+  getSupervisorTeams(): Observable<Team[]>{
+    let id = this.storageService.getUser().id;
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("id",id);
+
+    const headers = this.getHeaderWithToken();
+    return this.http.get<Team[]>(API_TEAMS_URL + 'supervisor', {headers, params:queryParams})
+  }
+
+  getTeamMembers(teamId: number): Observable<TeamMember[]>{
+    this.storageService.getUser().id;
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("teamId",teamId);
+
+    const headers = this.getHeaderWithToken();
+    return this.http.get<TeamMember[]>(API_TEAMS_URL + 'members', {headers, params:queryParams})
+  }
+
+  addGrade(member: TeamMember): Observable<any> {
+    const headers = this.getHeaderWithToken();
+    return this.http.put<TeamMember>(API_TEAMS_URL + 'member/' + member.id, member, { headers });
+  }
 }
