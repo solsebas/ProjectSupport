@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import pl.polsl.projectsupport.dto.AttendanceDto;
 import pl.polsl.projectsupport.dto.StudentTeamDto;
 
+import java.util.Objects;
+
 @Component
 public class EmailServiceImpl implements EmailService {
 
@@ -19,6 +21,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendTestMessage(String to, String subject, String text) {
+        if (Objects.equals(to, "")) return;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ProjectSupport");
         message.setTo(to);
@@ -29,6 +32,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendNewGradeNotification(String to, StudentTeamDto dto) {
+        if (Objects.equals(to, "")) return;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ProjectSupport");
         message.setTo(to);
@@ -42,6 +46,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendNewTeamNotification(String to, StudentTeamDto dto) {
+        if (Objects.equals(to, "")) return;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ProjectSupport");
         message.setTo(to);
@@ -55,6 +60,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendNewAttendanceNotification(String to, AttendanceDto dto, String firstName, String topic) {
+        if (Objects.equals(to, "")) return;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ProjectSupport");
         message.setTo(to);
