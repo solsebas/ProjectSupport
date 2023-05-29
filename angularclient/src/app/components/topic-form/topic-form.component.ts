@@ -58,8 +58,8 @@ export class TopicFormComponent {
     if (this.validateForm()) {
       this.topicService.createTopic(topic).subscribe({
         next: data => {
-          this.topicName = "";
-          this.topicDescription = "";
+          this.topicName;
+          this.topicDescription;
           console.log(data);
           this.messageAdd = 'Temat dodany poprawnie!';
           this.closeFormAddTopic();
