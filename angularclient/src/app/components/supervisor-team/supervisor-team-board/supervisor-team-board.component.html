@@ -1,5 +1,10 @@
 <h2>{{members.at(0)?.team?.topic?.topicName}} (limit: {{members.at(0)?.team?.limit}})</h2>
 <h5>{{members.at(0)?.team?.status}}</h5>
+
+<button *ngIf="members.at(0)?.team?.status == 'NEW'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("ACTIVE")'>Ustaw na ACTIVE</button>
+<button *ngIf="members.at(0)?.team?.status == 'ACTIVE'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CLOSED")'>Ustaw na CLOSED</button>
+<button *ngIf="members.at(0)?.team?.status != 'CANCELED'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CANCELED")'>Ustaw na CANCELED</button>
+
 <div *ngFor="let member of members">
   <h3>{{member.student?.firstName}} {{member.student?.surname}}<br></h3>
   <h4>Ocena: {{member.grade != 0 ? member.grade : "brak"}}</h4>

@@ -43,6 +43,11 @@ public class TeamController {
         return teamService.editStudentTeamDto(studentTeamDto, id);
     }
 
+    @PutMapping("/status/{id}")
+    public TeamDto editTeam(@RequestBody TeamDto teamDto, @PathVariable Long id){
+        return teamService.editTeamDto(teamDto, id);
+    }
+
     @GetMapping("/supervisor")
 //    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TeamDto> getTeamsForSupervisor(@RequestParam Long id) {

@@ -149,6 +149,12 @@ public class TeamServiceImpl implements TeamService {
         return convertToDto(studentTeamModel);
     }
 
+    @Override
+    public TeamDto editTeamDto(TeamDto teamDto, Long id) {
+        TeamModel teamModel = editTeam(teamDto, id);
+        return convertToDto(teamModel);
+    }
+
     private StudentTeamModel editStudentTeam(StudentTeamDto studentTeamDto, Long id){
         return studentTeamDao.findById(id)
                 .map(studentTeamModel -> {
@@ -156,6 +162,15 @@ public class TeamServiceImpl implements TeamService {
                     return studentTeamDao.save(studentTeamModel);
                 })
                 .orElseGet(() -> studentTeamDao.save(convertToModel(studentTeamDto)));
+    }
+
+    private TeamModel editTeam(TeamDto teamDto, Long id){
+        return teamDao.findById(id)
+                .map(teamModel -> {
+                    teamModel.setStatus(TeamStatus.valueOf(teamDto.getStatus()));
+                    return teamDao.save(teamModel);
+                })
+                .orElseGet(() -> teamDao.save(convertToModel(teamDto)));
     }
 
     private List<StudentTeamModel> getTeamMembers(Long teamId) {
