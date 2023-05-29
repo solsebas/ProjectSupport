@@ -24,4 +24,5 @@ public interface TeamService {
     List<TeamDto> getTeamDtosBySupervisor(Long userId);
     List<StudentTeamDto> getTeamMemberDtos(Long teamId);
     StudentTeamDto editStudentTeamDto(StudentTeamDto studentTeamDto, Long id);
+    TeamDto editTeamDto(TeamDto teamDto, Long id);
 }

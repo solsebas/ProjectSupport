@@ -76,4 +76,9 @@ export class TeamService {
     const headers = this.getHeaderWithToken();
     return this.http.put<TeamMember>(API_TEAMS_URL + 'member/' + member.id, member, { headers });
   }
+
+  setStatus(team: Team): Observable<any> {
+    const headers = this.getHeaderWithToken();
+    return this.http.put<Team>(API_TEAMS_URL + 'status/' + team.id, team, { headers });
+  }
 }
