@@ -81,4 +81,19 @@ export class SupervisorTeamBoardComponent {
     }
     return ;
   }
+
+  editStatus(status: string){
+    let team = this.members.at(0)?.team
+    if (team){
+      team.status = status
+      this.teamService.setStatus(team).subscribe({
+        next: data => {
+
+        },
+        error: err => {
+          console.error(err);
+        }
+      })
+    }
+  }
 }
