@@ -21,14 +21,14 @@ export class BlockUrlGuard implements CanActivate {
 
 
         if (user.roles.includes('ROLE_SUPERVISOR')) {
-          if (url === '/admin' || url === '/studentBoard' || url === '/register') {
+          if (url === '/admin' || url === '/admin/register' || url === '/student' || url === '/student/team' || url === '/student/team/') {
             this.router.navigate(['/access-denied']);
             return false;
           } else {
             return true;
           }
         } else if (user.roles.includes('ROLE_STUDENT')) {
-          if (url === '/admin' || url === '/supervisor' || url === '/topic' || url === '/team' || url === '/supervisor' || url === '/register') {
+          if (url === '/admin' || url === '/admin/register' || url === '/supervisor' || url === '/supervisor/team' || url === '/supervisor/topic' || url === '/supervisor/team-manage' || url === '/supervisor/team-manage/') {
             this.router.navigate(['/access-denied']);
             return false;
           } else {

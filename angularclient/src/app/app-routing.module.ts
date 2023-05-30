@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [BlockUrlGuard]  },
 
   { path: 'student', component: BoardStudentComponent, canActivate: [BlockUrlGuard]  },
-  { path: 'student/team', component: StudentTeamComponent}, // todo: canActivate: [BlockUrlGuard]
-  { path: 'student/team/:id', component: StudentsTeamBoardComponent},
+  { path: 'student/team', component: StudentTeamComponent, canActivate: [BlockUrlGuard]},
+  { path: 'student/team/:id', component: StudentsTeamBoardComponent, canActivate: [BlockUrlGuard]},
 
   { path: 'admin', component: BoardAdminComponent, canActivate: [BlockUrlGuard]  },
   { path: 'admin/register', component: RegisterComponent, canActivate: [BlockUrlGuard]  },
@@ -34,9 +34,8 @@ const routes: Routes = [
   { path: 'supervisor', component: BoardSupervisorComponent, canActivate: [BlockUrlGuard]  },
   { path: 'supervisor/topic', component: TopicFormComponent, canActivate: [BlockUrlGuard] },
   { path: 'supervisor/team', component: TeamFormComponent, canActivate: [BlockUrlGuard] },
-  { path: 'supervisor/team-manage', component: SupervisorTeamComponent},
-  { path: 'supervisor/team-manage/:id', component: SupervisorTeamBoardComponent},
-
+  { path: 'supervisor/team-manage', component: SupervisorTeamComponent, canActivate: [BlockUrlGuard]},
+  { path: 'supervisor/team-manage/:id', component: SupervisorTeamBoardComponent, canActivate: [BlockUrlGuard]},
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
