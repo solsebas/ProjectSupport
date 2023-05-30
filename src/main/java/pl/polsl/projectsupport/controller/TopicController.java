@@ -1,6 +1,7 @@
 package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.TopicDto;
 import pl.polsl.projectsupport.service.TopicService;
@@ -19,11 +20,11 @@ public class TopicController {
     //region TopicService Implementation
     //---------------------------------------------------------------------------------------
     @PostMapping("")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addTopic(@RequestBody TopicDto topicDto) {topicService.create(topicDto);}
 
     @GetMapping("")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TopicDto> getTopics(){ return topicService.getTopicDtos();}
     //---------------------------------------------------------------------------------------
     //endregion
