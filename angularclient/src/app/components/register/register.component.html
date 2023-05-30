@@ -1,8 +1,8 @@
 <div class="col-md-12">
   <div class="card card-container">
     <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card"/>
-    <h3 class="m-4" >Rejestracja prowadzącego</h3>
-    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <h3 class="m-4" >Rejestracja</h3>
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="m-2"novalidate>
       <div class="form-group m-2">
         <input placeholder="Nazwa użytkownika" type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }"/>
         <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
@@ -30,6 +30,16 @@
       <div class="border-top my-3"></div>
 
       <div class="form-group m-2">
+        <select class="form-control" id="userRole" name="userRole" [(ngModel)]="userRole">
+          <option value="" selected disabled>Wybierz rolę</option>
+          <option value="superviosor">Prowadzący</option>
+          <option value="student">Student</option>
+        </select>
+      </div>
+
+      <div class="border-top my-3"></div>
+
+      <div class="form-group m-2">
         <input placeholder="Imie" type="text" class="form-control" name="imie" [(ngModel)]="form.firstname" required minlength="2" #firstname="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstname.errors }"/>
         <div class="invalid-feedback" *ngIf="firstname.errors && f.submitted">
           <div *ngIf="firstname.errors['required']">Imie jest hasło</div>
@@ -44,7 +54,7 @@
         </div>
       </div>
       <div class="form-group mt-4 m-2">
-        <button class="btn btn-primary btn-block">Zarejestruj</button>
+        <button class="btn btn-primary btn-block" type="submit" [disabled]="form.username == null || form.email == null || form.password == null || form.firstname == null || form.surname == null || this.userRole == ''">Zarejestruj</button>
       </div>
 
       <div class="alert alert-warning m-2" *ngIf="f.submitted && isSignUpFailed">

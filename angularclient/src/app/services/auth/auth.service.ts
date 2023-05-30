@@ -23,10 +23,10 @@ export class AuthService {
         return this.http.post(API_AUTH_URL + 'signin', {username, password }, httpOptions);
     }
 
-    register(username: string, email: string, password: string, firstname: string, surname: string): Observable<any> {
+    register(username: string, email: string, password: string, firstname: string, surname: string, role: string): Observable<any> {
         const headers = this.getHeaderWithToken();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(API_AUTH_URL + 'signup', {username, email, password, firstname, surname }, { headers });
+        return this.http.post(API_AUTH_URL + 'signup', {username, email, password, firstname, surname, role }, { headers });
     }
 
     logout() {
