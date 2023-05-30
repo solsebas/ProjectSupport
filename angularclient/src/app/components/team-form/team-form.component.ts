@@ -54,6 +54,15 @@ export class TeamFormComponent {
         console.error(err);
       }
     });
+
+    this.topicService.getTopicsSupervisor().subscribe({
+      next: data => {
+        this.supervisorTopics = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
   openForViewTeam() {
@@ -67,14 +76,6 @@ export class TeamFormComponent {
 
   openForAddTeam() {
     this.showFormAddTeam = true;
-    this.topicService.getTopicsSupervisor().subscribe({
-      next: data => {
-        this.supervisorTopics = data;
-      },
-      error: err => {
-        console.error(err);
-      }
-    });
   }
 
   closeFormAddTeam(){
@@ -133,6 +134,10 @@ export class TeamFormComponent {
             this.limit = 1;
             console.log(data);
             this.messageAdd = 'Zespół dodany poprawnie!';
+
+            if (team.topic) {
+              team.topic.idUser = this.selectedTopic?.idUser;
+            }
             this.closeFormAddTeam();
           },
           error: err => {

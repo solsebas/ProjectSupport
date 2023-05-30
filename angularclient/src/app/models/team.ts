@@ -16,7 +16,9 @@ export class Team {
 
   studentList?: Student[]
 
-  constructor(limit: number) {
+  constructor(limit: number, term?: Term, topic?: Topic) {
     this.limit = limit;
+    this.term = term;
+    this.topic = topic;
   }
 }

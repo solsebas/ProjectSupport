@@ -27,7 +27,7 @@
     <div *ngIf="showFormAddTeam">
       <h2>Lista tematów prowadzącego:</h2>
       <select id="topic" name="topic" [(ngModel)]="selectedTopic">
-        <option *ngFor="let topic of supervisorTopics">{{ topic.topicName }}</option>
+        <option *ngFor="let topic of supervisorTopics" [ngValue]="topic">{{ topic.topicName }}</option>
       </select>
     </div>
 

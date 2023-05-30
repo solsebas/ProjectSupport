@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Topic} from "../../models/topic";
 import {StorageService} from "../storage/storage.service";
+import {Team} from "../../models/team";
 
 const API_TOPICS_URL = 'http://localhost:8080/api/topics/';
 
@@ -32,9 +33,11 @@ export class TopicService {
   }
 
   getTopicsSupervisor(): Observable<Topic[]> {
-    const supervisorId = this.storageService.getUser().id;
+    let supervisorId = this.storageService.getUser().id;
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("supervisorId", supervisorId);
+
     const headers = this.getHeaderWithToken();
-    const url = `${API_TOPICS_URL}?supervisorId=${supervisorId}`;
-    return this.http.get<Topic[]>(url, { headers });
+    return this.http.get<Topic[]>(API_TOPICS_URL + 'topicsS', { headers, params: queryParams });
   }
 }

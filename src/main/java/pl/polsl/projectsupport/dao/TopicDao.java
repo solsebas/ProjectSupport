@@ -12,6 +12,6 @@ import java.util.List;
 
 @Repository
 public interface TopicDao extends JpaRepository<TopicModel, Long> {
-    @Query("SELECT t FROM TopicModel t WHERE t.supervisor.id = :supervisorId")
-    List<TopicModel> findBySupervisorId(@Param("supervisorId") Long supervisorId);
+    @Query(value = "SELECT t.* FROM topic t WHERE t.supervisor_id = (select s.supervisor_id from supervisor s where s.user_id = :id)", nativeQuery = true)
+    List<TopicModel> findBySupervisorId(@Param("id") Long supervisorId);
 }
