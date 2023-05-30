@@ -9,14 +9,16 @@
     <a href="#adminSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel admina</span><i class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" id="adminSubmenu" data-bs-parent="#menu">
+    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="adminSubmenu" data-bs-parent="#menu">
       <li>
         <a [routerLink]="'admin'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline"></span>Panel admina</a>
+          <i class="fs-4 bi-speedometer2"></i>
+          <span class="ms-1 d-sm-inline"></span>Administracja systemu</a>
       </li>
       <li>
         <a [routerLink]="'admin/register'" class="nav-link px-0 w-100" >
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Rejestracja</span>
+          <i class="bi bi-person-plus-fill"></i>
+          <span class="ms-1 d-sm-inline">Rejestracja</span>
         </a>
       </li>
     </ul>
@@ -27,22 +29,26 @@
     <a href="#supervizorSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel proawdzącego</span><i class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" id="supervizorSubmenu" data-bs-parent="#menu">
+    <ul class="collapse nav flex-column" style="position: relative; left: 20px;" id="supervizorSubmenu" data-bs-parent="#menu">
       <li>
         <a [routerLink]="'supervisor'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Panel nadzorczy</span></a>
+          <i class="bi bi-columns"></i>
+          <span class="ms-1 d-sm-inline">Panel nadzorczy</span></a>
       </li>
       <li>
         <a [routerLink]="'supervisor/topic'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Tematy projektów</span></a>
+          <i class="bi bi-book-half"></i>
+          <span class="ms-1 d-sm-inline">Zarządzenie tematami projektów</span></a>
       </li>
       <li>
         <a [routerLink]="'supervisor/team'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Zespoły</span></a>
+          <i class="bi bi-people-fill"></i>
+          <span class="ms-1 d-sm-inline">Zarządzenie zespołami</span></a>
       </li>
       <li>
         <a [routerLink]="'supervisor/team-manage'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Zarządzanie zespołami</span></a>
+          <i class="bi bi-person-rolodex"></i>
+          <span class="ms-1 d-sm-inline">Zarządzanie projektami</span></a>
       </li>
     </ul>
   </li>
@@ -51,18 +57,11 @@
     <a href="#studentSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
       <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel studenta</span><i class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" id="studentSubmenu" data-bs-parent="#menu">
-      <li>
-        <a [routerLink]="''" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Puste</span></a>
-      </li>
-      <li>
-        <a [routerLink]="'student'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Panel studenta</span></a>
-      </li>
+    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="studentSubmenu" data-bs-parent="#menu">
       <li>
         <a [routerLink]="'student/team'" class="nav-link px-0 w-100">
-          <i class="fs-4 bi-table"></i> <span class="ms-1 d-sm-inline">Zespoły</span></a>
+          <i class="bi bi-people-fill"></i>
+          <span class="ms-1 d-sm-inline">Zespoły</span></a>
       </li>
     </ul>
 

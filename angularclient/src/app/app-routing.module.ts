@@ -4,7 +4,6 @@ import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {RegisterComponent} from "./components/register/register.component";
-import {BoardStudentComponent} from "./components/board-user/board-student.component";
 import {BoardAdminComponent} from "./components/board-admin/board-admin.component";
 import {BoardSupervisorComponent} from "./components/board-supervisor/board-supervisor.component";
 import {TopicFormComponent} from "./components/topic-form/topic-form.component";
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: 'access-denied', component: AccessDeniedComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [BlockUrlGuard]  },
 
-  { path: 'student', component: BoardStudentComponent, canActivate: [BlockUrlGuard]  },
   { path: 'student/team', component: StudentTeamComponent, canActivate: [BlockUrlGuard]},
   { path: 'student/team/:id', component: StudentsTeamBoardComponent, canActivate: [BlockUrlGuard]},
 

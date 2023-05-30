@@ -16,7 +16,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {httpInterceptorProviders} from "./helpers/auth.interceptor";
 import { RegisterComponent } from './components/register/register.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
-import { BoardStudentComponent } from './components/board-user/board-student.component';
 import { BoardSupervisorComponent } from './components/board-supervisor/board-supervisor.component';
 import { TopicFormComponent } from './components/topic-form/topic-form.component';
 import { TeamFormComponent } from './components/team-form/team-form.component';
@@ -26,6 +25,7 @@ import {StudentTeamComponent} from "./components/student-team/student-team.compo
 import { StudentsTeamBoardComponent } from './components/student-team/students-team-board/students-team-board.component';
 import { SupervisorTeamComponent } from './components/supervisor-team/supervisor-team.component';
 import { SupervisorTeamBoardComponent } from './components/supervisor-team/supervisor-team-board/supervisor-team-board.component';
+import {FilterPipe} from "./helpers/filter.pipe";
 
 
 @NgModule({
@@ -39,7 +39,6 @@ import { SupervisorTeamBoardComponent } from './components/supervisor-team/super
     ProfileComponent,
     RegisterComponent,
     BoardAdminComponent,
-    BoardStudentComponent,
     BoardSupervisorComponent,
     TopicFormComponent,
     TeamFormComponent,
@@ -47,7 +46,9 @@ import { SupervisorTeamBoardComponent } from './components/supervisor-team/super
     StudentTeamComponent,
     StudentsTeamBoardComponent,
     SupervisorTeamComponent,
-    SupervisorTeamBoardComponent
+    SupervisorTeamBoardComponent,
+    FilterPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -57,7 +58,10 @@ import { SupervisorTeamBoardComponent } from './components/supervisor-team/super
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ httpInterceptorProviders, BlockUrlGuard ],
+  providers: [httpInterceptorProviders, BlockUrlGuard],
+  exports: [
+    FilterPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -34,7 +34,7 @@
 }
 
 
-.btn-add-topic::before {
+.btn-add-team::before {
   content: "";
   background-image: url('img/form-add-icon.png');
   background-size: contain;
@@ -51,19 +51,28 @@
 
 
 }
-.btn-add-topic {
+.btn-add-team {
   position: relative;
-  background-color: rgba(255,0,0,0.5);
-  border-color: rgba(182, 3, 3, 0.5);;
+  background-color: rgba(34, 0, 255, 0.5);
+  border-color: rgba(21, 3, 182, 0.5);;
 }
 
 .btn-add-stud {
   position: relative;
   background-color: rgba(0,255,0,0.5);
   border-color: rgba(3, 182, 3, 0.5);
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+  transition: 0.5s;
 }
 
-.btn-view-topic::before {
+.btn-add-stud:hover {
+  background-color: rgba(0, 255, 0, 0.63);
+  border-color: rgba(3, 182, 3, 0.73);
+}
+
+.btn-view-team::before {
   content: "";
   background-image: url('img/form-show-icon.png');
   background-size: contain;
@@ -80,10 +89,10 @@
 
 
 }
-.btn-view-topic {
+.btn-view-team {
   position: relative;
-  background-color: rgba(0,255,0,0.5);
-  border-color: rgba(0, 187, 0, 0.5);
+  background-color: rgba(255, 0, 115, 0.5);
+  border-color: rgba(187, 0, 78, 0.5);
 }
 
 
@@ -105,6 +114,7 @@
   margin: min(5px, 5%);
   min-height: 180px;
   min-width: 100px;
+  max-width: 200px;
   transition: 0.5s;
   margin-bottom: 20px;
 }

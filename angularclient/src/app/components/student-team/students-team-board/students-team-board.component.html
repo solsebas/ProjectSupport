@@ -1,19 +1,49 @@
-<h2>{{member?.team?.topic?.topicName}} (limit: {{member?.team?.limit}})</h2>
-<h5>{{member?.team?.status}}</h5>
-<span *ngFor="let mem of member?.team?.studentList">{{mem.firstName}} {{mem.surname}}<br></span>
-<h3>Ocena: {{member?.grade != 0 ? member?.grade : "brak"}}</h3>
-<h3>Obecności:</h3>
-<table>
-  <thead>
-    <tr>
-      <td>Data</td>
-      <td>Obecność</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let attendance of member?.attendanceList">
-      <td>{{attendance.date}}</td>
-      <td>{{attendance.present}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="card mt-5 mb-3">
+  <div class="card-header">
+    <h2 class="card-title"><b>"{{ member?.team?.topic?.topicName }}"</b> (limit: {{ member?.team?.limit }})</h2>
+    <h5 class="card-subtitle" [ngStyle]="{ color: getStatusColor(member?.team?.status) }">{{member?.team?.status}}</h5>
+  </div>
+  <div class="card-body">
+
+    <div class="m-3 mb-5">
+      <h3 class="mb-4 mt-3">
+        <b>Lista uczestników projektu:</b>
+      </h3>
+      <div class="list-group">
+         <span class="list-group-item" *ngFor="let mem of member?.team?.studentList">
+          {{ mem.firstName }} {{ mem.surname }}
+         </span>
+      </div>
+    </div>
+    <hr class="my-4">
+
+    <h3 class="mb-5 mt-3">
+      <b>Ocena:</b>
+      {{ member?.grade != 0 ? member?.grade : 'brak' }}
+    </h3>
+
+    <hr class="my-4">
+
+    <ng-container *ngIf="member?.attendanceList?.length !== 0 else noAttendance">
+      <h3><b>Obecności:</b></h3>
+    <table class="table table-striped table-dark rounded overflow-hidden">
+      <thead>
+      <tr>
+        <th>Data</th>
+        <th>Obecność</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attendance of member?.attendanceList">
+          <td>{{ attendance?.date }}</td>
+          <td>{{ attendance?.present ? 'obecny' : 'nieobecny' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </ng-container>
+    <ng-template #noAttendance>
+      <h3><b>Obecności:</b> brak</h3>
+    </ng-template>
+  </div>
+</div>
+<button style="min-width: 200px;" class="btn btn-primary"(click)="navigateToStudentTeam()"><b>Powrót</b></button>

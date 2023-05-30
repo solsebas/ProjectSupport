@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {TeamMember} from "../../../models/team-member";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TeamService} from "../../../services/team/team.service";
 import {Subscription} from "rxjs";
 import {Attendance} from "../../../models/attendance";
@@ -15,6 +15,8 @@ export class SupervisorTeamBoardComponent {
   selectedId: number = 0;
   members: TeamMember[] = [];
 
+  messageAdd: string = "";
+  messageAddAttendacne: string = "";
   graded_id: bigint = BigInt(0);
   grade: number = 5;
 
@@ -22,7 +24,7 @@ export class SupervisorTeamBoardComponent {
   date: string = '';
   attendance: boolean = false;
 
-  constructor(private route: ActivatedRoute, private teamService :TeamService, private attendanceService: AttendanceService) {
+  constructor(private route: ActivatedRoute, private teamService :TeamService, private attendanceService: AttendanceService, private router: Router) {
     const sub: Subscription =
       this.route.params.subscribe(params => {
         this.selectedId = params['id'];
@@ -47,13 +49,27 @@ export class SupervisorTeamBoardComponent {
       // @ts-ignore
     this.teamService.addGrade(member).subscribe({
         next: data => {
-
+          this.messageAdd = "Ocena " + member?.grade + " została ustawiona dla studenta " + member?.student.firstName + " " + member?.student.surname;
+          this.graded_id = BigInt(0);
         },
         error: err => {
           console.error(err);
+          this.messageAdd = err.toString();
         }
       });
 
+  }
+
+  getStatusColor(status: string | undefined): string {
+    if (status === 'CLOSED' || status === 'CANCELED') {
+      return 'red';
+    } else if (status === 'ACTIVE') {
+      return 'blue';
+    } else if (status === 'NEW') {
+      return 'green';
+    } else {
+      return 'black'; // Kolor domyślny dla innych statusów
+    }
   }
 
   submitAttendanceForm(event: Event) {
@@ -64,14 +80,32 @@ export class SupervisorTeamBoardComponent {
       // @ts-ignore
       this.attendanceService.createAttendance(attendance).subscribe({
         next: data => {
+          if (this.attendance)
+            this.messageAddAttendacne = "Obeconść w dniu " + this.date.toString() + " została dodana." ;
+          else
+            this.messageAddAttendacne = "Nieobeconść w dniu " + this.date.toString() + " została dodana." ;
+
+          const sub2: Subscription =
+            this.teamService.getTeamMembers(this.selectedId).subscribe({
+              next: data => {
+                console.log(data);
+                this.members = data;
+              },
+              error: err => {
+                console.error(err);
+              }
+            });
 
         },
         error: err => {
           console.error(err);
+          this.messageAddAttendacne = err.toString();
         }
       });
     }
   }
+
+
 
   getMember(id: bigint){
     for (let mem of this.members){
@@ -95,5 +129,9 @@ export class SupervisorTeamBoardComponent {
         }
       })
     }
+  }
+
+  navigateToSupervisorTeamMengage() {
+    this.router.navigateByUrl('/supervisor/team-manage');
   }
 }
