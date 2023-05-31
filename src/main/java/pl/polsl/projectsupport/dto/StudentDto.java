@@ -8,5 +8,4 @@ public class StudentDto {
     Long id;
     String firstName;
     String surname;
-    UserModel user;
 }

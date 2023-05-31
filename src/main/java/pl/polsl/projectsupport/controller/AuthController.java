@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.JSONWebToken.JwtUtils;
 import pl.polsl.projectsupport.dao.RoleDao;
 import pl.polsl.projectsupport.dao.UserDao;
-import pl.polsl.projectsupport.dto.StudentDto;
 import pl.polsl.projectsupport.dto.SupervisorDto;
 import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
+import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.UserModel;
 import pl.polsl.projectsupport.payload.request.LoginRequest;
 import pl.polsl.projectsupport.payload.request.RegisterRequest;
@@ -86,6 +87,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
         if (userDao.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: nazwa użytkownika jest już zajęta!"));
@@ -131,11 +133,12 @@ public class AuthController {
         if (strRoles != null) {
             switch (strRoles) {
                 case "student":
-                    StudentDto studentDto = new StudentDto();
-                    studentDto.setFirstName(signUpRequest.getFirstname());
-                    studentDto.setSurname(signUpRequest.getSurname());
-                    studentDto.setUser(userModel);
-                    studentService.create(studentDto);
+                    StudentModel studentModel = new StudentModel();
+                    studentModel.setId(null);
+                    studentModel.setFirstName(signUpRequest.getFirstname());
+                    studentModel.setSurname(signUpRequest.getSurname());
+                    studentModel.setUser(userModel);
+                    studentService.create(studentModel);
                     break;
                 default:
                     SupervisorDto supervisorDto = new SupervisorDto();
