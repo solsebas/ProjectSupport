@@ -149,7 +149,6 @@ export class TeamFormComponent {
     }
   }
 
-
   submitStudent(studentId: bigint){
     this.teamService.addStudent({'studentId': studentId, 'teamId': this.teamId}).subscribe({
       next: data => {
@@ -162,6 +161,5 @@ export class TeamFormComponent {
       }
     });
   }
-
 
 }

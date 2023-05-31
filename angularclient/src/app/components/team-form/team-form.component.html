@@ -16,7 +16,23 @@
       <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formTeamValid">Dodaj</button>
       <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
     </div>
+
+    <div *ngIf="showFormAddTeam">
+      <label for="term"><h2>Kierunek i semestr:</h2></label>
+      <select id="term" name="term" [(ngModel)]="selectedTerm">
+        <option *ngFor="let term of terms" [ngValue]="term">{{ term.major }} - {{ term.termNumber }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="showFormAddTeam">
+      <h2>Lista tematów prowadzącego:</h2>
+      <select id="topic" name="topic" [(ngModel)]="selectedTopic">
+        <option *ngFor="let topic of supervisorTopics" [ngValue]="topic">{{ topic.topicName }}</option>
+      </select>
+    </div>
+
   </form>
+
 </div>
 
 <div class="form-popup" [hidden]="!showFormViewTeams">
@@ -39,7 +55,7 @@
           <td>{{ team.id}}</td>
           <td>{{ team.studentList?.length }} / {{ team.limit }}</td>
           <td>{{ team.topic?.topicName }} ({{ team.topic?.topicDescription }})</td>
-          <td>{{ team.term }}</td>
+          <td>{{ team.term?.id }}</td>
           <td>{{ team.status }}</td>
           <td>
             <span *ngFor="let student of team.studentList">
