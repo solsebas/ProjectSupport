@@ -1,10 +1,10 @@
-package pl.polsl.projectsupport.payload.request;
+package pl.polsl.projectsupport.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class LoginRequest {
+public class LoginRequestDto {
     @NotBlank
     private String username;
 

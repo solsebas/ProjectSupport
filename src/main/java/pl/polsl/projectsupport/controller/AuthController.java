@@ -18,10 +18,10 @@ import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
 import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.UserModel;
-import pl.polsl.projectsupport.payload.request.LoginRequest;
-import pl.polsl.projectsupport.payload.request.RegisterRequest;
-import pl.polsl.projectsupport.payload.response.JwtResponse;
-import pl.polsl.projectsupport.payload.response.MessageResponse;
+import pl.polsl.projectsupport.dto.LoginRequestDto;
+import pl.polsl.projectsupport.dto.RegisterRequestDto;
+import pl.polsl.projectsupport.dto.JwtResponseDto;
+import pl.polsl.projectsupport.dto.MessageResponseDto;
 import pl.polsl.projectsupport.service.StudentService;
 import pl.polsl.projectsupport.service.SupervisorService;
 import pl.polsl.projectsupport.service.UserDetailsImpl;
@@ -72,7 +72,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -83,18 +83,18 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequestDto signUpRequest) {
         if (userDao.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: nazwa użytkownika jest już zajęta!"));
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: nazwa użytkownika jest już zajęta!"));
         }
 
         if (userDao.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: e-mail jest już używany!"));
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: e-mail jest już używany!"));
         }
 
         // Create new user's account
@@ -151,6 +151,6 @@ public class AuthController {
 
 
 
-        return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie!"));
+        return ResponseEntity.ok(new MessageResponseDto("Użytkownik zarejestrowany pomyślnie!"));
     }
 }

@@ -18,7 +18,7 @@ export class UserService {
 
   getPublicContent(): Observable<any> {
     const headers = this.getHeaderWithToken();
-    return this.http.get(API_URL + 'public', { responseType: 'text', headers });
+    return this.http.get(API_URL + 'public', { responseType: 'text' });
   }
   getAdminBoard(): Observable<any> {
     const headers = this.getHeaderWithToken();
