@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.JSONWebToken.JwtUtils;
 import pl.polsl.projectsupport.dao.RoleDao;
 import pl.polsl.projectsupport.dao.UserDao;
+import pl.polsl.projectsupport.dto.StudentDto;
 import pl.polsl.projectsupport.dto.SupervisorDto;
 import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
@@ -20,6 +21,7 @@ import pl.polsl.projectsupport.payload.request.LoginRequest;
 import pl.polsl.projectsupport.payload.request.RegisterRequest;
 import pl.polsl.projectsupport.payload.response.JwtResponse;
 import pl.polsl.projectsupport.payload.response.MessageResponse;
+import pl.polsl.projectsupport.service.StudentService;
 import pl.polsl.projectsupport.service.SupervisorService;
 import pl.polsl.projectsupport.service.UserDetailsImpl;
 
@@ -48,6 +50,10 @@ public class AuthController {
 
     @Autowired
     SupervisorService supervisorService;
+
+    @Autowired
+    StudentService studentService;
+
 
     @Autowired
     RoleDao roleRepository;
@@ -101,23 +107,19 @@ public class AuthController {
         } else {
             switch (strRoles) {
                 case "admin":
-                    RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(adminRole);
 
                     break;
                 case "student":
-                    RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(modRole);
 
                     break;
                 default:
-                    RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(userRole);
             }
-
         }
 
         user.setRoles(roles);
@@ -125,11 +127,26 @@ public class AuthController {
 
         UserModel userModel = userDao.findUserByName(signUpRequest.getUsername());
 
-        SupervisorDto supervisorDto = new SupervisorDto();
-        supervisorDto.setFirstname(signUpRequest.getFirstname());
-        supervisorDto.setSurname(signUpRequest.getSurname());
-        supervisorDto.setUser(userModel);
-        supervisorService.create(supervisorDto);
+
+        if (strRoles != null) {
+            switch (strRoles) {
+                case "student":
+                    StudentDto studentDto = new StudentDto();
+                    studentDto.setFirstName(signUpRequest.getFirstname());
+                    studentDto.setSurname(signUpRequest.getSurname());
+                    studentDto.setUser(userModel);
+                    studentService.create(studentDto);
+                    break;
+                default:
+                    SupervisorDto supervisorDto = new SupervisorDto();
+                    supervisorDto.setFirstname(signUpRequest.getFirstname());
+                    supervisorDto.setSurname(signUpRequest.getSurname());
+                    supervisorDto.setUser(userModel);
+                    supervisorService.create(supervisorDto);
+            }
+        }
+
+
 
         return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie!"));
     }

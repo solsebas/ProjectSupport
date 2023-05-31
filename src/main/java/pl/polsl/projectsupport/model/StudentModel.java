@@ -21,7 +21,7 @@ public class StudentModel {
 
     String surname;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     UserModel user;
 

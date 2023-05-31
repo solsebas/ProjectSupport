@@ -6,6 +6,7 @@ import pl.polsl.projectsupport.model.StudentModel;
 import java.util.List;
 
 public interface StudentService {
+    void create(StudentDto studentDto);
     public StudentDto convertToDto(StudentModel studentModel);
     public StudentModel convertToModel(StudentDto studentDto);
     public List<StudentModel> getStudents();
