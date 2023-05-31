@@ -15,7 +15,7 @@ public class TeamDto {
 
     TopicDto topic;
 
-    Long term;
+    TermDto term;
 
     List<StudentDto> studentList;
 }

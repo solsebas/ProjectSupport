@@ -3,14 +3,14 @@ package pl.polsl.projectsupport.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.polsl.projectsupport.dao.StudentDao;
-import pl.polsl.projectsupport.dao.StudentTeamDao;
-import pl.polsl.projectsupport.dao.TeamDao;
+import pl.polsl.projectsupport.dao.*;
 import pl.polsl.projectsupport.dto.*;
 import pl.polsl.projectsupport.enums.TeamStatus;
 import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.StudentTeamModel;
 import pl.polsl.projectsupport.model.TeamModel;
+import pl.polsl.projectsupport.model.TermModel;
+import pl.polsl.projectsupport.model.TopicModel;
 import pl.polsl.projectsupport.service.email.EmailService;
 
 import java.util.ArrayList;
@@ -23,6 +23,12 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamDao teamDao;
+
+    @Autowired
+    private TermDao termDao;
+
+    @Autowired
+    private TopicDao topicDao;
 
     @Autowired
     private StudentDao studentDao;
@@ -41,8 +47,16 @@ public class TeamServiceImpl implements TeamService {
         TeamModel teamModel = convertToModel(teamDto);
         teamModel.setStatus(TeamStatus.NEW);
         teamModel.setStudents(new ArrayList<>());
+
+        Optional<TermModel> termModel = termDao.findById(teamDto.getTerm().getId());
+        Optional<TopicModel> topicModel = topicDao.findById(teamDto.getTopic().getId());
+
+        teamModel.setTerm(termModel.get());
+        teamModel.setTopic(topicModel.get());
+
         teamDao.save(teamModel);
     }
+
 
     @Override
     public void addStudent(TeamStudentDto dto) {

@@ -19,7 +19,7 @@
         <tr *ngFor="let team of teams | filter: { id: idFilter, 'topic.topicName': topicNameFilter, term: termFilter, status: statusFilter }">
           <td>{{ team.id }}</td>
           <td>{{ team.topic?.topicName }}</td>
-          <td>{{ team.term }}</td>
+          <td>{{ team.term?.id }}</td>
           <td>{{ team.status }}</td>
           <td>
             <button class="btn btn-light" [routerLink]="[team.id?.toString()]">

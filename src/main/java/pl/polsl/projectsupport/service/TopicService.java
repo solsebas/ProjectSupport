@@ -11,4 +11,5 @@ public interface TopicService {
     public TopicModel convertToModel(TopicDto topicDto);
     public List<TopicModel> getTopics();
     public List<TopicDto> getTopicDtos();
+    List<TopicDto> getTopicDtosBySupervisorId(Long supervisorId);
 }

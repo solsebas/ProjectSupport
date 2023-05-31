@@ -1,5 +1,6 @@
 import {Topic} from "./topic";
 import {Student} from "./student";
+import {Term} from "./term";
 
 export class Team {
 
@@ -11,11 +12,13 @@ export class Team {
 
   topic?: Topic
 
-  term?: bigint
+  term?: Term
 
   studentList?: Student[]
 
-  constructor(limit: number) {
+  constructor(limit: number, term?: Term, topic?: Topic) {
     this.limit = limit;
+    this.term = term;
+    this.topic = topic;
   }
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TopicDto {
-    int id;
+    Long id;
     String topicName;
     String topicDescription;
     Long idUser;
