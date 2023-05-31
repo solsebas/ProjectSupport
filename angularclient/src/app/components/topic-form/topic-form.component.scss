@@ -53,8 +53,8 @@
 }
 .btn-add-topic {
   position: relative;
-  background-color: rgba(255,0,0,0.5);
-  border-color: rgba(182, 3, 3, 0.5);;
+  background-color: rgba(255, 213, 0, 0.5);
+  border-color: rgba(182, 146, 3, 0.5);;
 }
 
 
@@ -78,8 +78,8 @@
 }
 .btn-view-topic {
   position: relative;
-  background-color: rgba(0,255,0,0.5);
-  border-color: rgba(0, 187, 0, 0.5);
+  background-color: rgba(255, 128, 0, 0.5);
+  border-color: rgba(187, 72, 0, 0.5);
 }
 
 
@@ -101,6 +101,7 @@
   margin: min(5px, 5%);
   min-height: 180px;
   min-width: 100px;
+  max-width: 200px;
   transition: 0.5s;
   margin-bottom: 20px;
 }

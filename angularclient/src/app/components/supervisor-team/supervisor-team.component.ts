@@ -9,7 +9,10 @@ import {TeamService} from "../../services/team/team.service";
 })
 export class SupervisorTeamComponent {
   teams: Team[] = []
-
+  topicNameFilter: string = '';
+  idFilter: string = '';
+  termFilter: string = '';
+  statusFilter: string = '';
   constructor(private teamService: TeamService) {
 
     this.teamService.getSupervisorTeams().subscribe({
@@ -21,4 +24,5 @@ export class SupervisorTeamComponent {
       }
     });
   }
+
 }

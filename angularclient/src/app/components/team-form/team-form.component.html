@@ -1,12 +1,12 @@
-<div class="container w-100 justify-content-center flex p-3">
-  <h1 class="mb-4">Pulpit:</h1>
-  <div class="row w-100 "> <!--justify-content-between-->
-    <button class="button-open-menu btn-add-topic" (click)="openForAddTeam()"><h3>Dodaj zespół</h3></button>
-    <button class="button-open-menu btn-view-topic" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
+<div class="container w-100 flex p-3">
+  <h1 class="mb-4"><b>Zarządzenie zespołami</b></h1>
+  <div class="row w-100 justify-content-center"> <!--justify-content-between-->
+    <button class="button-open-menu btn-add-team" (click)="openForAddTeam()"><h3>Dodaj zespół</h3></button>
+    <button class="button-open-menu btn-view-team" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
   </div>
 </div>
 
-<<div class="form-popup" [hidden]="!showFormAddTeam">
+<div class="form-popup" [hidden]="!showFormAddTeam">
   <form class="form-form" name="topic-form" (submit)="submitTeamForm($event)">
 
     <label for="limit"><h2>Limit członków:</h2> {{ limit }}</label>
@@ -16,24 +16,8 @@
       <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formTeamValid">Dodaj</button>
       <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
     </div>
-
-    <div *ngIf="showFormAddTeam">
-      <label for="term"><h2>Kierunek i semestr:</h2></label>
-      <select id="term" name="term" [(ngModel)]="selectedTerm">
-        <option *ngFor="let term of terms" [ngValue]="term">{{ term.major }} - {{ term.termNumber }}</option>
-      </select>
-    </div>
-
-    <div *ngIf="showFormAddTeam">
-      <h2>Lista tematów prowadzącego:</h2>
-      <select id="topic" name="topic" [(ngModel)]="selectedTopic">
-        <option *ngFor="let topic of supervisorTopics" [ngValue]="topic">{{ topic.topicName }}</option>
-      </select>
-    </div>
-
   </form>
 </div>
-
 
 <div class="form-popup" [hidden]="!showFormViewTeams">
   <div class="form-form">

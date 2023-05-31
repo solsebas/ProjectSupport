@@ -1,55 +1,150 @@
-<h2>{{members.at(0)?.team?.topic?.topicName}} (limit: {{members.at(0)?.team?.limit}})</h2>
-<h5>{{members.at(0)?.team?.status}}</h5>
+<div class="row">
+  <div class="justify-content-center mt-4">
+    <button style="width: 50%;" class="btn btn-primary"(click)="navigateToSupervisorTeamMengage()"><b>Powrót</b></button>
+  </div>
+  <div class="col-md-{{ members.at(0)?.team?.status != 'CLOSED' && members.at(0)?.team?.status != 'CANCELED' ? '6' : '12' }}">
+    <div class="card border-dark m-5">
+      <div class="card-header">
+        <h1 class="card-title"><b>{{members.at(0)?.team?.topic?.topicName}}</b> <br>(limit: {{members.at(0)?.team?.limit}})</h1>
+        <h5 class="card-subtitle" [ngStyle]="{ color: getStatusColor(members.at(0)?.team?.status) }">{{members.at(0)?.team?.status}}</h5>
+      </div>
+      <div class="card-body">
 
-<button *ngIf="members.at(0)?.team?.status == 'NEW'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("ACTIVE")'>Ustaw na ACTIVE</button>
-<button *ngIf="members.at(0)?.team?.status == 'ACTIVE'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CLOSED")'>Ustaw na CLOSED</button>
-<button *ngIf="members.at(0)?.team?.status != 'CANCELED'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CANCELED")'>Ustaw na CANCELED</button>
+        <div class="m-3" *ngIf="members.at(0)?.team?.status != 'CLOSED' && members.at(0)?.team?.status != 'CANCELED'">
+          <h2 class="mb-3">
+            <b>Zmień status projektu</b>
+          </h2>
+          <button *ngIf="members.at(0)?.team?.status == 'NEW'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("ACTIVE")'>Ustaw na ACTIVE</button>
+          <button *ngIf="members.at(0)?.team?.status == 'ACTIVE'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CLOSED")'>Ustaw na CLOSED</button>
+          <button *ngIf="members.at(0)?.team?.status != 'CANCELED'" class="btn btn-primary m-2" type="button" style="min-width: 100px;" (click)='editStatus("CANCELED")'>Ustaw na CANCELED</button>
+        </div>
 
-<div *ngFor="let member of members">
-  <h3>{{member.student?.firstName}} {{member.student?.surname}}<br></h3>
-  <h4>Ocena: {{member.grade != 0 ? member.grade : "brak"}}</h4>
-  <h4>Obecności:</h4>
-  <table>
-    <thead>
-    <tr>
-      <td>Data</td>
-      <td>Obecność</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let attendance of member.attendanceList">
-      <td>{{attendance.date}}</td>
-      <td>{{attendance.present}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <hr>
+        <hr *ngIf="members.at(0)?.team?.status != 'CLOSED' && members.at(0)?.team?.status != 'CANCELED'" class="my-4">
+
+        <div class="m-3 mb-5">
+          <h2 class="mb-4 mt-3">
+            <b>Lista uczestników projektu:</b>
+          </h2>
+          <div *ngFor="let member of members">
+            <div class="card">
+              <h3 class="mt-3">
+                <b>{{member.student?.firstName}} {{member.student?.surname}}</b>
+              </h3>
+              <hr class="mx-4">
+              <h4>
+                <b>Ocena:</b>
+                {{member.grade != 0 ? member.grade : "brak"}}
+              </h4>
+              <hr class="mx-4">
+              <div class="mb-3">
+                <ng-container *ngIf="member?.attendanceList?.length !== 0 else noAttendance">
+                  <h4><b>Obecności:</b></h4>
+                  <div class="mx-5">
+                    <table class="table table-striped table-dark rounded overflow-hidden">
+                      <thead class="thead-light">
+                      <tr>
+                        <th>Data</th>
+                        <th>Obecność</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let attendance of member?.attendanceList">
+                        <td>{{ attendance?.date }}</td>
+                        <td>{{ attendance?.present ? 'obecny' : 'nieobecny' }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </ng-container>
+                <ng-template #noAttendance>
+                  <h4><b>Obecności:</b> brak</h4>
+                </ng-template>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="members.at(0)?.team?.status != 'CLOSED' && members.at(0)?.team?.status != 'CANCELED'">
+      <div class="card border-dark m-5" >
+        <div class="card-header">
+          <h2 class="card-title"><b>Dodanie oceny</b></h2>
+        </div>
+        <div class="card-body">
+          <form name="grade-form" (submit)="submitGradeForm($event)">
+            <div class="m-3">
+              <select name="graded_id" class="form-select" [(ngModel)]="graded_id" required>
+                <option value=0 disabled selected>Wybierz uczestnika</option>
+                <ng-container *ngFor="let member of members">
+                  <option *ngIf="!member.grade" [value]="member.id">{{ member.student.firstName }} {{ member.student.surname }}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="grade" class="form-label">Ocena:</label>
+              <input type="range" class="form-range" min="2" max="5" step="1" id="grade" name="grade" [(ngModel)]="grade" required>
+              <label for="grade">{{ grade }}</label>
+            </div>
+            <button class="btn btn-primary m-2" [disabled]="graded_id.toString() === '0'" type="submit" style="min-width: 200px;">Dodaj ocenę</button>
+            <div class="alert alert-info" *ngIf="messageAdd!=''">
+              {{ messageAdd }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card border-dark m-5">
+        <div class="card-header">
+          <h2 class="card-title"><b>Dodanie obecności</b></h2>
+        </div>
+        <div class="card-body">
+
+          <form name="attendance-form" (submit)="submitAttendanceForm($event)">
+            <div class="m-3 mb-5" style="position:relative; left:4px;">
+              <select name="attendant_id" class="form-select" [(ngModel)]="attendant_id" required>
+                <option value=0 disabled selected>Wybierz uczestnika</option>
+                <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-md-6 justify-content-end" style="width: 20%; position: relative; top:4px; ">
+                <div class="mb-3">
+                  <label for="date" class="form-label"><h5>Data:</h5></label>
+                </div>
+              </div>
+              <div class="col-md-6" style="width: 80%">
+                <div class="mb-3">
+                  <input type="date" id="date" name="date" [(ngModel)]="date"  class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="attendance" class="form-label"><h5><b>{{ attendance ? 'Obecny' : 'Nieobecny' }}</b>&nbsp;
+                <input type="checkbox" id="attendance" name="attendance" [(ngModel)]="attendance" class="form-check-input">
+              </h5></label>
+            </div>
+            <button class="btn btn-primary m-2" [disabled]="attendant_id.toString() === '0' || date === ''" type="submit" style="min-width: 200px;">Dodaj obecność</button>
+            <div class="alert alert-info" *ngIf="messageAddAttendacne!=''">
+              {{ messageAddAttendacne }}
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+  <div class="justify-content-center">
+    <button style="width: 50%;" class="btn btn-primary"(click)="navigateToSupervisorTeamMengage()"><b>Powrót</b></button>
+  </div>
+
 </div>
 
-<h4>Dodaj Ocene:</h4>
-<form name="grade-form" (submit)="submitGradeForm($event)">
 
-  <select name="graded_id" [(ngModel)]="graded_id">
-    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
-  </select>
-  <label for="grade"><h5>Ocena:</h5> {{ grade }}</label>
-  <input type="range" min="2" max="5" step="1" id="grade" name="grade" placeholder="Ocena" [(ngModel)]="grade" required>
 
-  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
 
-</form>
 
-<form name="attendance-form" (submit)="submitAttendanceForm($event)">
 
-  <select name="graded_id" [(ngModel)]="attendant_id">
-    <option *ngFor="let member of members" label="{{member.student.firstName}} {{member.student.surname}}" [value]="member.id">
-  </select>
-  <label for="date"><h5>Data:</h5> {{ date }}</label>
-  <input type="date" id="date" name="date" [(ngModel)]="date">
 
-  <label for="attendance"><h5>Obecny:</h5> {{ attendance }}</label>
-  <input type="checkbox" id="attendance" name="attendance" [(ngModel)]="attendance">
 
-  <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;">Dodaj</button>
-
-</form>
