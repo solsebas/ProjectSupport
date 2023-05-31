@@ -11,3 +11,4 @@ public interface SupervisorDao extends JpaRepository<SupervisorModel, Long> {
     @Query(value = "select * from supervisor s where s.user_id = :id" , nativeQuery = true)
     public SupervisorModel findSupervisor(@Param("id") Long idUser);
 }
+
