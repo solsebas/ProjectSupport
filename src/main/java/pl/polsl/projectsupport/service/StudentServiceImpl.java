@@ -20,6 +20,11 @@ public class StudentServiceImpl implements StudentService {
     private ModelMapper modelMapper;
 
     @Override
+    public void create(StudentModel studentModel) {
+        studentDao.save(studentModel);
+    }
+
+    @Override
     public StudentDto convertToDto(StudentModel studentModel) {
         StudentDto studentDto = modelMapper.map(studentModel, StudentDto.class);
         return studentDto;
@@ -27,7 +32,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentModel convertToModel(StudentDto studentDto) {
-        //todo: implement if needed
         return null;
     }
 

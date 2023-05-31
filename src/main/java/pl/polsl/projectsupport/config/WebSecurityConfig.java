@@ -17,13 +17,11 @@ import pl.polsl.projectsupport.JSONWebToken.AuthEntryPointJwt;
 import pl.polsl.projectsupport.JSONWebToken.AuthTokenFilter;
 import pl.polsl.projectsupport.service.UserDetailsServiceImpl;
 
+import org.springframework.http.HttpMethod;
 import javax.servlet.Filter;
 
 @Configuration
-@EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
-        prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
@@ -69,14 +67,24 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/logout").permitAll()
+                .antMatchers("/api/public/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/teams/member").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/teams/student").permitAll()
+                .antMatchers("/api/student/**").permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
+
                 .antMatchers("/api/auth/signup").hasRole("ADMIN")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/student/**").hasAnyRole("STUDENT", "ADMIN","SUPERVISOR")
-                .antMatchers("/api/supervisor/**").hasAnyRole("SUPERVISOR", "ADMIN")
-                .antMatchers("/api/topics/**").permitAll() // todo
-                .antMatchers("/api/teams/**").permitAll() // todo
-                .antMatchers("/api/public/**").permitAll()
+
+                .antMatchers("/api/attendances/**").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers("/api/teams").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers("/api/teams/supervisor").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers(HttpMethod.POST,"/api/teams/member/**").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers("/api/teams/status/**").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers(HttpMethod.POST,"/api/teams/student").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers("/api/teams/members").hasAnyRole( "ADMIN","SUPERVISOR")
+                .antMatchers("/api/topics/**").hasAnyRole( "ADMIN","SUPERVISOR")
+
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

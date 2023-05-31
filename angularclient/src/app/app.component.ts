@@ -13,6 +13,7 @@ export class AppComponent {
   username?: string;
   showAdminBoard = false;
   showModeratorBoard = false;
+  title: string = 'ProjectSupport';
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
 
@@ -29,8 +30,5 @@ export class AppComponent {
       this.username = user.username;
     }
   }
-
-
-
 
 }

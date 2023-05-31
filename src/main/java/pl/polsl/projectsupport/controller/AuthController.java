@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,11 +16,13 @@ import pl.polsl.projectsupport.dao.UserDao;
 import pl.polsl.projectsupport.dto.SupervisorDto;
 import pl.polsl.projectsupport.enums.EnumRole;
 import pl.polsl.projectsupport.model.RoleModel;
+import pl.polsl.projectsupport.model.StudentModel;
 import pl.polsl.projectsupport.model.UserModel;
-import pl.polsl.projectsupport.payload.request.LoginRequest;
-import pl.polsl.projectsupport.payload.request.RegisterRequest;
-import pl.polsl.projectsupport.payload.response.JwtResponse;
-import pl.polsl.projectsupport.payload.response.MessageResponse;
+import pl.polsl.projectsupport.dto.LoginRequestDto;
+import pl.polsl.projectsupport.dto.RegisterRequestDto;
+import pl.polsl.projectsupport.dto.JwtResponseDto;
+import pl.polsl.projectsupport.dto.MessageResponseDto;
+import pl.polsl.projectsupport.service.StudentService;
 import pl.polsl.projectsupport.service.SupervisorService;
 import pl.polsl.projectsupport.service.UserDetailsImpl;
 
@@ -50,6 +53,10 @@ public class AuthController {
     SupervisorService supervisorService;
 
     @Autowired
+    StudentService studentService;
+
+
+    @Autowired
     RoleDao roleRepository;
 
     @Autowired
@@ -65,7 +72,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -76,17 +83,18 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequestDto signUpRequest) {
         if (userDao.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: nazwa użytkownika jest już zajęta!"));
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: nazwa użytkownika jest już zajęta!"));
         }
 
         if (userDao.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: e-mail jest już używany!"));
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: e-mail jest już używany!"));
         }
 
         // Create new user's account
@@ -101,23 +109,19 @@ public class AuthController {
         } else {
             switch (strRoles) {
                 case "admin":
-                    RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(adminRole);
 
                     break;
                 case "student":
-                    RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(modRole);
 
                     break;
                 default:
-                    RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
-                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
                     roles.add(userRole);
             }
-
         }
 
         user.setRoles(roles);
@@ -125,12 +129,28 @@ public class AuthController {
 
         UserModel userModel = userDao.findUserByName(signUpRequest.getUsername());
 
-        SupervisorDto supervisorDto = new SupervisorDto();
-        supervisorDto.setFirstname(signUpRequest.getFirstname());
-        supervisorDto.setSurname(signUpRequest.getSurname());
-        supervisorDto.setUser(userModel);
-        supervisorService.create(supervisorDto);
 
-        return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie!"));
+        if (strRoles != null) {
+            switch (strRoles) {
+                case "student":
+                    StudentModel studentModel = new StudentModel();
+                    studentModel.setId(null);
+                    studentModel.setFirstName(signUpRequest.getFirstname());
+                    studentModel.setSurname(signUpRequest.getSurname());
+                    studentModel.setUser(userModel);
+                    studentService.create(studentModel);
+                    break;
+                default:
+                    SupervisorDto supervisorDto = new SupervisorDto();
+                    supervisorDto.setFirstname(signUpRequest.getFirstname());
+                    supervisorDto.setSurname(signUpRequest.getSurname());
+                    supervisorDto.setUser(userModel);
+                    supervisorService.create(supervisorDto);
+            }
+        }
+
+
+
+        return ResponseEntity.ok(new MessageResponseDto("Użytkownik zarejestrowany pomyślnie!"));
     }
 }

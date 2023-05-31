@@ -1,7 +1,8 @@
 ﻿<div class="col-md-12">
   <div class="card card-container">
     <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <h2 class="mt-3" *ngIf="!isLoggedIn">Logowanie</h2>
+    <form class="m-3" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group m-2">
         <input placeholder="Nazwa użytkownika" type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }"/>
         <div *ngIf="username.errors && f.submitted" class="invalid-feedback">Wymagana jest nazwa użytkownika!</div>
