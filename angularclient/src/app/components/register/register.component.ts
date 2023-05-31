@@ -18,7 +18,11 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  userRole: string = "";
+
+
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
@@ -26,7 +30,8 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const { username, email, password, firstname, surname } = this.form;
 
-    this.authService.register(username, email, password, firstname, surname).subscribe({
+
+    this.authService.register(username, email, password, firstname, surname, this.userRole).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;

@@ -8,6 +8,7 @@
   display: block;
   transition: .7s all ease;
   overflow: hidden;
+  min-width: 300px;
 }
 
 #sideNavbar.hidden {
@@ -57,6 +58,4 @@
     color: red;
     padding-bottom: 20px;
   }
-
-
 }

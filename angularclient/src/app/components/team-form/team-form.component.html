@@ -1,8 +1,8 @@
-<div class="container w-100 justify-content-center flex p-3">
-  <h1 class="mb-4">Pulpit:</h1>
-  <div class="row w-100 "> <!--justify-content-between-->
-    <button class="button-open-menu btn-add-topic" (click)="openForAddTeam()"><h3>Dodaj zespół</h3></button>
-    <button class="button-open-menu btn-view-topic" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
+<div class="container w-100 flex p-3">
+  <h1 class="mb-4"><b>Zarządzenie zespołami</b></h1>
+  <div class="row w-100 justify-content-center"> <!--justify-content-between-->
+    <button class="button-open-menu btn-add-team" (click)="openForAddTeam()"><h3>Dodaj zespół</h3></button>
+    <button class="button-open-menu btn-view-team" (click)="openForViewTeam()"><h3>Pokaż listę zespołów</h3></button>
   </div>
 </div>
 
@@ -16,13 +16,6 @@
       <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formTeamValid">Dodaj</button>
       <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
     </div>
-
-<!--    <div class="alert alert-success" role="alert" *ngIf="messageAdd.substring(0,4) == 'Tema' && messageAdd">-->
-<!--      {{ messageAdd }}-->
-<!--    </div>-->
-<!--    <div class="alert alert-danger" role="alert" *ngIf="messageAdd.substring(0,4) == 'Błąd' && messageAdd"> &lt;!&ndash;&ndash;&gt;-->
-<!--      {{ messageAdd }}-->
-<!--    </div>-->
   </form>
 </div>
 

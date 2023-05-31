@@ -92,33 +92,32 @@ public class AuthController {
         // Create new user's account
         UserModel user = new UserModel(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
+        String strRoles = signUpRequest.getRole();
         Set<RoleModel> roles = new HashSet<>();
 
         if (strRoles == null) {
             RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR).orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
             roles.add(userRole);
         } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
-                        roles.add(adminRole);
+            switch (strRoles) {
+                case "admin":
+                    RoleModel adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    roles.add(adminRole);
 
-                        break;
-                    case "student":
-                        RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
-                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
-                        roles.add(modRole);
+                    break;
+                case "student":
+                    RoleModel modRole = roleRepository.findByName(EnumRole.ROLE_STUDENT)
+                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    roles.add(modRole);
 
-                        break;
-                    default:
-                        RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
-                        roles.add(userRole);
-                }
-            });
+                    break;
+                default:
+                    RoleModel userRole = roleRepository.findByName(EnumRole.ROLE_SUPERVISOR)
+                            .orElseThrow(() -> new RuntimeException("Error: Nie znaleziono roli."));
+                    roles.add(userRole);
+            }
+
         }
 
         user.setRoles(roles);

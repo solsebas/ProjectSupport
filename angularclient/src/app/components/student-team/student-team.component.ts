@@ -9,7 +9,10 @@ import {TeamService} from "../../services/team/team.service";
 })
 export class StudentTeamComponent {
   teams: Team[] = []
-
+  topicNameFilter: string = '';
+  idFilter: string = '';
+  termFilter: string = '';
+  statusFilter: string = '';
   constructor(private teamService: TeamService) {
 
     this.teamService.getStudentsTeams().subscribe({
