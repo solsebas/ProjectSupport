@@ -20,44 +20,12 @@ public class TeamController {
     private final TeamService teamService;
 
 
-    //region TeamService Implementation
+    //region ADMIN and SUPERVISOR
     //---------------------------------------------------------------------------------------
     @GetMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public List<TeamDto> getTeams() {
         return teamService.getTeamDtos();
-    }
-
-    @GetMapping("/student")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
-    public List<TeamDto> getTeamsForStudent(@RequestParam Long id) {
-        return teamService.getTeamDtosByStudent(id);
-    }
-
-    @GetMapping("/member")
-    public StudentTeamDto getTeamMember(@RequestParam Long userId, @RequestParam Long teamId){
-        return teamService.getStudentTeamDto(userId, teamId);
-    }
-
-    @PutMapping("/member/{id}")
-    public StudentTeamDto editStudentTeam(@RequestBody StudentTeamDto studentTeamDto, @PathVariable Long id){
-        return teamService.editStudentTeamDto(studentTeamDto, id);
-    }
-
-    @PutMapping("/status/{id}")
-    public TeamDto editTeam(@RequestBody TeamDto teamDto, @PathVariable Long id){
-        return teamService.editTeamDto(teamDto, id);
-    }
-
-    @GetMapping("/supervisor")
-//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
-    public List<TeamDto> getTeamsForSupervisor(@RequestParam Long id) {
-        return teamService.getTeamDtosBySupervisor(id);
-    }
-
-    @GetMapping("/members")
-    public List<StudentTeamDto> getTeamMembers(@RequestParam Long teamId){
-        return teamService.getTeamMemberDtos(teamId);
     }
 
     @PostMapping("")
@@ -66,12 +34,49 @@ public class TeamController {
         teamService.create(teamDto);
     }
 
-    @PostMapping("/student")
+    @GetMapping("/supervisor")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public List<TeamDto> getTeamsForSupervisor(@RequestParam Long id) {
+        return teamService.getTeamDtosBySupervisor(id);
+    }
+
+    @PutMapping("/member/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public StudentTeamDto editStudentTeam(@RequestBody StudentTeamDto studentTeamDto, @PathVariable Long id){
+        return teamService.editStudentTeamDto(studentTeamDto, id);
+    }
+
+    @PutMapping("/status/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public TeamDto editTeam(@RequestBody TeamDto teamDto, @PathVariable Long id){
+        return teamService.editTeamDto(teamDto, id);
+    }
+
+    @PostMapping("/student")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
     public void addStudent(@RequestBody TeamStudentDto dto){
         teamService.addStudent(dto);
     }
+
+    @GetMapping("/members")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public List<StudentTeamDto> getTeamMembers(@RequestParam Long teamId){
+        return teamService.getTeamMemberDtos(teamId);
+    }
+
     //---------------------------------------------------------------------------------------
     //endregion
+
+    @GetMapping("/member")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR') or hasRole('STUDENT')")
+    public StudentTeamDto getTeamMember(@RequestParam Long userId, @RequestParam Long teamId){
+        return teamService.getStudentTeamDto(userId, teamId);
+    }
+
+    @GetMapping("/student")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
+    public List<TeamDto> getTeamsForStudent(@RequestParam Long id) {
+        return teamService.getTeamDtosByStudent(id);
+    }
 
 }

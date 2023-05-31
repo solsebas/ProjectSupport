@@ -1,11 +1,11 @@
-package pl.polsl.projectsupport.payload.response;
+package pl.polsl.projectsupport.dto;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class JwtResponse {
+public class JwtResponseDto {
     private String token;
     private String type = "Bearer";
     private Long id;
@@ -13,7 +13,7 @@ public class JwtResponse {
     private String email;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+    public JwtResponseDto(String accessToken, Long id, String username, String email, List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;

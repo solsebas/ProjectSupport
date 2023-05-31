@@ -1,5 +1,3 @@
-
-
 <div class="container w-100 flex p-3">
   <h1 class="mb-4"><b>Zarządzanie tematami projektów</b></h1>
   <div class="row w-100 justify-content-center"> <!--justify-content-between-->
@@ -7,10 +5,6 @@
     <button class="button-open-menu btn-view-topic" (click)="openFormViewTopic()"><h3>Pokaż listę tematów</h3></button>
   </div>
 </div>
-
-
-
-
 
 <div class="form-popup" [hidden]="!showFormAddTopics">
   <form class="form-form" name="topic-form"(submit)="submitForm($event)">
@@ -61,10 +55,7 @@
       <button type="button" class="btn btn-primary m-2" (click)="showTopics()">Odśwież listę tematów</button>
       <button type="button" class="btn btn-danger m-2" (click)="closeFormViewTopic()">Anuluj</button>
     </div>
-
   </div>
-
-
 </div>
 
 

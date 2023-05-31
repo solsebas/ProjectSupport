@@ -18,11 +18,7 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
 
     @Override
-    public void create(UserDto userDto) {
-
-    }
-
-
+    public void create(UserDto userDto) {}
 
     @Override
     public UserDto convertToDto(UserModel userModel) {

@@ -22,21 +22,12 @@ public class StudentController {
     //region StudentService Implementation
     //---------------------------------------------------------------------------------------
     @GetMapping("/students")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT') or hasRole('SUPERVISOR')")
     public List<StudentDto> getStudents(){
         return studentService.getStudentDtos();
     }
     //---------------------------------------------------------------------------------------
     //endregion
 
-
-    //region user Implementation
-    //---------------------------------------------------------------------------------------
-    @GetMapping("/userBoard")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
-    public String studentUserAccess() {
-        return "STUDENT user content";
-    }
-    //---------------------------------------------------------------------------------------
-    //endregion
 
 }
