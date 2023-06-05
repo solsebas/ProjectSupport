@@ -12,6 +12,7 @@ export class TopicFormComponent {
 
   topicName = '';
   topicDescription = '';
+  archieve=false;
   showFormAddTopics = false; // czy ma być wyświetlone formularz do dodawania tematów
   showFormViewTopics = false; // czy ma być wyświetlone formularz do wyświetlania tematów
 
@@ -21,6 +22,7 @@ export class TopicFormComponent {
 
   showTopicsList = false;
   topics: Topic[] = [];
+  filteredTopics: Topic[] = [];
 
 
   constructor(private topicService: TopicService) {
@@ -53,13 +55,14 @@ export class TopicFormComponent {
   }
 
   submitForm(event: Event) {
-    let topic: Topic = new Topic(this.topicName, this.topicDescription);
+    let topic: Topic = new Topic(this.topicName, this.topicDescription, this.archieve);
     event.preventDefault();
     if (this.validateForm()) {
       this.topicService.createTopic(topic).subscribe({
         next: data => {
           this.topicName;
           this.topicDescription;
+          this.archieve = false;
           console.log(data);
           this.messageAdd = 'Temat dodany poprawnie!';
           this.closeFormAddTopic();
@@ -84,6 +87,7 @@ export class TopicFormComponent {
       next: data => {
         console.log(data);
         this.topics = data;
+        this.filteredTopics = this.topics.filter(topic => !topic.archieve);
       },
       error: err => {
         console.error(err);
@@ -97,6 +101,18 @@ export class TopicFormComponent {
       this.showFormAddTopics = false;
       this.showFormViewTopics = false;
     }
+  }
+
+  changeArchieve(topic: Topic) {
+    topic.archieve = true;
+    this.topicService.updateTopic(topic).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
   }
 
 }

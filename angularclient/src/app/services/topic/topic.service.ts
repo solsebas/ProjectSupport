@@ -40,4 +40,10 @@ export class TopicService {
     const headers = this.getHeaderWithToken();
     return this.http.get<Topic[]>(API_TOPICS_URL + 'topicsS', { headers, params: queryParams });
   }
+
+  updateTopic(topic: Topic): Observable<any> {
+    const headers = this.getHeaderWithToken();
+    return this.http.put(API_TOPICS_URL + topic.id, topic, { headers });
+  }
+
 }

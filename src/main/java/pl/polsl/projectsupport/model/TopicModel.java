@@ -19,6 +19,8 @@ public class TopicModel {
 
     String description;
 
+    boolean archieve = false;
+
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
     SupervisorModel supervisor;

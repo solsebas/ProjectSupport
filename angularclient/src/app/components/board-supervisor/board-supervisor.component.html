@@ -128,13 +128,19 @@
         <tr>
           <th scope="col">Nazwa tematu</th>
           <th scope="col">Opis tematu</th>
+          <th scope="col">Archiwum</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let topic of topics">
-          <td>{{ topic.topicName }}</td>
-          <td>{{ topic.topicDescription }}</td>
-        </tr>
+        <ng-container *ngFor="let topic of filteredTopics">
+          <tr *ngIf="!topic.archieve">
+            <td>{{ topic.topicName }}</td>
+            <td>{{ topic.topicDescription }}</td>
+            <td>{{ topic.archieve }}</td>
+            <td><button class="btn btn-primary" (click)="changeArchieve(topic)">Zmień</button></td>
+          </tr>
+        </ng-container>
         </tbody>
       </table>
     </div>

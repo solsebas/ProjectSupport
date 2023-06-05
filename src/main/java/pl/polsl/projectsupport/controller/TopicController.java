@@ -33,4 +33,11 @@ public class TopicController {
     public List<TopicDto> getTopicsBySupervisorId(@RequestParam Long supervisorId) {
         return topicService.getTopicDtosBySupervisorId(supervisorId);
     }
+
+    @PutMapping("/{topicId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPERVISOR')")
+    public void updateTopic(@PathVariable Long topicId, @RequestBody TopicDto topicDto) {
+        topicService.updateArchieve(topicId, topicDto);
+    }
+
 }
