@@ -50,7 +50,7 @@
             <span *ngFor="let student of team.studentList">
             {{student.firstName + ' ' + student.surname}} <br/>
             </span>
-            <button (click)="openForAddStudent(team.id?team.id:teamId)" class="btn-add-stud" *ngIf="team.studentList?.length != team.limit">+</button>
+            <button (click)="openForAddStudent(team)" class="btn-add-stud" *ngIf="team.studentList?.length != team.limit">+</button>
           </td>
         </tr>
         </tbody>

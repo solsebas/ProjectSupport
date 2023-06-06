@@ -46,4 +46,13 @@ public class StudentServiceImpl implements StudentService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<StudentDto> getStudentsByTerm(Long termId) {
+        List<StudentModel> students = studentDao.findStudentTerm(termId);
+        return students.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
 }

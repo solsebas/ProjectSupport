@@ -46,6 +46,7 @@ export class BoardSupervisorComponent implements OnInit {
   showTopicsList = false;
   topics: Topic[] = [];
   filteredTopics: Topic[] = [];
+  termId: bigint = BigInt(0);
 
   constructor(private teamService: TeamService, private studentService: StudentService, private topicService: TopicService, private router: Router) {
     this.teamService.getTeams().subscribe({
@@ -90,9 +91,14 @@ export class BoardSupervisorComponent implements OnInit {
     this.showFormAddTeam = false;
   }
 
-  openForAddStudent(teamId: bigint) {
-    this.teamId = teamId
-    this.showStudents()
+  openForAddStudent(team: Team) {
+    const teamId = team?.id || this.teamId;
+    const termId = team?.term?.id || this.termId;
+
+    this.teamId = teamId;
+    this.termId = termId as bigint;
+
+    this.showStudents();
     this.showStudentList = true;
   }
 
@@ -101,7 +107,7 @@ export class BoardSupervisorComponent implements OnInit {
   }
 
   showStudents() {
-    this.studentService.getStudents().subscribe({
+    this.studentService.getStudentsByTerm(this.termId).subscribe({
       next: data => {
         console.log(data);
         this.students = data;

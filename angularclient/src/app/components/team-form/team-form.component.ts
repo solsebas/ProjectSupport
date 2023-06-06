@@ -34,7 +34,7 @@ export class TeamFormComponent {
   formTeamValid = false;
   formStudentValid = false;
   messageAdd = '';
-
+  termId: bigint = BigInt(0);
 
   constructor(private teamService: TeamService, private studentService: StudentService, private termService: TermService, private topicService: TopicService ) {
     this.teamService.getTeams().subscribe({
@@ -82,18 +82,25 @@ export class TeamFormComponent {
     this.showFormAddTeam = false;
   }
 
-  openForAddStudent(teamId: bigint) {
-    this.teamId = teamId
-    this.showStudents()
+  openForAddStudent(team: Team) {
+    const teamId = team?.id || this.teamId;
+    const termId = team?.term?.id || this.termId;
+
+    this.teamId = teamId;
+    this.termId = termId as bigint;
+
+    this.showStudents();
     this.showStudentList = true;
   }
+
+
 
   closeFormAddStudent(){
     this.showStudentList = false;
   }
 
   showStudents() {
-    this.studentService.getStudents().subscribe({
+    this.studentService.getStudentsByTerm(this.termId).subscribe({
       next: data => {
         console.log(data);
         this.students = data;
