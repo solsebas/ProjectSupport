@@ -67,4 +67,11 @@ public class TopicServiceImpl implements TopicService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void updateArchieve(Long topicId, TopicDto topicDto) {
+        TopicModel topicModel = topicDao.findById(topicId).orElseThrow(() -> new IllegalArgumentException("Invalid topic ID"));
+        topicModel.setArchieve(topicDto.isArchieve());
+        topicDao.save(topicModel);
+    }
+
 }

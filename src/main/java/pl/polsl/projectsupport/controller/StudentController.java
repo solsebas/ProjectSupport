@@ -2,10 +2,7 @@ package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.StudentDto;
 import pl.polsl.projectsupport.service.StudentService;
 
@@ -29,5 +26,11 @@ public class StudentController {
     //---------------------------------------------------------------------------------------
     //endregion
 
+    @GetMapping("/studentsT/{termId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT') or hasRole('SUPERVISOR')")
+    @ResponseBody
+    public List<StudentDto> getStudentsByTerm(@PathVariable("termId") Long termId) {
+        return studentService.getStudentsByTerm(termId);
+    }
 
 }

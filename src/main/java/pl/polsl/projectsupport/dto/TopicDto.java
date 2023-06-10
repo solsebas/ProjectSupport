@@ -8,4 +8,5 @@ public class TopicDto {
     String topicName;
     String topicDescription;
     Long idUser;
+    boolean archieve;
 }

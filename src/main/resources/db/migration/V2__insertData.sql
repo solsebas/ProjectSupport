@@ -29,12 +29,12 @@ INSERT INTO public.supervisor(first_name, surname, user_id) VALUES ('Gabriel', '
 
 
 -- TOPIC TABLE --
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('Android app', 1, 'Aplikacja która ma być napisana na androida');            -- TOPIC_ID 1
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('iOS app', 1, 'Aplikacja która ma być napisana na iOS');                     -- TOPIC_ID 2
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('Android i iOS app', 1, 'Aplikajca która ma działać na androidzie i iOS');   -- TOPIC_ID 3
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('Z80', 2, 'Obsługa przerwań w procesorze Z80');                              -- TOPIC_ID 4
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('8051', 2, 'Obsługa przerwań w procesorze 8051');                            -- TOPIC_ID 5
-INSERT INTO public.topic(name, supervisor_id, description) VALUES ('Liczniki i dzielnkiki', 2, 'Licznik mod7 oraz mod10');                      -- TOPIC_ID 6
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('Android app', 1, 'Aplikacja która ma być napisana na androida',false);            -- TOPIC_ID 1
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('iOS app', 1, 'Aplikacja która ma być napisana na iOS',false);                     -- TOPIC_ID 2
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('Android i iOS app', 1, 'Aplikajca która ma działać na androidzie i iOS',false);   -- TOPIC_ID 3
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('Z80', 2, 'Obsługa przerwań w procesorze Z80',false);                              -- TOPIC_ID 4
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('8051', 2, 'Obsługa przerwań w procesorze 8051',false);                            -- TOPIC_ID 5
+INSERT INTO public.topic(name, supervisor_id, description, archieve) VALUES ('Liczniki i dzielnkiki', 2, 'Licznik mod7 oraz mod10',false);                      -- TOPIC_ID 6
 
 
 

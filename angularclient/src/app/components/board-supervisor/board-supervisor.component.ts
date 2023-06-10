@@ -35,6 +35,7 @@ export class BoardSupervisorComponent implements OnInit {
 
   topicName = '';
   topicDescription = '';
+  archieve=false;
   showFormAddTopics = false; // czy ma być wyświetlone formularz do dodawania tematów
   showFormViewTopics = false; // czy ma być wyświetlone formularz do wyświetlania tematów
 
@@ -44,7 +45,8 @@ export class BoardSupervisorComponent implements OnInit {
 
   showTopicsList = false;
   topics: Topic[] = [];
-
+  filteredTopics: Topic[] = [];
+  termId: bigint = BigInt(0);
 
   constructor(private teamService: TeamService, private studentService: StudentService, private topicService: TopicService, private router: Router) {
     this.teamService.getTeams().subscribe({
@@ -89,9 +91,14 @@ export class BoardSupervisorComponent implements OnInit {
     this.showFormAddTeam = false;
   }
 
-  openForAddStudent(teamId: bigint) {
-    this.teamId = teamId
-    this.showStudents()
+  openForAddStudent(team: Team) {
+    const teamId = team?.id || this.teamId;
+    const termId = team?.term?.id || this.termId;
+
+    this.teamId = teamId;
+    this.termId = termId as bigint;
+
+    this.showStudents();
     this.showStudentList = true;
   }
 
@@ -100,7 +107,7 @@ export class BoardSupervisorComponent implements OnInit {
   }
 
   showStudents() {
-    this.studentService.getStudents().subscribe({
+    this.studentService.getStudentsByTerm(this.termId).subscribe({
       next: data => {
         console.log(data);
         this.students = data;
@@ -179,13 +186,14 @@ export class BoardSupervisorComponent implements OnInit {
   }
 
   submitFormTopic(event: Event) {
-    let topic: Topic = new Topic(this.topicName, this.topicDescription);
+    let topic: Topic = new Topic(this.topicName, this.topicDescription, this.archieve);
     event.preventDefault();
     if (this.validateFormTopic()) {
       this.topicService.createTopic(topic).subscribe({
         next: data => {
           this.topicName;
           this.topicDescription;
+          this.archieve;
           console.log(data);
           this.messageAddTopic = 'Temat dodany poprawnie!';
           this.closeFormAddTopic();
@@ -211,10 +219,23 @@ export class BoardSupervisorComponent implements OnInit {
       next: data => {
         console.log(data);
         this.topics = data;
+        this.filteredTopics = this.topics.filter(topic => !topic.archieve);
       },
       error: err => {
         console.error(err);
         this.messageView = 'Nie udało się pobrać tematów.';
+      }
+    });
+  }
+
+  changeArchieve(topic: Topic) {
+    topic.archieve = true;
+    this.topicService.updateTopic(topic).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => {
+        console.error(err);
       }
     });
   }

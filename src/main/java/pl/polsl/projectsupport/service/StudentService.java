@@ -11,4 +11,6 @@ public interface StudentService {
     public StudentModel convertToModel(StudentDto studentDto);
     public List<StudentModel> getStudents();
     public List<StudentDto> getStudentDtos();
+
+    List<StudentDto> getStudentsByTerm(Long termId);
 }
