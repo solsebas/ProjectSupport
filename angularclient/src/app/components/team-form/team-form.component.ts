@@ -31,7 +31,7 @@ export class TeamFormComponent {
 
   teamId: bigint = BigInt(0);
 
-  formTeamValid = false;
+  formTeamValid: false | null | Topic = false;
   formStudentValid = false;
   messageAdd = '';
   termId: bigint = BigInt(0);
@@ -83,11 +83,8 @@ export class TeamFormComponent {
   }
 
   openForAddStudent(team: Team) {
-    const teamId = team?.id || this.teamId;
-    const termId = team?.term?.id || this.termId;
-
-    this.teamId = teamId;
-    this.termId = termId as bigint;
+    this.teamId = team?.id || this.teamId;
+    this.termId = (team?.term?.id || this.termId) as bigint;
 
     this.showStudents();
     this.showStudentList = true;
@@ -124,7 +121,7 @@ export class TeamFormComponent {
     })
   }
   validateForm() {
-    return this.formTeamValid = this.limit > 0 && this.limit < 7
+    return this.formTeamValid = this.limit > 0 && this.limit < 7 && this.selectedTerm && this.selectedTopic;
   }
 
   submitTeamForm(event: Event) {

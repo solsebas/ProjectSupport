@@ -8,6 +8,8 @@ import {StudentService} from "../../services/student/student.service";
 import {Topic} from "../../models/topic";
 import {TopicService} from "../../services/topic/topic.service";
 import {Router} from "@angular/router";
+import {Term} from "../../models/term";
+import {TermService} from "../../services/term/term.service";
 
 @Component({
   selector: 'app-board-supervisor',
@@ -28,11 +30,13 @@ export class BoardSupervisorComponent implements OnInit {
   teamId: bigint = BigInt(0);
 
 
-  formTeamValid = false;
+  formTeamValid: false | null | Topic = false;
   formStudentValid = false;
   messageAddTeam = '';
-
-
+  terms: Term[] = [];
+  supervisorTopics: Topic[] = [];
+  selectedTerm: Term | null = null;
+  selectedTopic: Topic | null = null;
   topicName = '';
   topicDescription = '';
   archieve=false;
@@ -48,10 +52,28 @@ export class BoardSupervisorComponent implements OnInit {
   filteredTopics: Topic[] = [];
   termId: bigint = BigInt(0);
 
-  constructor(private teamService: TeamService, private studentService: StudentService, private topicService: TopicService, private router: Router) {
+  constructor(private teamService: TeamService, private studentService: StudentService, private termService: TermService, private topicService: TopicService, private router: Router) {
     this.teamService.getTeams().subscribe({
       next: data => {
         this.teams = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+
+    this.termService.getTerms().subscribe({
+      next: data => {
+        this.terms = data;
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+
+    this.topicService.getTopicsSupervisor().subscribe({
+      next: data => {
+        this.supervisorTopics = data;
       },
       error: err => {
         console.error(err);
@@ -79,6 +101,39 @@ export class BoardSupervisorComponent implements OnInit {
     this.showFormViewTeams = true;
   }
 
+  validateForm() {
+    return this.formTeamValid = this.limit > 0 && this.limit < 7 && this.selectedTerm && this.selectedTopic;
+  }
+
+  submitTeamForm(event: Event) {
+    event.preventDefault();
+
+    if (this.selectedTerm && this.selectedTopic) {
+      const team: Team = new Team(this.limit);
+      team.term = this.selectedTerm;
+      team.topic = this.selectedTopic;
+
+      if (this.validateForm()) {
+        this.teamService.createTeam(team).subscribe({
+          next: data => {
+            this.limit = 1;
+            console.log(data);
+            this.messageAddTeam = 'Zespół dodany poprawnie!';
+
+            if (team.topic) {
+              team.topic.idUser = this.selectedTopic?.idUser;
+            }
+            this.closeFormAddTeam();
+          },
+          error: err => {
+            console.error(err);
+            this.messageAddTeam = 'Błąd przy dodawaniu zespołu';
+          }
+        });
+      }
+    }
+  }
+
   closeFormViewTeam(){
     this.showFormViewTeams = false;
   }
@@ -92,11 +147,8 @@ export class BoardSupervisorComponent implements OnInit {
   }
 
   openForAddStudent(team: Team) {
-    const teamId = team?.id || this.teamId;
-    const termId = team?.term?.id || this.termId;
-
-    this.teamId = teamId;
-    this.termId = termId as bigint;
+    this.teamId = team?.id || this.teamId;
+    this.termId = (team?.term?.id || this.termId) as bigint;
 
     this.showStudents();
     this.showStudentList = true;
@@ -129,28 +181,6 @@ export class BoardSupervisorComponent implements OnInit {
         console.error(err);
       }
     })
-  }
-  validateFormTeam() {
-    return this.formTeamValid = this.limit > 0 && this.limit < 7
-  }
-
-  submitTeamFormTeam(event: Event) {
-    let team: Team = new Team(this.limit);
-    event.preventDefault();
-    if (this.validateFormTeam()) {
-      this.teamService.createTeam(team).subscribe({
-        next: data => {
-          this.limit = 1;
-          console.log(data);
-          this.messageAddTeam = 'Zespół dodany poprawnie!';
-          this.closeFormAddTeam();
-        },
-        error: err => {
-          console.error(err);
-          this.messageAddTeam = 'Błąd przy dodawaniu zespołu';
-        }
-      });
-    }
   }
 
   submitStudent(studentId: bigint){

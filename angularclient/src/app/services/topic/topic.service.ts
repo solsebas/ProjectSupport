@@ -38,7 +38,7 @@ export class TopicService {
     queryParams = queryParams.append("supervisorId", supervisorId);
 
     const headers = this.getHeaderWithToken();
-    return this.http.get<Topic[]>(API_TOPICS_URL + 'topicsS', { headers, params: queryParams });
+    return this.http.get<Topic[]>(API_TOPICS_URL + 'topicsSupervisor', { headers, params: queryParams });
   }
 
   updateTopic(topic: Topic): Observable<any> {

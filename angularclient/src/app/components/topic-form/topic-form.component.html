@@ -30,7 +30,7 @@
 </div>
 
 <div class="form-popup" [hidden]="!showFormViewTopics">
-  <div class="form-form">
+  <div class="form-form" style="max-height: 600px; min-height: 200px; overflow-y: auto; ">
     <h2>Lista tematów</h2>
     <div  *ngIf="showTopicsList && !messageView">
       <table class="table table-striped">
@@ -47,7 +47,7 @@
           <tr *ngIf="!topic.archieve">
             <td>{{ topic.topicName }}</td>
             <td>{{ topic.topicDescription }}</td>
-            <td>{{ topic.archieve }}</td>
+            <td>{{ topic.archieve ? 'Tak' : 'Nie' }}</td>
             <td><button class="btn btn-primary" (click)="changeArchieve(topic)">Zmień</button></td>
           </tr>
         </ng-container>

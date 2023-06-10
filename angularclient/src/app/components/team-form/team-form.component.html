@@ -8,44 +8,46 @@
 
 <div class="form-popup" [hidden]="!showFormAddTeam">
   <form class="form-form" name="topic-form" (submit)="submitTeamForm($event)">
+    <h1><b>Dodaj zespołu:</b></h1>
+    <div class="mt-3">
+      <h2>Limit członków:</h2> {{ limit }}
+      <input style="min-width:400px;" (change)="validateForm()" type="range" min="1" max="6" step="1" id="limit" name="limit" placeholder="Limit członków" [(ngModel)]="limit" required>
+    </div>
 
-    <label for="limit"><h2>Limit członków:</h2> {{ limit }}</label>
-    <input (change)="validateForm()" type="range" min="1" max="6" step="1" id="limit" name="limit" placeholder="Limit członków" [(ngModel)]="limit" required>
+    <div class="mb-5">
+      <h2>Kierunek i semestr:</h2>
+      <select (change)="validateForm()" class="form-select" style="width:400px;" id="term" name="term" [(ngModel)]="selectedTerm">
+        <option *ngFor="let term of terms" [ngValue]="term">{{ term.major }} - sem. {{ term.termNumber }}</option>
+      </select>
+    </div>
+
+    <div class="mb-5">
+      <h2>Lista tematów prowadzącego:</h2>
+      <select (change)="validateForm()" class="form-select" style="width:400px; position: relative; left:10px;" id="topic" name="topic" [(ngModel)]="selectedTopic">
+        <option *ngFor="let topic of supervisorTopics" [ngValue]="topic">{{ topic.topicName }}</option>
+      </select>
+    </div>
+
 
     <div class="btn-toolbar m-2">
       <button class="btn btn-primary m-2" type="submit" style="min-width: 100px;" [disabled]="!formTeamValid">Dodaj</button>
       <button class="btn btn-danger m-2" type="button" (click)="closeFormAddTeam()">Anuluj</button>
     </div>
 
-    <div *ngIf="showFormAddTeam">
-      <label for="term"><h2>Kierunek i semestr:</h2></label>
-      <select id="term" name="term" [(ngModel)]="selectedTerm">
-        <option *ngFor="let term of terms" [ngValue]="term">{{ term.major }} - {{ term.termNumber }}</option>
-      </select>
-    </div>
-
-    <div *ngIf="showFormAddTeam">
-      <h2>Lista tematów prowadzącego:</h2>
-      <select id="topic" name="topic" [(ngModel)]="selectedTopic">
-        <option *ngFor="let topic of supervisorTopics" [ngValue]="topic">{{ topic.topicName }}</option>
-      </select>
-    </div>
-
   </form>
-
 </div>
 
-<div class="form-popup" [hidden]="!showFormViewTeams">
-  <div class="form-form">
+<div class="teams-list form-popup" [hidden]="!showFormViewTeams">
+  <div class="form-form" style="max-height: 600px; min-height: 200px; overflow-y: auto; ">
     <h2>Lista tematów</h2>
-    <div  *ngIf="showTeamsList">
+    <div class="" *ngIf="showTeamsList">
       <table class="table table-striped">
         <thead>
         <tr>
           <th scope="col">Id zespołu</th>
           <th scope="col">Limit</th>
           <th scope="col">Temat</th>
-          <th scope="col">ID Semestru</th>
+          <th scope="col">Kierunek</th>
           <th scope="col">Status</th>
           <th scope="col">Uczestnicy</th>
         </tr>
@@ -55,7 +57,7 @@
           <td>{{ team.id}}</td>
           <td>{{ team.studentList?.length }} / {{ team.limit }}</td>
           <td>{{ team.topic?.topicName }} ({{ team.topic?.topicDescription }})</td>
-          <td>{{ team.term?.id }}</td>
+          <td>{{ team.term?.major }} - sem. {{ team.term?.termNumber }}</td>
           <td>{{ team.status }}</td>
           <td>
             <span *ngFor="let student of team.studentList">
@@ -100,9 +102,4 @@
   </div>
 </div>
 
-<!--todo: usuwanie zespołów-->
 <!--todo: usuwanie osób z zespołu-->
-<!--todo: walidacja przy dodawaniu osób-->
-<!--todo: przypisywanie tematów do zespołu-->
-<!--todo: sprzątanie-->
-<!-- TRZEBA OGARNĄĆ W TAKI SPOSÓB, ŻEBY SENSOWNIE WYŚWIETLAŁO I VALIDOWAŁO WEDŁUG SEMESTRU.-->
