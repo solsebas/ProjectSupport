@@ -48,7 +48,7 @@
             <td>{{ topic.topicName }}</td>
             <td>{{ topic.topicDescription }}</td>
             <td>{{ topic.archieve ? 'Tak' : 'Nie' }}</td>
-            <td><button class="btn btn-primary" (click)="changeArchieve(topic)">Zmień</button></td>
+            <td><button class="btn btn-primary" (click)="confirmChangeArchieve(topic)">Zarchiwizuj</button></td>
           </tr>
         </ng-container>
         </tbody>

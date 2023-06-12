@@ -96,6 +96,7 @@ export class TopicFormComponent {
     });
   }
 
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.keyCode === 27) { // 27 - ESC_KEY code
       this.showFormAddTopics = false;
@@ -113,6 +114,19 @@ export class TopicFormComponent {
         console.error(err);
       }
     });
+  }
+
+  confirmChangeArchieve(topic: Topic) {
+    const isSupervisorTopic = this.topics.some(t => t.id === topic.id);
+    if (isSupervisorTopic) {
+      const confirmResult = window.confirm("Czy na pewno chcesz zmienić status archiwum dla tego tematu?");
+
+      if (confirmResult) {
+        this.changeArchieve(topic);
+      }
+    } else {
+      alert("Nie masz uprawnień do zmiany statusu archiwum dla tego tematu.");
+    }
   }
 
 }
