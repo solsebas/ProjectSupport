@@ -26,7 +26,7 @@ public class StudentController {
     //---------------------------------------------------------------------------------------
     //endregion
 
-    @GetMapping("/studentsT/{termId}")
+    @GetMapping("/studentsByTerm/{termId}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT') or hasRole('SUPERVISOR')")
     @ResponseBody
     public List<StudentDto> getStudentsByTerm(@PathVariable("termId") Long termId) {

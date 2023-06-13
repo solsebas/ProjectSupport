@@ -26,6 +26,6 @@ export class StudentService {
   getStudentsByTerm(termid: bigint): Observable<Student[]> {
     this.storageService.getUser().id;
     const headers = this.getHeaderWithToken();
-    return this.http.get<Student[]>(API_STUDENT_URL + 'studentsT/' + termid, {headers});
+    return this.http.get<Student[]>(API_STUDENT_URL + 'studentsByTerm/' + termid, {headers});
   }
 }
