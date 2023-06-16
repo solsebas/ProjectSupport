@@ -26,6 +26,8 @@ import { StudentsTeamBoardComponent } from './components/student-team/students-t
 import { SupervisorTeamComponent } from './components/supervisor-team/supervisor-team.component';
 import { SupervisorTeamBoardComponent } from './components/supervisor-team/supervisor-team-board/supervisor-team-board.component';
 import { FilterPipe } from "./helpers/filter.pipe";
+import {DownloadUploaddComponent} from "./components/download-upload/download-upload.component";
+import { DownloadZespComponent } from './components/download-zesp/download-zesp.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { FilterPipe } from "./helpers/filter.pipe";
     SupervisorTeamComponent,
     SupervisorTeamBoardComponent,
     FilterPipe,
-    FilterPipe
+    DownloadUploaddComponent,
+    DownloadZespComponent
   ],
   imports: [
     BrowserModule,

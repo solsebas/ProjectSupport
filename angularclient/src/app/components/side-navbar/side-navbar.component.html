@@ -1,22 +1,24 @@
-<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" >
+<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
   <li class="nav-item">
-    <a [routerLink]="''" class="nav-link align-middle px-0  w-100" >
+    <a [routerLink]="''" class="nav-link align-middle px-0  w-100">
       <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Główna strona</span>
     </a>
   </li>
 
   <li class="nav-item" *ngIf="isUserAdmin">
     <a href="#adminSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
-      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel admina</span><i class="bi bi-caret-down-fill"></i>
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel admina</span><i
+      class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="adminSubmenu" data-bs-parent="#menu">
+    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="adminSubmenu"
+        data-bs-parent="#menu">
       <li>
         <a [routerLink]="'admin'" class="nav-link px-0 w-100">
           <i class="fs-4 bi-speedometer2"></i>
           <span class="ms-1 d-sm-inline"></span>Administracja systemu</a>
       </li>
       <li>
-        <a [routerLink]="'admin/register'" class="nav-link px-0 w-100" >
+        <a [routerLink]="'admin/register'" class="nav-link px-0 w-100">
           <i class="bi bi-person-plus-fill"></i>
           <span class="ms-1 d-sm-inline">Rejestracja</span>
         </a>
@@ -27,9 +29,11 @@
 
   <li class="nav-item" *ngIf="isUserSupervisor || isUserAdmin">
     <a href="#supervizorSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
-      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel proawdzącego</span><i class="bi bi-caret-down-fill"></i>
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel proawdzącego</span><i
+      class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column" style="position: relative; left: 20px;" id="supervizorSubmenu" data-bs-parent="#menu">
+    <ul class="collapse nav flex-column" style="position: relative; left: 20px;" id="supervizorSubmenu"
+        data-bs-parent="#menu">
       <li>
         <a [routerLink]="'supervisor'" class="nav-link px-0 w-100">
           <i class="bi bi-columns"></i>
@@ -55,13 +59,20 @@
 
   <li class="nav-item" *ngIf="isUserStudent || isUserAdmin">
     <a href="#studentSubmenu" data-bs-toggle="collapse" class="nav-link px-0 align-middle  w-100">
-      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel studenta</span><i class="bi bi-caret-down-fill"></i>
+      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-sm-inline">Panel studenta</span><i
+      class="bi bi-caret-down-fill"></i>
     </a>
-    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="studentSubmenu" data-bs-parent="#menu">
+    <ul class="collapse nav flex-column ms-1" style="position: relative; left: 20px;" id="studentSubmenu"
+        data-bs-parent="#menu">
       <li>
         <a [routerLink]="'student/team'" class="nav-link px-0 w-100">
           <i class="bi bi-people-fill"></i>
           <span class="ms-1 d-sm-inline">Zespoły</span></a>
+      </li>
+      <li>
+        <a [routerLink]="'files'" class="nav-link px-0 w-100">
+          <i class="bi bi-people-fill"></i>
+          <span class="ms-1 d-sm-inline">Załączniki</span></a>
       </li>
     </ul>
 
