@@ -1,6 +1,7 @@
 package pl.polsl.projectsupport.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.projectsupport.dto.TopicDto;
@@ -8,6 +9,9 @@ import pl.polsl.projectsupport.service.TermService;
 import pl.polsl.projectsupport.service.TopicService;
 import pl.polsl.projectsupport.service.AttachmentService;
 import pl.polsl.projectsupport.dto.AttachmentDto;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +28,14 @@ public class  FileController {
 
 
     @PostMapping("")
-    public void addFile(@RequestBody AttachmentDto attachmentDto )
-    {
-        attt.create(attachmentDto);
-    }
-
+    public void handleFileUpload(
+            @RequestParam("id") Long id,
+            @RequestParam("file") MultipartFile file,
+    @RequestBody AttachmentDto dto) {
+        attt.addFile(dto);
+        // Обработка загруженного файла и идентификатора в вашем бэкенд-коде
+        // ...
+ }
 
 
 }

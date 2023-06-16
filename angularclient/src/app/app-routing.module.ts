@@ -16,6 +16,8 @@ import {SupervisorTeamComponent} from "./components/supervisor-team/supervisor-t
 import {
   SupervisorTeamBoardComponent
 } from "./components/supervisor-team/supervisor-team-board/supervisor-team-board.component";
+import {DownloadUploaddComponent} from "./components/download-upload/download-upload.component";
+import {DownloadZespComponent} from "./components/download-zesp/download-zesp.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,9 +36,10 @@ const routes: Routes = [
   { path: 'supervisor/team', component: TeamFormComponent, canActivate: [BlockUrlGuard] },
   { path: 'supervisor/team-manage', component: SupervisorTeamComponent, canActivate: [BlockUrlGuard]},
   { path: 'supervisor/team-manage/:id', component: SupervisorTeamBoardComponent, canActivate: [BlockUrlGuard]},
-
-
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'files/first1', component: DownloadUploaddComponent},
+  { path: 'files', component: DownloadZespComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'files/:id', component: DownloadUploaddComponent}
 ];
 
 @NgModule({

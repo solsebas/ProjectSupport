@@ -14,13 +14,15 @@ export class DownloadUploadService {
   private getHeaderWithToken(): HttpHeaders {
     return new HttpHeaders().set('Authorization', 'Bearer ' + this.storageService.getUser().token);
   }
-  uploadFiles(formData: FormData): Observable<any> {
-    const url = 'API_FILES_URL';
-
+  uploadFiles(id: number, file: File): Observable<any> {
+    const url = API_FILES_URL;
+    const formData: FormData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('file', file);
 
     const headers = this.getHeaderWithToken();
 
-    return this.http.post(url, formData, { headers });
+    return this.http.post<any>(url, formData, { headers });
   }
 }
 

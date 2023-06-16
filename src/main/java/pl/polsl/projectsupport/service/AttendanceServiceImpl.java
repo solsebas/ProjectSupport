@@ -12,7 +12,7 @@ import pl.polsl.projectsupport.model.StudentTeamModel;
 import pl.polsl.projectsupport.service.email.EmailService;
 
 @Service
-public class AttendanceServiceImpl implements AttendanceService {
+public class    AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private ModelMapper modelMapper;
