@@ -11,7 +11,7 @@ import pl.polsl.projectsupport.service.email.EmailService;
 import pl.polsl.projectsupport.dao.FilesDao;
 
 @Service
-public abstract class AttachmentServiceImpl implements AttachmentService {
+public class AttachmentServiceImpl implements AttachmentService {
 
     @Autowired
     private ModelMapper modelMapper;
