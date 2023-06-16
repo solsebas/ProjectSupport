@@ -3,6 +3,7 @@ package pl.polsl.projectsupport.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -17,7 +18,6 @@ import pl.polsl.projectsupport.JSONWebToken.AuthEntryPointJwt;
 import pl.polsl.projectsupport.JSONWebToken.AuthTokenFilter;
 import pl.polsl.projectsupport.service.UserDetailsServiceImpl;
 
-import org.springframework.http.HttpMethod;
 import javax.servlet.Filter;
 
 @Configuration
@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+
                 .antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/logout").permitAll()
                 .antMatchers("/api/public/**").permitAll()
