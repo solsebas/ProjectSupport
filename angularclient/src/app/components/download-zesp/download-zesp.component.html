@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="container mt-4">
+    <h1 class="text-center">Przegląd zespołów studenta</h1>
+    <h2 class="text-center">Wybież zespoł</h2>
+    <div class="text-center m-5">
+      <div class="input-group mb-3">
+
+      </div>
+      <table class="table table-striped table-dark rounded overflow-hidden">
+        <thead>
+        <tr>
+          <th>ID<input type="text" class="form-control mt-1" placeholder="Filtr ID" [(ngModel)]="idFilter"></th>
+          <th>Temat<input type="text" class="form-control mt-1" placeholder="Filtr tematu" [(ngModel)]="topicNameFilter"></th>
+          <th>Semestr<input type="text" class="form-control mt-1" placeholder="Filtr semestru" [(ngModel)]="termFilter"></th>
+          <th>Status<input type="text" class="form-control mt-1" placeholder="Filtr statusu" [(ngModel)]="statusFilter"></th>
+          <th class="text-center align-middle">Akcje<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let team of teams | filter: { id: idFilter, 'topic.topicName': topicNameFilter, term: termFilter, status: statusFilter }">
+          <td>{{ team.id }}</td>
+          <td>{{ team.topic?.topicName }}</td>
+          <td>{{ team.term }}</td>
+          <td>{{ team.status }}</td>
+          <td>
+            <button class="btn btn-light" [routerLink]=[team.id?.toString()]>
+              Szczegóły
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
