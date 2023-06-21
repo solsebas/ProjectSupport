@@ -8,7 +8,7 @@ import pl.polsl.projectsupport.service.AttendanceService;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost"}, maxAge = 3600, allowCredentials="true")
 @RequestMapping("/api/attendances")
 public class AttendanceController {
 
