@@ -22,6 +22,15 @@ To run the project, the following software needs to be installed and configured:
 
 # Deployment Instructions
 
+## New method - docker compose
+1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+2. Launch a terminal, enter angularclient folder and execute the following command:
+- `npm run build`
+3. Enter main project folder and execute the following command:
+- `docker compose up ` (For detach mode add `-d`. Containers will be started in the background, and the console output will be available for further use)
+
+## Old method
+
 ### Database (PostgreSQL) - Setup:
 1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 2. Launch a terminal and execute the following commands:
